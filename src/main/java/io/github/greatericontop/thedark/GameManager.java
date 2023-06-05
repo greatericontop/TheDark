@@ -32,6 +32,7 @@ public class GameManager {
         // tick players
         for (PlayerProfile profile : playerProfiles.values()) {
             profile.getPlayer().sendActionBar(Component.text(String.format("§6Coins: %,d", profile.coins)));
+            profile.updateArmor();
         }
         // tick enemies
         activeEnemies.removeIf(BaseEnemy::isDead);

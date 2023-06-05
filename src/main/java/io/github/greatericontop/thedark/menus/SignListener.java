@@ -39,6 +39,8 @@ public class SignListener implements Listener {
 
         if (signType.equals("armor")) {
             plugin.armorBuyListener.openMenu(profile);
+        } else if (signType.equals("armorEnchantment")) {
+            plugin.armorEnchantmentListener.openMenu(profile);
         }
     }
 
