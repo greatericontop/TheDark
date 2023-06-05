@@ -1,24 +1,34 @@
 package io.github.greatericontop.thedark;
 
 import io.github.greatericontop.thedark.enemy.BaseEnemy;
+import io.github.greatericontop.thedark.player.PlayerProfile;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Location;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class GameManager {
 
     private final TheDark plugin;
     // TODO: for testing
-    public final List<BaseEnemy> activeEnemies;
+    public final Map<UUID, PlayerProfile> playerProfiles = new HashMap<>();
+    public final List<BaseEnemy> activeEnemies = new ArrayList<>();
 
     public GameManager(TheDark plugin) {
         this.plugin = plugin;
-        activeEnemies = new ArrayList<>();
     }
 
     public void tick() {
+        // tick players
+        for (PlayerProfile profile : playerProfiles.values()) {
+            profile.getPlayer().sendActionBar(Component.text(String.format("§6Coins: %,d", profile.coins)));
+        }
+        // tick enemies
         activeEnemies.removeIf(BaseEnemy::isDead);
     }
 
