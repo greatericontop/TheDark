@@ -2,6 +2,7 @@ package io.github.greatericontop.thedark;
 
 import io.github.greatericontop.thedark.enemy.BasicZombie;
 import io.github.greatericontop.thedark.enemy.FatDebugZombie;
+import io.github.greatericontop.thedark.guns.GunUtil;
 import io.github.greatericontop.thedark.player.PlayerProfile;
 import io.github.greatericontop.thedark.menus.SignListener;
 import org.bukkit.Material;
@@ -11,6 +12,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 
 public class TheDarkCommand implements CommandExecutor {
@@ -62,6 +64,9 @@ public class TheDarkCommand implements CommandExecutor {
             sign.getPersistentDataContainer().set(SignListener.SIGN_TYPE_KEY, PersistentDataType.STRING, args[1]);
             player.sendMessage("§3Set your sign to be: §7" + args[1]);
             return true;
+        }
+        if (args[0].equals("makeGun")) {
+            player.getInventory().getItemInMainHand().editMeta((ItemMeta im) -> im.getPersistentDataContainer().set(GunUtil.GUN_KEY, PersistentDataType.STRING, args[1]));
         }
 
         return false;

@@ -7,7 +7,7 @@ api-version: 1.19
 commands:
   thedark:
     description: TheDark Command
-    usage: §c/thedark <...>
+    usage: §c/thedark [info, spawnBasicZombies, spawnDebugZombie, addMe, setSign, makeGun]
     permission: thedark.command
     permission-message: §cNo permission!
 

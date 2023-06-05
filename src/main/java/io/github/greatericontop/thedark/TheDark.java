@@ -1,11 +1,12 @@
 package io.github.greatericontop.thedark;
 
+import io.github.greatericontop.thedark.guns.ShootGunListener;
 import io.github.greatericontop.thedark.menus.ArmorBuyListener;
 import io.github.greatericontop.thedark.menus.ArmorEnchantmentListener;
 import io.github.greatericontop.thedark.menus.SignListener;
 import io.github.greatericontop.thedark.menus.SwordBuyListener;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitRunnable;
 
 public class TheDark extends JavaPlugin {
 
@@ -33,12 +34,9 @@ public class TheDark extends JavaPlugin {
         swordBuyListener = new SwordBuyListener(this);
         this.getServer().getPluginManager().registerEvents(swordBuyListener, this);
 
+        this.getServer().getPluginManager().registerEvents(new ShootGunListener(this), this);
 
-        new BukkitRunnable() {
-            public void run() {
-                gameManager.tick();
-            }
-        }.runTaskTimer(this, 20L, 1L);
+        Bukkit.getScheduler().runTaskTimer(this, () -> gameManager.tick(), 20L, 1L);
 
     }
 
