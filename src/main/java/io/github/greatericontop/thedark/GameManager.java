@@ -27,6 +27,9 @@ public class GameManager {
     public PlayerProfile getPlayerProfile(Player player) {
         return playerProfiles.get(player.getUniqueId());
     }
+    public PlayerProfile getPlayerProfile(UUID uuid) {
+        return playerProfiles.get(uuid);
+    }
 
     public void tick() {
         // tick players
