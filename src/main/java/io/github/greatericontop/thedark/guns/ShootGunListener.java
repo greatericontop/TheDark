@@ -8,6 +8,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
@@ -31,7 +32,9 @@ public class ShootGunListener implements Listener {
         if (event.getHand() != EquipmentSlot.HAND)  return;
         if (event.getAction() != Action.RIGHT_CLICK_AIR && event.getAction() != Action.RIGHT_CLICK_BLOCK)  return;
         Player player = event.getPlayer();
-        PersistentDataContainer pdc = player.getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer();
+        ItemMeta im = player.getInventory().getItemInMainHand().getItemMeta();
+        if (im == null)  return;
+        PersistentDataContainer pdc = im.getPersistentDataContainer();
         if (!pdc.has(GunUtil.GUN_KEY, PersistentDataType.STRING))  return;
 
         GunType gunType = GunType.valueOf(pdc.get(GunUtil.GUN_KEY, PersistentDataType.STRING));
