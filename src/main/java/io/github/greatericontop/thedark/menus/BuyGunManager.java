@@ -7,7 +7,21 @@ import org.bukkit.inventory.ItemStack;
 
 public class BuyGunManager {
 
-    public static void giveGun(GunType gunType, Player player, Integer forceSlot) {
+    public static void attemptBuy(GunType gunType, Player player, int requestedSlot) {
+        if (requestedSlot < 1 || requestedSlot > 3) {
+            player.sendMessage("§3You can only buy guns in your 3 slots!");
+            return;
+        }
+        // if the player has available space and tried to replace a gun, cancel
+        if (getFirstSpace(player) != -1 && isPopulated(player.getInventory().getItem(requestedSlot))) {
+            player.sendMessage("§3You have available slots. You don't need to replace a gun.");
+            return;
+        }
+        ItemStack gunItem = gunType.createItemStack();
+        player.getInventory().setItem(requestedSlot, gunItem);
+    }
+
+    public static void debugGiveGun(GunType gunType, Player player, Integer forceSlot) {
         int slot = forceSlot != null ? forceSlot : getFirstSpace(player);
         if (slot == -1) {
             // no space available and not forced
@@ -21,12 +35,15 @@ public class BuyGunManager {
     private static int getFirstSpace(Player player) {
         // check for guns in slot 1, 2, 3
         for (int slot = 1; slot <= 3; slot++) {
-            ItemStack stack = player.getInventory().getItem(slot);
-            if (stack == null)  return slot;
-            // light gray dye signifies an empty space
-            if (stack.getType() == Material.LIGHT_GRAY_DYE)  return slot;
+            if (!isPopulated(player.getInventory().getItem(slot))) {
+                return slot;
+            }
         }
         return -1;
+    }
+
+    private static boolean isPopulated(ItemStack stack) {
+        return stack != null && stack.getType() != Material.LIGHT_GRAY_DYE;
     }
 
 }
