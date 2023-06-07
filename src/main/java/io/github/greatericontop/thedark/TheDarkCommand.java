@@ -5,7 +5,7 @@ import io.github.greatericontop.thedark.enemy.FatDebugZombie;
 import io.github.greatericontop.thedark.enemy.StandardZombie;
 import io.github.greatericontop.thedark.guns.GunType;
 import io.github.greatericontop.thedark.guns.GunUtil;
-import io.github.greatericontop.thedark.menus.BuyGunManager;
+import io.github.greatericontop.thedark.guns.BuyGunManager;
 import io.github.greatericontop.thedark.player.PlayerProfile;
 import io.github.greatericontop.thedark.menus.SignListener;
 import net.kyori.adventure.text.Component;

@@ -1,10 +1,15 @@
-package io.github.greatericontop.thedark.menus;
+package io.github.greatericontop.thedark.guns;
 
-import io.github.greatericontop.thedark.guns.GunType;
 import io.github.greatericontop.thedark.player.PlayerProfile;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataContainer;
+import org.bukkit.persistence.PersistentDataType;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BuyGunManager {
 
@@ -28,6 +33,11 @@ public class BuyGunManager {
         // if the player has available space and tried to replace a gun, cancel
         if (getFirstSpace(player) != -1 && isPopulated(player.getInventory().getItem(requestedSlot))) {
             player.sendMessage("§3You have available slots. You don't need to replace a gun.");
+            return false;
+        }
+        // only 1 of each gun permitted
+        if (getGunsInInventory(player).contains(gunType)) {
+            player.sendMessage("§3You can only have 1 of each gun!");
             return false;
         }
         ItemStack gunItem = gunType.createItemStack();
@@ -55,6 +65,22 @@ public class BuyGunManager {
             }
         }
         return -1;
+    }
+
+    private static List<GunType> getGunsInInventory(Player player) {
+        List<GunType> guns = new ArrayList<>();
+        for (int slot = 1; slot <= 3; slot++) {
+            ItemStack stack = player.getInventory().getItem(slot);
+            if (!isPopulated(stack))  continue;
+            ItemMeta im = stack.getItemMeta();
+            if (im == null)  continue;
+            PersistentDataContainer pdc = im.getPersistentDataContainer();
+            if (pdc.has(GunUtil.GUN_KEY, PersistentDataType.STRING)) {
+                GunType gunType = GunType.valueOf(pdc.get(GunUtil.GUN_KEY, PersistentDataType.STRING));
+                guns.add(gunType);
+            }
+        }
+        return guns;
     }
 
     private static boolean isPopulated(ItemStack stack) {

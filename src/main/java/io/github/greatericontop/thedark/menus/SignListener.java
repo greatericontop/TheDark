@@ -1,6 +1,7 @@
 package io.github.greatericontop.thedark.menus;
 
 import io.github.greatericontop.thedark.TheDark;
+import io.github.greatericontop.thedark.guns.BuyGunManager;
 import io.github.greatericontop.thedark.guns.GunType;
 import io.github.greatericontop.thedark.player.PlayerProfile;
 import org.bukkit.Material;
