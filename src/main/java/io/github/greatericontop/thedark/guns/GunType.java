@@ -78,13 +78,17 @@ public enum GunType {
     }
 
     public ItemStack createFullyLoadedItemStack() {
-        ItemStack stack = new ItemStack(itemMaterial, ammoSize);
+        ItemStack stack = new ItemStack(itemMaterial, 1);
         ItemMeta im = stack.getItemMeta();
         im.displayName(itemName);
         im.lore(itemLore);
         im.getPersistentDataContainer().set(GunUtil.GUN_KEY, PersistentDataType.STRING, this.name());
         stack.setItemMeta(im);
         return stack;
+    }
+
+    public int getDurabilityPerUse() {
+        return itemMaterial.getMaxDurability() / ammoSize; // (rounded down)
     }
 
 }
