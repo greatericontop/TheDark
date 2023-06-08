@@ -18,8 +18,8 @@ import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
 
 public class GunUtil implements Listener {
-    public final static NamespacedKey GUN_KEY = new NamespacedKey("thedark", "gun");
-    private final static double MAX_DISTANCE = 72.0;
+    public static final NamespacedKey GUN_KEY = new NamespacedKey("thedark", "gun");
+    private static final double MAX_DISTANCE = 72.0;
 
     private final TheDark plugin;
 
