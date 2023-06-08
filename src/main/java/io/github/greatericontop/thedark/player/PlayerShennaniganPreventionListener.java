@@ -20,7 +20,7 @@ public class PlayerShennaniganPreventionListener implements Listener {
     public void onInventoryClick(InventoryClickEvent event) {
         PlayerProfile profile = plugin.getGameManager().getPlayerProfile(event.getWhoClicked().getUniqueId());
         if (profile == null)  return; // don't do anything to players not involved in the game
-        if (profile.getPlayer().getInventory().equals(event.getClickedInventory())) {
+        if (event.getClickedInventory().equals(profile.getPlayer().getInventory())) {
             // don't allow player to drop/click/move items in their own inventory
             event.setCancelled(true);
         }

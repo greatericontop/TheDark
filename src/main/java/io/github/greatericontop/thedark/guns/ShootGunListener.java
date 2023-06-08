@@ -11,7 +11,6 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
@@ -50,15 +49,13 @@ public class ShootGunListener implements Listener {
         Map<UUID, Boolean> cooldowns = this.cooldowns.get(gunType);
         if (cooldowns.getOrDefault(player.getUniqueId(), false))  return;
 
-        Damageable im1 = (Damageable) im;
-        int newDamage = im1.getDamage() + gunType.getDurabilityPerUse();
-        if (newDamage >= gunType.getDurabilityPerUse()*gunType.getAmmoSize()) {
+        int currentAmount = stack.getAmount();
+        if (currentAmount == 1) {
             player.sendMessage("§7Placeholder for something else! Reloading!");
-            im1.setDamage(0);
+            stack.setAmount(gunType.getAmmoSize());
         } else {
-            im1.setDamage(newDamage);
+            stack.setAmount(currentAmount - 1);
         }
-        stack.setItemMeta(im1);
 
         GunUtil.fireProjectile(gunType, player.getEyeLocation(), player.getEyeLocation().getDirection(), player, gunType.getDamage(), plugin);
         cooldowns.put(player.getUniqueId(), true);
