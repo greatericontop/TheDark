@@ -11,28 +11,28 @@ import java.util.List;
 public enum GunType {
 
     PISTOL(
-            3.0, 11L, 125, 10, 30,
+            5.0, 11L, 125, 10, 30,
             Material.WOODEN_HOE,
             "§fPistol",
             "§7A basic pistol."
     ),
 
     RIFLE(
-            4.0, 9L, 500, 30, 30,
+            6.0, 8L, 500, 30, 30,
             Material.STONE_HOE,
             "§eRifle",
             "§7A high-powered rifle that fires quickly."
     ),
 
     SHOTGUN(
-            6.0, 25L, 400, 5, 30,
+            5.0, 25L, 400, 5, 30,
             Material.IRON_SHOVEL,
             "§eShotgun",
             "§7This shotgun damages multiple enemies."
     ),
 
     SUPER_WEAPON(
-            20.0, 2L, 10, 64, 30,
+            20.0, 1L, 10, 64, 30,
             Material.NETHERITE_HOE,
             "§cTHE SUPERWEAPON",
             "§4Need I say more?"

@@ -50,7 +50,7 @@ public class GunUtil implements Listener {
                 if (e.getType() == EntityType.PLAYER) {
                     continue;
                 }
-                e.damage(damage*Util.randomDouble(0.5, 0.95), owner);
+                e.damage(damage*Util.randomDouble(0.6, 0.9), owner);
             }
         }
         // particles
@@ -62,7 +62,7 @@ public class GunUtil implements Listener {
             current.getWorld().spawnParticle(Particle.ASH, current, 1, 0.0, 0.0, 0.0, 0.0);
         }
         // sound
-        sourceLoc.getWorld().playSound(sourceLoc, Sound.ENTITY_GENERIC_EXPLODE, 0.225F, 1.0F);
+        sourceLoc.getWorld().playSound(sourceLoc, Sound.ENTITY_GENERIC_EXPLODE, 0.45F, 1.0F);
     }
 
     public static int getDamagePositionBelowCurrent(int maxDurability, int ticksToRefill, int currentDamage) {
