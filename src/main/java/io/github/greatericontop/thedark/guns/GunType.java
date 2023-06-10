@@ -16,53 +16,48 @@ public enum GunType {
             0, 4.0, 11L, 125, 10,
             GunClassification.PISTOL,
             Material.WOODEN_HOE,
-            "§fPistol",
-            "§7A basic pistol."
+            "§fPistol"
+
     ),
     PISTOL_1STAR(
             1, 5.0, 11L, -1, 16,
             GunClassification.PISTOL,
             Material.WOODEN_HOE,
-            "§fPistol §9⚝",
-            "§6§l1 Enhancement Star"
+            "§ePistol §9⚝"
     ),
 
     RIFLE(
             0, 5.0, 8L, 500, 30,
             GunClassification.RIFLE,
             Material.STONE_HOE,
-            "§eRifle",
-            "§7A high-powered rifle that fires quickly."
+            "§eRifle"
+
     ),
     RIFLE_1STAR(
             1, 6.0, 7L, -1, 30,
             GunClassification.RIFLE,
             Material.STONE_HOE,
-            "§eRifle §9⚝",
-            "§6§l1 Enhancement Star"
+            "§bRifle §9⚝"
     ),
 
     SHOTGUN(
             0, 4.0, 25L, 400, 5,
             GunClassification.SHOTGUN,
             Material.IRON_SHOVEL,
-            "§eShotgun",
-            "§7This shotgun damages multiple enemies."
+            "§eShotgun"
     ),
     SHOTGUN_1STAR(
             1, 5.0, 25L, -1, 6,
             GunClassification.SHOTGUN,
             Material.IRON_SHOVEL,
-            "§eShotgun §9⚝",
-            "§6§l1 Enhancement Star"
+            "§bShotgun §9⚝"
     ),
 
     SUPER_WEAPON(
             0, 20.0, 1L, 10, 64,
             GunClassification.SUPER_WEAPON,
             Material.NETHERITE_HOE,
-            "§cTHE SUPERWEAPON",
-            "§4Need I say more?"
+            "§dTHE SUPERWEAPON"
     ),
 
     ;
@@ -77,7 +72,6 @@ public enum GunType {
 
     private final Material itemMaterial;
     private final Component itemName;
-    private final String miniDescription;
 
     public double getDamage() {
         return damage;
@@ -95,9 +89,10 @@ public enum GunType {
         return classification;
     }
 
-    GunType(int enhancementStarCount, double damage, long cooldownTicks, int cost, int ammoSize,
+    GunType(
+            int enhancementStarCount, double damage, long cooldownTicks, int cost, int ammoSize,
             GunClassification classification,
-            Material itemMaterial, String itemName, String miniDescription
+            Material itemMaterial, String itemName
     ) {
         this.enhancementStarCount = enhancementStarCount;
         this.damage = damage;
@@ -107,7 +102,6 @@ public enum GunType {
         this.classification = classification;
         this.itemMaterial = itemMaterial;
         this.itemName = Component.text(itemName);
-        this.miniDescription = miniDescription;
     }
 
     public int getRechargeTicks() {
@@ -117,7 +111,7 @@ public enum GunType {
     private List<Component> generateLore() {
         if (enhancementStarCount == 0) {
             return List.of(
-                    Component.text(miniDescription),
+                    Component.text(classification.getMiniDescription()),
                     Component.text(""),
                     Component.text(String.format("§7Damage: §c%.0f", damage)),
                     Component.text(String.format("§7Cooldown: §f%.2fs", cooldownTicks * 0.05)),
@@ -144,7 +138,7 @@ public enum GunType {
             return List.of(
                     Component.text(String.format("§6§l%d Enhancement Star", enhancementStarCount)),
                     Component.text(""),
-                    Component.text(miniDescription),
+                    Component.text(classification.getMiniDescription()),
                     Component.text(""),
                     Component.text(damageMessage),
                     Component.text(cooldownMessage),

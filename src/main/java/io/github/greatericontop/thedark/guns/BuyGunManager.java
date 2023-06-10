@@ -36,7 +36,7 @@ public class BuyGunManager {
             return false;
         }
         // only 1 of each gun permitted
-        if (getGunsInInventory(player).contains(gunType)) {
+        if (getGunsInInventory(player).contains(gunType.getClassification())) {
             player.sendMessage("§3You can only have 1 of each gun!");
             return false;
         }
@@ -67,8 +67,8 @@ public class BuyGunManager {
         return -1;
     }
 
-    private static List<GunType> getGunsInInventory(Player player) {
-        List<GunType> guns = new ArrayList<>();
+    private static List<GunClassification> getGunsInInventory(Player player) {
+        List<GunClassification> guns = new ArrayList<>();
         for (int slot = 1; slot <= 3; slot++) {
             ItemStack stack = player.getInventory().getItem(slot);
             if (!isPopulated(stack))  continue;
@@ -77,7 +77,7 @@ public class BuyGunManager {
             PersistentDataContainer pdc = im.getPersistentDataContainer();
             if (pdc.has(GunUtil.GUN_KEY, PersistentDataType.STRING)) {
                 GunType gunType = GunType.valueOf(pdc.get(GunUtil.GUN_KEY, PersistentDataType.STRING));
-                guns.add(gunType);
+                guns.add(gunType.getClassification());
             }
         }
         return guns;
