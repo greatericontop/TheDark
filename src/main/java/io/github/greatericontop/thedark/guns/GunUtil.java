@@ -45,7 +45,7 @@ public class GunUtil implements Listener {
             targetLoc = sourceLoc.clone().add(direction.clone().multiply(MAX_DISTANCE));
         }
         // special properties
-        if (gunType == GunType.SHOTGUN) {
+        if (gunType.getClassification() == GunClassification.SHOTGUN) {
             for (LivingEntity e : targetLoc.getNearbyLivingEntities(2.0)) {
                 if (e.getType() == EntityType.PLAYER) {
                     continue;
