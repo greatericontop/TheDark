@@ -49,6 +49,8 @@ public class SignListener implements Listener {
             GunType toBuy = GunType.valueOf(signType.substring(7)); // remove "buyGun_"
             BuyGunManager.buy(toBuy, profile, player);
             event.setCancelled(true); // this doesn't do anything, but this will prevent the gun shoot event from firing
+        } else if (signType.equals("roulette")) {
+            plugin.rouletteListener.openMenu(profile);
         }
     }
 
