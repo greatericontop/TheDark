@@ -9,7 +9,7 @@ public enum GunClassification {
     SHOTGUN("SHOTGUN", 40, "§7This shotgun damages multiple enemies."),
 
     FLAMETHROWER("FLAMETHROWER", 30, "§7Like §4f§ci§6r§ee§7? We got it here!"),
-    MIDAS_PISTOL("MIDAS_PISTOL", 30, "§7Enemies hit turn to §6gold §7and drop §6double gold§7!"),
+    MIDAS_PISTOL("MIDAS_PISTOL", 30, "§7Enemies hit turn to §6gold §7and drop §6triple gold§7!"),
     ROCKET_LAUNCHER("ROCKET_LAUNCHER", 140, "§8§lBig Boom"),
 
     SUPER_WEAPON("SUPER_WEAPON", 30, "§4Need I say more?"),

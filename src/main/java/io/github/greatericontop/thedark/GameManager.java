@@ -2,6 +2,8 @@ package io.github.greatericontop.thedark;
 
 import io.github.greatericontop.thedark.enemy.BaseEnemy;
 import io.github.greatericontop.thedark.enemy.EmeraldVindicator;
+import io.github.greatericontop.thedark.guns.GunClassification;
+import io.github.greatericontop.thedark.guns.GunUtil;
 import io.github.greatericontop.thedark.player.PlayerProfile;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Location;
@@ -48,6 +50,9 @@ public class GameManager {
             if (profile == null)  continue;
 
             int coins = enemy.coinsToAwardOnDeath();
+            if (GunUtil.getHeldGunClassification(killer) == GunClassification.MIDAS_PISTOL) {
+                coins *= 3;
+            }
             profile.coins += coins;
             killer.sendMessage(Component.text(String.format("§6+%d coins (kill)", coins)));
 

@@ -1,8 +1,8 @@
 package io.github.greatericontop.thedark.guns;
 
 import io.github.greatericontop.thedark.TheDark;
-import io.github.greatericontop.thedark.util.Util;
 import io.github.greatericontop.thedark.player.PlayerProfile;
+import io.github.greatericontop.thedark.util.Util;
 import org.bukkit.FluidCollisionMode;
 import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
@@ -14,8 +14,14 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataContainer;
+import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
+
+import javax.annotation.Nullable;
 
 public class GunUtil implements Listener {
     public static final NamespacedKey GUN_KEY = new NamespacedKey("thedark", "gun");
@@ -60,9 +66,6 @@ public class GunUtil implements Listener {
                 targetEntity.setFireTicks(80);
             }
         }
-        if (gunType.getClassification() == GunClassification.MIDAS_PISTOL) {
-            owner.sendMessage("§eTODO: check for this in the damage events (sword swapping is negligible)");
-        }
         if (gunType.getClassification() == GunClassification.ROCKET_LAUNCHER) {
             for (LivingEntity e : targetLoc.getNearbyLivingEntities(4.5)) {
                 if (e.getType() == EntityType.PLAYER) {
@@ -99,12 +102,32 @@ public class GunUtil implements Listener {
         throw new RuntimeException("currentDamage is greater than last value of damageAmount (" + currentDamage + ")");
     }
 
+    public static @Nullable GunType getHeldGun(Player player) {
+        ItemStack stack = player.getInventory().getItemInMainHand();
+        ItemMeta im = stack.getItemMeta();
+        if (im == null)  return null;
+        PersistentDataContainer pdc = im.getPersistentDataContainer();
+        if (pdc.has(GunUtil.GUN_KEY, PersistentDataType.STRING)) {
+            return GunType.valueOf(pdc.get(GunUtil.GUN_KEY, PersistentDataType.STRING));
+        }
+        return null;
+    }
+    public static @Nullable GunClassification getHeldGunClassification(Player player) {
+        GunType gunType = getHeldGun(player);
+        if (gunType == null)  return null;
+        return gunType.getClassification();
+    }
+
     @EventHandler()
     public void onDamageByPlayer(EntityDamageByEntityEvent event) {
         if (!(event.getDamager() instanceof Player player))  return;
         PlayerProfile profile = plugin.getGameManager().getPlayerProfile(player);
         if (profile == null)  return;
-        profile.coins += Util.roundNumber(event.getFinalDamage() * 0.95);
+        double multiplier = 0.8;
+        if (getHeldGunClassification(player) == GunClassification.MIDAS_PISTOL) {
+            multiplier *= 3;
+        }
+        profile.coins += Util.roundNumber(event.getFinalDamage() * multiplier);
     }
 
 }
