@@ -73,7 +73,9 @@ public class TheDarkCommand implements CommandExecutor {
             return true;
         }
         if (args[0].equals("spawnVindicator")) {
-            plugin.getGameManager().spawnEnemy(EmeraldVindicator.class, player.getLocation());
+            for (int i = 0; i < 15; i++) {
+                plugin.getGameManager().spawnEnemy(EmeraldVindicator.class, player.getLocation());
+            }
             return true;
         }
         if (args[0].equals("addMe")) {

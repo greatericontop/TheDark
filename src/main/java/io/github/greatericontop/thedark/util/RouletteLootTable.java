@@ -34,6 +34,10 @@ public class RouletteLootTable {
     }
 
     public static void runClaim(int winKey, PlayerProfile profile, Player player, int hotbarSlot) {
+        if (hotbarSlot < 1 || hotbarSlot > 3) {
+            player.sendMessage("§cOnly the 3 gun slots are allowed!");
+            return;
+        }
         // see BuyGunManager.java - don't replace a gun if there are open spaces available
         if (BuyGunManager.getFirstSpace(player) != -1 && BuyGunManager.isPopulated(player.getInventory().getItem(hotbarSlot))) {
             player.sendMessage("§3You have available slots. You don't need to replace a gun.");
