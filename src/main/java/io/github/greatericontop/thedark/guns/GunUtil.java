@@ -34,16 +34,18 @@ public class GunUtil implements Listener {
                 FluidCollisionMode.NEVER, true, 0.0,
                 entity -> (entity instanceof LivingEntity && entity.getType() != EntityType.PLAYER));
         Location targetLoc;
+        LivingEntity targetEntity = null;
         if (result != null) {
             targetLoc = result.getHitPosition().toLocation(sourceLoc.getWorld());
             if (result.getHitEntity() != null) {
-                LivingEntity targetEntity = (LivingEntity) result.getHitEntity();
+                targetEntity = (LivingEntity) result.getHitEntity();
                 targetEntity.damage(damage, owner);
                 // TODO knockback?
             }
         } else {
             targetLoc = sourceLoc.clone().add(direction.clone().multiply(MAX_DISTANCE));
         }
+
         // special properties
         if (gunType.getClassification() == GunClassification.SHOTGUN) {
             for (LivingEntity e : targetLoc.getNearbyLivingEntities(2.0)) {
@@ -53,6 +55,24 @@ public class GunUtil implements Listener {
                 e.damage(damage*Util.randomDouble(0.6, 0.9), owner);
             }
         }
+        if (gunType.getClassification() == GunClassification.FLAMETHROWER) {
+            if (targetEntity != null && targetEntity.getFireTicks() < 80) {
+                targetEntity.setFireTicks(80);
+            }
+        }
+        if (gunType.getClassification() == GunClassification.MIDAS_PISTOL) {
+            owner.sendMessage("§eTODO: check for this in the damage events (sword swapping is negligible)");
+        }
+        if (gunType.getClassification() == GunClassification.ROCKET_LAUNCHER) {
+            for (LivingEntity e : targetLoc.getNearbyLivingEntities(4.5)) {
+                if (e.getType() == EntityType.PLAYER) {
+                    continue;
+                }
+                e.damage(damage, owner);
+            }
+            targetLoc.getWorld().spawnParticle(Particle.EXPLOSION_LARGE, targetLoc, 2);
+        }
+
         // particles
         Vector totalDelta = targetLoc.toVector().subtract(sourceLoc.toVector());
         Vector step = totalDelta.clone().normalize().multiply(0.2);

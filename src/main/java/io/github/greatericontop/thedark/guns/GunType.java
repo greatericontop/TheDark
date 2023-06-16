@@ -12,6 +12,8 @@ import java.util.List;
 
 public enum GunType {
 
+    // basic
+
     PISTOL(
             0, 4.0, 11L, 125, 10,
             GunClassification.PISTOL,
@@ -52,6 +54,32 @@ public enum GunType {
             Material.IRON_SHOVEL,
             "§bShotgun §9⚝"
     ),
+
+    // better
+
+    FLAMETHROWER(
+            0, 2.5, 3L, -1, 48,
+            GunClassification.FLAMETHROWER,
+            Material.GOLDEN_SHOVEL,
+            "§bFlamethrower"
+    ),
+
+    MIDAS_PISTOL(
+            0, 4.0, 11L, -1, 10,
+            GunClassification.MIDAS_PISTOL,
+            Material.GOLDEN_HOE,
+            "§bMidas Pistol"
+    ),
+
+    ROCKET_LAUNCHER(
+            // :cooldownTicks: is set to the reload speed mainly to show the player the reload time on the tooltip
+            0, 20.0, 80L, -1, 1,
+            GunClassification.ROCKET_LAUNCHER,
+            Material.NETHERITE_PICKAXE,
+            "§bRocket Launcher"
+    ),
+
+    // other
 
     SUPER_WEAPON(
             0, 20.0, 1L, 10, 64,
@@ -113,7 +141,7 @@ public enum GunType {
             return List.of(
                     Component.text(classification.getMiniDescription()),
                     Component.text(""),
-                    Component.text(String.format("§7Damage: §c%.0f", damage)),
+                    Component.text(String.format("§7Damage: §c%.1f", damage)),
                     Component.text(String.format("§7Cooldown: §f%.2fs", cooldownTicks * 0.05)),
                     Component.text(String.format("§7Capacity: §f%d", ammoSize))
             );
@@ -121,9 +149,9 @@ public enum GunType {
             GunType root = classification.getRootGun();
             String damageMessage, cooldownMessage, capacityMessage;
             if (damage == root.getDamage()) {
-                damageMessage = String.format("§7Damage: §c%.0f", damage);
+                damageMessage = String.format("§7Damage: §c%.1f", damage);
             } else {
-                damageMessage = String.format("§7Damage: §8%.0f §7-> §c%.0f", root.getDamage(), damage);
+                damageMessage = String.format("§7Damage: §8%.1f §7-> §c%.1f", root.getDamage(), damage);
             }
             if (cooldownTicks == root.getCooldownTicks()) {
                 cooldownMessage = String.format("§7Cooldown: §f%.2fs", cooldownTicks * 0.05);
