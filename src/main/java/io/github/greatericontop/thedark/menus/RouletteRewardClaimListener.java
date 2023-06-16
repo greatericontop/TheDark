@@ -42,7 +42,7 @@ public class RouletteRewardClaimListener implements Listener {
                 "§7A gun already in that slot will be replaced.",
                 "",
                 "§7Since this is a rare item, you must pay to claim it.",
-                String.format("§fCost: §6%d coins", RouletteLootTable.getCost(winKey))
+                String.format("§fCost: §6%,d coins", RouletteLootTable.getCost(winKey))
         ));
 
         player.openInventory(gui);

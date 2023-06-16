@@ -59,7 +59,7 @@ public class RouletteListener extends GenericMenu {
         }
         profile.emeralds -= 1;
         player.closeInventory();
-        int number = ThreadLocalRandom.current().nextInt(2);
+        int number = ThreadLocalRandom.current().nextInt(3);
         plugin.rouletteRewardClaimListener.openMenu(profile, number); // TODO: DEBUG
 //        if (number < 4) { // weight 4
 //            player.sendMessage("§cSorry, you got nothing.");

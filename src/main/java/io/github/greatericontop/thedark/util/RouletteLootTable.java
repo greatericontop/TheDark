@@ -1,8 +1,8 @@
 package io.github.greatericontop.thedark.util;
 
 import io.github.greatericontop.thedark.guns.BuyGunManager;
+import io.github.greatericontop.thedark.guns.GunType;
 import io.github.greatericontop.thedark.player.PlayerProfile;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -10,18 +10,22 @@ public class RouletteLootTable {
 
     public static int getCost(int winKey) {
         return new int[] {
-                2000, // 0
-                4000, // 1
+                2_000, // 0 - Flamethrower
+                2_000, // 1 - Midas Pistol
+                17_500, // 2 - Rocket Launcher
         }[winKey];
     }
 
     public static ItemStack getIcon(int winKey) {
         switch (winKey) {
             case 0 -> {
-                return new ItemStack(Material.OAK_PLANKS);
+                return GunType.FLAMETHROWER.createFullyLoadedItemStack();
             }
             case 1 -> {
-                return new ItemStack(Material.SPRUCE_PLANKS);
+                return GunType.MIDAS_PISTOL.createFullyLoadedItemStack();
+            }
+            case 2 -> {
+                return GunType.ROCKET_LAUNCHER.createFullyLoadedItemStack();
             }
             default -> {
                 throw new IllegalArgumentException("invalid winKey " + winKey);
@@ -40,14 +44,19 @@ public class RouletteLootTable {
         switch (winKey) {
 
             case 0 -> {
-                player.sendMessage("§3You got some oak planks for 2000 coins.");
+                BuyGunManager.attemptGive(GunType.FLAMETHROWER, player, hotbarSlot);
             }
 
             case 1 -> {
-                player.sendMessage("§3You got some spruce planks for 4000 coins.");
+                BuyGunManager.attemptGive(GunType.MIDAS_PISTOL, player, hotbarSlot);
+            }
+
+            case 2 -> {
+                BuyGunManager.attemptGive(GunType.ROCKET_LAUNCHER, player, hotbarSlot);
             }
 
         }
+        Util.playSuccessSound(player);
         player.closeInventory();
     }
 
