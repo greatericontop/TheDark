@@ -57,7 +57,7 @@ public class BuyGunManager {
         player.getInventory().setItem(slot, gunItem);
     }
 
-    private static int getFirstSpace(Player player) {
+    public static int getFirstSpace(Player player) {
         // check for guns in slot 1, 2, 3
         for (int slot = 1; slot <= 3; slot++) {
             if (!isPopulated(player.getInventory().getItem(slot))) {
@@ -83,7 +83,7 @@ public class BuyGunManager {
         return guns;
     }
 
-    private static boolean isPopulated(ItemStack stack) {
+    public static boolean isPopulated(ItemStack stack) {
         return stack != null && stack.getType() != Material.LIGHT_GRAY_DYE;
     }
 
