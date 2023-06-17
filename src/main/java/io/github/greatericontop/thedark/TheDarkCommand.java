@@ -109,6 +109,10 @@ public class TheDarkCommand implements CommandExecutor {
             BuyGunManager.attemptGive(toGive, player, player.getInventory().getHeldItemSlot());
             return true;
         }
+        if (args[0].equals("emerald")) {
+            plugin.getGameManager().playerProfiles.get(player.getUniqueId()).emeralds += 1;
+            return true;
+        }
 
         return false;
     }

@@ -7,7 +7,7 @@ api-version: 1.19
 commands:
   thedark:
     description: TheDark Command
-    usage: §c/thedark §6[§finfo, spawnBasicZombies, spawnDebugZombie, spawnSomeEnemies, spawnRandomAssault, spawnVindicator, addMe, setSign, giveGun, forceBuyGun§6]
+    usage: §c/thedark §6[§finfo, spawnBasicZombies, spawnDebugZombie, spawnSomeEnemies, spawnRandomAssault, spawnVindicator, addMe, setSign, giveGun, forceBuyGun, emerald§6]
     permission: thedark.command
     permission-message: §cNo permission!
 

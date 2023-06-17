@@ -34,34 +34,31 @@ public class RouletteLootTable {
     }
 
     public static void runClaim(int winKey, PlayerProfile profile, Player player, int hotbarSlot) {
-        if (hotbarSlot < 1 || hotbarSlot > 3) {
-            player.sendMessage("§cOnly the 3 gun slots are allowed!");
-            return;
-        }
-        // see BuyGunManager.java - don't replace a gun if there are open spaces available
-        if (BuyGunManager.getFirstSpace(player) != -1 && BuyGunManager.isPopulated(player.getInventory().getItem(hotbarSlot))) {
-            player.sendMessage("§3You have available slots. You don't need to replace a gun.");
-            return;
-        }
-
-        profile.coins -= getCost(winKey);
         switch (winKey) {
 
             case 0 -> {
-                BuyGunManager.attemptGive(GunType.FLAMETHROWER, player, hotbarSlot);
+                rouletteLoot_giveGun(GunType.FLAMETHROWER, winKey, profile, player, hotbarSlot);
             }
 
             case 1 -> {
-                BuyGunManager.attemptGive(GunType.MIDAS_PISTOL, player, hotbarSlot);
+                rouletteLoot_giveGun(GunType.MIDAS_PISTOL, winKey, profile, player, hotbarSlot);
             }
 
             case 2 -> {
-                BuyGunManager.attemptGive(GunType.ROCKET_LAUNCHER, player, hotbarSlot);
+                rouletteLoot_giveGun(GunType.ROCKET_LAUNCHER, winKey, profile, player, hotbarSlot);
             }
 
         }
-        Util.playSuccessSound(player);
-        player.closeInventory();
+    }
+
+    private static void rouletteLoot_giveGun(GunType gunType, int winKey, PlayerProfile profile, Player player, int hotbarSlot) {
+        if (BuyGunManager.attemptGive(gunType, player, hotbarSlot)) {
+            profile.coins -= getCost(winKey);
+            Util.playSuccessSound(player);
+            player.closeInventory();
+        } else {
+            Util.playFailSound(player);
+        }
     }
 
 }

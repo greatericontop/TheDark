@@ -26,6 +26,16 @@ public class BuyGunManager {
     }
 
     public static boolean attemptGive(GunType gunType, Player player, int requestedSlot) {
+        if (!checkGiveIsOk(gunType, player, requestedSlot)) {
+            return false;
+        }
+        ItemStack gunItem = gunType.createFullyLoadedItemStack();
+        player.getInventory().setItem(requestedSlot, gunItem);
+        player.sendMessage("§3Successfully purchased your gun!");
+        return true;
+    }
+
+    public static boolean checkGiveIsOk(GunType gunType, Player player, int requestedSlot) {
         if (requestedSlot < 1 || requestedSlot > 3) {
             player.sendMessage("§3You can only buy guns in your 3 slots!");
             return false;
@@ -40,9 +50,6 @@ public class BuyGunManager {
             player.sendMessage("§3You can only have 1 of each gun!");
             return false;
         }
-        ItemStack gunItem = gunType.createFullyLoadedItemStack();
-        player.getInventory().setItem(requestedSlot, gunItem);
-        player.sendMessage("§3Successfully purchased your gun!");
         return true;
     }
 
