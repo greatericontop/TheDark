@@ -3,16 +3,19 @@ package io.github.greatericontop.thedark.util;
 import io.github.greatericontop.thedark.guns.BuyGunManager;
 import io.github.greatericontop.thedark.guns.GunType;
 import io.github.greatericontop.thedark.player.PlayerProfile;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 public class RouletteLootTable {
+    public static int ROULETTE_REWARD_COUNT = 4;
 
     public static int getCost(int winKey) {
         return new int[] {
                 2_000, // 0 - Flamethrower
                 2_000, // 1 - Midas Pistol
                 17_500, // 2 - Rocket Launcher
+                1_000, // 3 - sword sharpness upgrade
         }[winKey];
     }
 
@@ -26,6 +29,12 @@ public class RouletteLootTable {
             }
             case 2 -> {
                 return GunType.ROCKET_LAUNCHER.createFullyLoadedItemStack();
+            }
+            case 3 -> {
+                return Util.createItemStack(Material.DIAMOND_SWORD, 1,
+                        "§4Sharpness Upgrade",
+                        "§fYour swords now have §cSharpness I §fpermanently."
+                );
             }
             default -> {
                 throw new IllegalArgumentException("invalid winKey " + winKey);
@@ -46,6 +55,13 @@ public class RouletteLootTable {
 
             case 2 -> {
                 rouletteLoot_giveGun(GunType.ROCKET_LAUNCHER, winKey, profile, player, hotbarSlot);
+            }
+
+            case 3 -> {
+                profile.swordSharpnessOne = true;
+                profile.coins -= getCost(winKey);
+                Util.playSuccessSound(player);
+                player.closeInventory();
             }
 
         }

@@ -23,6 +23,7 @@ public class PlayerProfile {
     public int armorLevel;
     public int armorProtectionLevel;
     public int swordTier;
+    public boolean swordSharpnessOne;
 
     public PlayerProfile(Player player) {
         this.player = player;
@@ -31,6 +32,7 @@ public class PlayerProfile {
         armorLevel = 0;
         armorProtectionLevel = 0;
         swordTier = 1;
+        swordSharpnessOne = false;
         initializePlayer();
     }
 
@@ -81,6 +83,9 @@ public class PlayerProfile {
         // SWORD
         Material swordMaterial = SwordBuyListener.SWORD_MATERIALS[swordTier - 1];
         ItemStack sword = new ItemStack(swordMaterial, 1);
+        if (swordSharpnessOne) {
+            sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
+        }
         player.getInventory().setItem(0, sword);
         // ARMOR
         if (armorLevel == 0) {

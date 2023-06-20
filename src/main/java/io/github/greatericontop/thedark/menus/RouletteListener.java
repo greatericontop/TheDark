@@ -1,6 +1,7 @@
 package io.github.greatericontop.thedark.menus;
 
 import io.github.greatericontop.thedark.TheDark;
+import io.github.greatericontop.thedark.util.RouletteLootTable;
 import io.github.greatericontop.thedark.util.Util;
 import io.github.greatericontop.thedark.player.PlayerProfile;
 import net.kyori.adventure.text.Component;
@@ -59,7 +60,7 @@ public class RouletteListener extends GenericMenu {
         }
         profile.emeralds -= 1;
         player.closeInventory();
-        int number = ThreadLocalRandom.current().nextInt(3);
+        int number = ThreadLocalRandom.current().nextInt(RouletteLootTable.ROULETTE_REWARD_COUNT);
         plugin.rouletteRewardClaimListener.openMenu(profile, number); // TODO: DEBUG
 //        if (number < 4) { // weight 4
 //            player.sendMessage("§cSorry, you got nothing.");
