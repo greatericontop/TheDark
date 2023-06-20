@@ -10,6 +10,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerSwapHandItemsEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
@@ -55,6 +56,14 @@ public class PlayerShennaniganPreventionListener implements Listener {
         if (event.getAction() != Action.RIGHT_CLICK_BLOCK)  return;
         if (event.getClickedBlock().getType() != Material.OAK_SIGN && event.getClickedBlock().getType() != Material.OAK_WALL_SIGN)  return;
         if (event.getItem() == null || event.getItem().getType() != Material.LIGHT_GRAY_DYE)  return;
+        PlayerProfile profile = plugin.getGameManager().getPlayerProfile(event.getPlayer().getUniqueId());
+        if (profile != null) {
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler()
+    public void onOffhandSwap(PlayerSwapHandItemsEvent event) {
         PlayerProfile profile = plugin.getGameManager().getPlayerProfile(event.getPlayer().getUniqueId());
         if (profile != null) {
             event.setCancelled(true);
