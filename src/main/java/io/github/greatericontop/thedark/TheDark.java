@@ -9,6 +9,7 @@ import io.github.greatericontop.thedark.menus.RouletteRewardClaimListener;
 import io.github.greatericontop.thedark.menus.SignListener;
 import io.github.greatericontop.thedark.menus.SwordBuyListener;
 import io.github.greatericontop.thedark.player.PlayerShennaniganPreventionListener;
+import io.github.greatericontop.thedark.player.ShieldListener;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -45,6 +46,7 @@ public class TheDark extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(swordBuyListener, this);
 
         this.getServer().getPluginManager().registerEvents(new PlayerShennaniganPreventionListener(this), this);
+        this.getServer().getPluginManager().registerEvents(new ShieldListener(this), this);
 
         this.getServer().getPluginManager().registerEvents(new GunUtil(this), this);
         this.getServer().getPluginManager().registerEvents(new ShootGunListener(this), this);

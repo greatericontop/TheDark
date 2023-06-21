@@ -4,6 +4,7 @@ import io.github.greatericontop.thedark.TheDark;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 
 public class ShieldListener implements Listener {
@@ -14,12 +15,16 @@ public class ShieldListener implements Listener {
     }
 
     @EventHandler()
-    public void onDamage(EntityDamageEvent event) {
+    public void onDamage(EntityDamageByEntityEvent event) {
         if (!(event.getEntity() instanceof Player player))  return;
         PlayerProfile profile = plugin.getGameManager().getPlayerProfile(player);
         if (profile == null)  return;
 
-        // TODO
+        if (player.isBlocking()) {
+            double blockingModifier = event.getDamage(EntityDamageEvent.DamageModifier.BLOCKING);
+            // blockingModifier is negative 100% of the damage, so setting it to 0.4x reduces damage by 0.4x
+            event.setDamage(EntityDamageEvent.DamageModifier.BLOCKING, blockingModifier * 0.4);
+        }
 
     }
 

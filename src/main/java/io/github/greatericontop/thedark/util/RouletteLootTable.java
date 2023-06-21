@@ -11,7 +11,7 @@ import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 
 public class RouletteLootTable {
-    public static int ROULETTE_REWARD_COUNT = 4;
+    public static int ROULETTE_REWARD_COUNT = 5;
 
     public static int getCost(int winKey) {
         return new int[] {
