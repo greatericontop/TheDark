@@ -138,8 +138,8 @@ public enum GunType {
             Material.NETHERITE_HOE,
             "§dTHE SUPERWEAPON"
     ),
-    SUPER_WEAPON_4STAR(
-            4, 200.0, 1L, 10, 125,
+    SUPER_WEAPON_1STAR(
+            1, 200.0, 1L, 10, 125,
             GunClassification.SUPER_WEAPON,
             Material.NETHERITE_HOE,
             "§dTHE SUPERWEAPON §9⚝§4⚝§2⚝§5⚝"
@@ -158,6 +158,9 @@ public enum GunType {
     private final Material itemMaterial;
     private final Component itemName;
 
+    public int getEnhancementStarCount() {
+        return enhancementStarCount;
+    }
     public double getDamage() {
         return damage;
     }

@@ -51,6 +51,8 @@ public class SignListener implements Listener {
             event.setCancelled(true); // this doesn't do anything, but this will prevent the gun shoot event from firing
         } else if (signType.equals("roulette")) {
             plugin.rouletteListener.openMenu(profile);
+        } else if (signType.equals("enhancement")) {
+            plugin.enhancementListener.openMenu(profile);
         }
     }
 
