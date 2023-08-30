@@ -2,6 +2,9 @@ package io.github.greatericontop.thedark.rounds.operation;
 
 import io.github.greatericontop.thedark.enemy.BaseEnemy;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
+
+import java.util.Random;
 
 public class SpawnOneAtATime extends BaseOperation {
 
@@ -10,11 +13,14 @@ public class SpawnOneAtATime extends BaseOperation {
     private final int count;
     private final int spacing;
 
+    private final Random random;
+
     public SpawnOneAtATime(int offsetTicks, Class<? extends BaseEnemy> enemyClass, int count, int spacing) {
         this.offset = offsetTicks;
         this.enemyClass = enemyClass;
         this.count = count;
         this.spacing = spacing;
+        random = new Random();
     }
 
     @Override
@@ -31,7 +37,8 @@ public class SpawnOneAtATime extends BaseOperation {
         if (numberRemaining <= 0) {
             return;
         }
-        ctx.plugin().getGameManager().spawnEnemy(enemyClass, ctx.location());
+        Location[] locations = ctx.locations();
+        ctx.plugin().getGameManager().spawnEnemy(enemyClass, locations[random.nextInt(locations.length)]);
         final int numberRemainingNext = numberRemaining - 1;
         Bukkit.getScheduler().runTaskLater(ctx.plugin(), () -> spawnOne(ctx, numberRemainingNext), spacing);
     }

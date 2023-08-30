@@ -115,10 +115,10 @@ public class TheDarkCommand implements CommandExecutor {
             plugin.getGameManager().playerProfiles.get(player.getUniqueId()).emeralds += 1;
             return true;
         }
-        if (args[0].equals("startRoundHere")) {
+        if (args[0].equals("startRound")) {
             int round = Integer.parseInt(args[1]);
             player.sendMessage("§7Starting round!");
-            RoundUtil.executeRound(new OperationContext(plugin, player.getLocation()), round);
+            RoundUtil.executeRound(plugin, round);
         }
 
         return false;

@@ -55,6 +55,9 @@ public class TheDark extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new GunUtil(this), this);
         this.getServer().getPluginManager().registerEvents(new ShootGunListener(this), this);
 
+        this.saveDefaultConfig();
+        this.getConfig().options().copyDefaults(true);
+
         Bukkit.getScheduler().runTaskTimer(this, () -> gameManager.tick(), 20L, 1L);
 
     }

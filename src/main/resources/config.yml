@@ -1,0 +1,5 @@
+# THEDARK
+
+# Valid spawn locations. You'd probably want 3-6 of these.
+valid-spawn-locations:
+- ["world", 1.0, 64.0, 1.0] # for world "world" X=1 Y=64 Z=1
