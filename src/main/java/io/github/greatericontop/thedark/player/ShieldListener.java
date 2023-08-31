@@ -21,9 +21,11 @@ public class ShieldListener implements Listener {
         if (profile == null)  return;
 
         if (player.isBlocking()) {
-            double blockingModifier = event.getDamage(EntityDamageEvent.DamageModifier.BLOCKING);
-            // blockingModifier is negative 100% of the damage, so setting it to 0.4x reduces damage by 0.4x
+            double blockingModifier = event.getOriginalDamage(EntityDamageEvent.DamageModifier.BLOCKING);
+            player.sendMessage("§7[D] Blocking modifier: " + blockingModifier);
+            // blockingModifier is negative 100% of the damage, so setting it to 0.4x reduces damage by 0.4x (verify?)
             event.setDamage(EntityDamageEvent.DamageModifier.BLOCKING, blockingModifier * 0.4);
+            player.sendMessage("§7[D] new value " + (blockingModifier*0.4));
         }
 
     }
