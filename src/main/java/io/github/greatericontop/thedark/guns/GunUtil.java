@@ -3,6 +3,7 @@ package io.github.greatericontop.thedark.guns;
 import io.github.greatericontop.thedark.TheDark;
 import io.github.greatericontop.thedark.player.PlayerProfile;
 import io.github.greatericontop.thedark.util.Util;
+import org.bukkit.Bukkit;
 import org.bukkit.FluidCollisionMode;
 import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
@@ -22,6 +23,8 @@ import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GunUtil implements Listener {
     public static final NamespacedKey GUN_KEY = new NamespacedKey("thedark", "gun");
@@ -40,12 +43,14 @@ public class GunUtil implements Listener {
                 FluidCollisionMode.NEVER, true, 0.0,
                 entity -> (entity instanceof LivingEntity && entity.getType() != EntityType.PLAYER));
         Location targetLoc;
+        List<LivingEntity> allAffectedEntities = new ArrayList<>();
         LivingEntity targetEntity = null;
         if (result != null) {
             targetLoc = result.getHitPosition().toLocation(sourceLoc.getWorld());
             if (result.getHitEntity() != null) {
                 targetEntity = (LivingEntity) result.getHitEntity();
                 targetEntity.damage(damage, owner);
+                allAffectedEntities.add(targetEntity);
                 // TODO knockback?
             }
         } else {
@@ -59,6 +64,7 @@ public class GunUtil implements Listener {
                     continue;
                 }
                 e.damage(damage*Util.randomDouble(0.6, 0.9), owner);
+                allAffectedEntities.add(e);
             }
         }
         if (gunType.getClassification() == GunClassification.FLAMETHROWER) {
@@ -72,6 +78,7 @@ public class GunUtil implements Listener {
                     continue;
                 }
                 e.damage(damage, owner);
+                allAffectedEntities.add(e);
             }
             targetLoc.getWorld().spawnParticle(Particle.EXPLOSION_LARGE, targetLoc, 2);
         }
@@ -86,6 +93,8 @@ public class GunUtil implements Listener {
         }
         // sound
         sourceLoc.getWorld().playSound(sourceLoc, Sound.ENTITY_GENERIC_EXPLODE, 0.45F, 1.0F);
+        // only 3 or 4 ticks of i-frames
+        Bukkit.getScheduler().runTaskLater(plugin, () -> allAffectedEntities.forEach(e -> e.setNoDamageTicks(3)), 1L);
     }
 
     public static int getDamagePositionBelowCurrent(int maxDurability, int ticksToRefill, int currentDamage) {
