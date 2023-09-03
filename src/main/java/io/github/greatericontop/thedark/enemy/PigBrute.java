@@ -19,7 +19,7 @@ public class PigBrute extends BaseEnemy {
 
     @Override
     public int coinsToAwardOnDeath() {
-        return 75;
+        return 50;
     }
 
     // TODO: onDeath event that spawns 2 PigZombies

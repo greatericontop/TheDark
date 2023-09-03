@@ -1,6 +1,6 @@
 package io.github.greatericontop.thedark.rounds.data;
 
-import io.github.greatericontop.thedark.enemy.ArmedStandardZombie;
+import io.github.greatericontop.thedark.enemy.MilitantZombie;
 import io.github.greatericontop.thedark.enemy.BasicZombie;
 import io.github.greatericontop.thedark.enemy.EmeraldVindicator;
 import io.github.greatericontop.thedark.enemy.StandardZombie;
@@ -56,7 +56,7 @@ public class Data1To10 {
             .addSpawnOneAtATime(BasicZombie.class, 10, 40, true)
             .addSpawnOneAtATime(StandardZombie.class, 10, 60, false)
             .delaySeconds(6)
-            .addSpawnOneAtATime(ArmedStandardZombie.class, 8, 40, false)
+            .addSpawnOneAtATime(MilitantZombie.class, 8, 40, false)
     .getOutput();
 
 

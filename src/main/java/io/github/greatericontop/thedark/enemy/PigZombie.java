@@ -17,7 +17,7 @@ public class PigZombie extends BaseEnemy {
 
     @Override
     public int coinsToAwardOnDeath() {
-        return 25;
+        return 20;
     }
 
 }
