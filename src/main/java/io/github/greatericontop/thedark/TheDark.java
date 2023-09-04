@@ -1,5 +1,6 @@
 package io.github.greatericontop.thedark;
 
+import io.github.greatericontop.thedark.enemy.EnemyDeathListener;
 import io.github.greatericontop.thedark.guns.GunUtil;
 import io.github.greatericontop.thedark.guns.ShootGunListener;
 import io.github.greatericontop.thedark.menus.ArmorBuyListener;
@@ -47,6 +48,8 @@ public class TheDark extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(rouletteRewardClaimListener, this);
         swordBuyListener = new SwordBuyListener(this);
         this.getServer().getPluginManager().registerEvents(swordBuyListener, this);
+
+        this.getServer().getPluginManager().registerEvents(new EnemyDeathListener(this), this);
 
         this.getServer().getPluginManager().registerEvents(new PlayerShennaniganPreventionListener(this), this);
 

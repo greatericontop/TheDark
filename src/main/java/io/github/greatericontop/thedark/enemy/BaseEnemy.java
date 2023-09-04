@@ -2,6 +2,7 @@ package io.github.greatericontop.thedark.enemy;
 
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.persistence.PersistentDataType;
 
 public abstract class BaseEnemy {
     protected LivingEntity entity;
@@ -19,6 +20,7 @@ public abstract class BaseEnemy {
         entity.setHealth(maxHealth);
         entity.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(speed);
         entity.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(80.0);
+        entity.getPersistentDataContainer().set(EnemyDeathListener.NO_DROP_ITEMS, PersistentDataType.INTEGER, 1);
         entity.setPersistent(true);
     }
 
