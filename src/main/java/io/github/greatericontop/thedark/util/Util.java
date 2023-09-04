@@ -1,11 +1,13 @@
 package io.github.greatericontop.thedark.util;
 
 import net.kyori.adventure.text.Component;
+import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.LeatherArmorMeta;
 
 public class Util {
 
@@ -14,6 +16,14 @@ public class Util {
         ItemMeta im = stack.getItemMeta();
         im.displayName(Component.text(name));
         im.setLore(java.util.Arrays.asList(lore));
+        stack.setItemMeta(im);
+        return stack;
+    }
+
+    public static ItemStack createLeatherArmor(Material mat, int rgbColor) {
+        ItemStack stack = new ItemStack(mat, 1);
+        LeatherArmorMeta im = (LeatherArmorMeta) stack.getItemMeta();
+        im.setColor(Color.fromRGB(rgbColor));
         stack.setItemMeta(im);
         return stack;
     }

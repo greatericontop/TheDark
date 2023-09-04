@@ -1,7 +1,7 @@
 package io.github.greatericontop.thedark;
 
 import io.github.greatericontop.thedark.enemy.BaseEnemy;
-import io.github.greatericontop.thedark.enemy.EmeraldVindicator;
+import io.github.greatericontop.thedark.enemy.other.EmeraldVindicator;
 import io.github.greatericontop.thedark.guns.GunClassification;
 import io.github.greatericontop.thedark.guns.GunUtil;
 import io.github.greatericontop.thedark.player.PlayerProfile;

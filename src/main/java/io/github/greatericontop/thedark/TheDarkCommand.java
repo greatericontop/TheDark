@@ -1,9 +1,9 @@
 package io.github.greatericontop.thedark;
 
-import io.github.greatericontop.thedark.enemy.BasicZombie;
-import io.github.greatericontop.thedark.enemy.EmeraldVindicator;
-import io.github.greatericontop.thedark.enemy.FatDebugZombie;
-import io.github.greatericontop.thedark.enemy.StandardZombie;
+import io.github.greatericontop.thedark.enemy.zombies.BasicZombie;
+import io.github.greatericontop.thedark.enemy.other.EmeraldVindicator;
+import io.github.greatericontop.thedark.enemy.other.FatDebugZombie;
+import io.github.greatericontop.thedark.enemy.zombies.StandardZombie;
 import io.github.greatericontop.thedark.guns.BuyGunManager;
 import io.github.greatericontop.thedark.guns.GunType;
 import io.github.greatericontop.thedark.menus.SignListener;

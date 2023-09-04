@@ -1,5 +1,6 @@
-package io.github.greatericontop.thedark.enemy;
+package io.github.greatericontop.thedark.enemy.zombies;
 
+import io.github.greatericontop.thedark.enemy.BaseEnemy;
 import org.bukkit.Location;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;

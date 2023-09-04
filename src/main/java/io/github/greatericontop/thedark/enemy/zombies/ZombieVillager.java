@@ -1,0 +1,27 @@
+package io.github.greatericontop.thedark.enemy.zombies;
+
+import io.github.greatericontop.thedark.enemy.BaseEnemy;
+import io.github.greatericontop.thedark.util.Util;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
+
+public class ZombieVillager extends BaseEnemy {
+
+    public ZombieVillager(Location spawnLocation) {
+        entity = (LivingEntity) spawnLocation.getWorld().spawnEntity(spawnLocation, EntityType.ZOMBIE_VILLAGER, false);
+        setUp(20.0, 0.23); // same health, same speed
+        int color = 0x11bb11;
+        entity.getEquipment().setHelmet(Util.createLeatherArmor(Material.LEATHER_HELMET, color));
+        entity.getEquipment().setChestplate(Util.createLeatherArmor(Material.LEATHER_CHESTPLATE, color));
+        entity.getEquipment().setLeggings(Util.createLeatherArmor(Material.LEATHER_LEGGINGS, color));
+        entity.getEquipment().setBoots(Util.createLeatherArmor(Material.LEATHER_BOOTS, color));
+    }
+
+    @Override
+    public int coinsToAwardOnDeath() {
+        return 20;
+    }
+
+}

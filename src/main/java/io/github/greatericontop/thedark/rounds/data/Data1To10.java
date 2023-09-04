@@ -1,9 +1,9 @@
 package io.github.greatericontop.thedark.rounds.data;
 
-import io.github.greatericontop.thedark.enemy.MilitantZombie;
-import io.github.greatericontop.thedark.enemy.BasicZombie;
-import io.github.greatericontop.thedark.enemy.EmeraldVindicator;
-import io.github.greatericontop.thedark.enemy.StandardZombie;
+import io.github.greatericontop.thedark.enemy.zombies.MilitantZombie;
+import io.github.greatericontop.thedark.enemy.zombies.BasicZombie;
+import io.github.greatericontop.thedark.enemy.other.EmeraldVindicator;
+import io.github.greatericontop.thedark.enemy.zombies.StandardZombie;
 import io.github.greatericontop.thedark.rounds.operation.BaseOperation;
 import io.github.greatericontop.thedark.rounds.operation.RoundOperationHelper;
 
