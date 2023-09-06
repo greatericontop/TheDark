@@ -1,8 +1,13 @@
 package io.github.greatericontop.thedark.enemy;
 
+import io.github.greatericontop.thedark.TheDark;
+import io.github.greatericontop.thedark.player.PlayerProfile;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.persistence.PersistentDataType;
+
+import javax.annotation.Nullable;
 
 public abstract class BaseEnemy {
     protected LivingEntity entity;
@@ -24,6 +29,10 @@ public abstract class BaseEnemy {
         entity.setPersistent(true);
     }
 
+    public void extraDeathEvent(TheDark plugin, PlayerProfile killerProfile) {
+        // This is used to add extra behavior when this enemy's entity dies
+        // By default, do nothing
+    }
 
     public abstract int coinsToAwardOnDeath();
 

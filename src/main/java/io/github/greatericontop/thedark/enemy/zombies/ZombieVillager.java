@@ -1,11 +1,16 @@
 package io.github.greatericontop.thedark.enemy.zombies;
 
+import io.github.greatericontop.thedark.TheDark;
 import io.github.greatericontop.thedark.enemy.BaseEnemy;
+import io.github.greatericontop.thedark.player.PlayerProfile;
 import io.github.greatericontop.thedark.util.Util;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
+
+import javax.annotation.Nullable;
 
 public class ZombieVillager extends BaseEnemy {
 
@@ -17,6 +22,11 @@ public class ZombieVillager extends BaseEnemy {
         entity.getEquipment().setChestplate(Util.createLeatherArmor(Material.LEATHER_CHESTPLATE, color));
         entity.getEquipment().setLeggings(Util.createLeatherArmor(Material.LEATHER_LEGGINGS, color));
         entity.getEquipment().setBoots(Util.createLeatherArmor(Material.LEATHER_BOOTS, color));
+    }
+
+    @Override
+    public void extraDeathEvent(TheDark plugin, PlayerProfile killerProfile) {
+        plugin.getGameManager().spawnEnemy(ZombieVillagerBaby.class, entity.getLocation());
     }
 
     @Override

@@ -41,7 +41,7 @@ public class GameManager {
             profile.getPlayer().sendActionBar(profile.getActionBar());
             profile.updateInventory();
         }
-        // tick enemies
+        // tick (dead) enemies
         for (BaseEnemy enemy : activeEnemies) {
             if (!enemy.isDead())  continue;
             Player killer = enemy.getEntity().getKiller();
@@ -49,18 +49,14 @@ public class GameManager {
             PlayerProfile profile = getPlayerProfile(killer);
             if (profile == null)  continue;
 
+            enemy.extraDeathEvent(plugin, profile);
+
             int coins = enemy.coinsToAwardOnDeath();
             if (GunUtil.getHeldGunClassification(killer) == GunClassification.MIDAS_PISTOL) {
                 coins *= 3;
             }
             profile.coins += coins;
             killer.sendMessage(Component.text(String.format("§6+%d coins (kill)", coins)));
-
-            if (enemy.getClass() == EmeraldVindicator.class) {
-                profile.emeralds += 1;
-                killer.sendMessage(Component.text("§2+1 Emerald"));
-                killer.playSound(killer.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1.0F, 1.0F);
-            }
         }
         // remove dead enemies AFTER to avoid junk with iterators & ConcurrentModificationException
         activeEnemies.removeIf(BaseEnemy::isDead);
