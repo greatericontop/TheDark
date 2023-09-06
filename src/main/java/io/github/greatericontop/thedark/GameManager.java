@@ -11,8 +11,10 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
@@ -42,7 +44,8 @@ public class GameManager {
             profile.updateInventory();
         }
         // tick (dead) enemies
-        for (BaseEnemy enemy : activeEnemies) {
+        List<BaseEnemy> newActiveEnemies = new ArrayList<>(activeEnemies);
+        for (BaseEnemy enemy : newActiveEnemies) {
             if (!enemy.isDead())  continue;
             Player killer = enemy.getEntity().getKiller();
             if (killer == null)  continue;
@@ -58,7 +61,7 @@ public class GameManager {
             profile.coins += coins;
             killer.sendMessage(Component.text(String.format("§6+%d coins (kill)", coins)));
         }
-        // remove dead enemies AFTER to avoid junk with iterators & ConcurrentModificationException
+        // (deleting afterward is easier & faster)
         activeEnemies.removeIf(BaseEnemy::isDead);
     }
 
