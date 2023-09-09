@@ -59,6 +59,13 @@ public class TheDark extends JavaPlugin {
         this.saveDefaultConfig();
         this.getConfig().options().copyDefaults(true);
 
+        // Placeholders
+        if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
+            new PlaceholderManager(this).register();
+        } else {
+            getLogger().warning("PlaceholderAPI not found, you will lose its functionality");
+        }
+
         Bukkit.getScheduler().runTaskTimer(this, () -> gameManager.tick(), 20L, 1L);
 
     }
