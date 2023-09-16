@@ -24,7 +24,7 @@ public enum GunType {
 
     ),
     PISTOL_1STAR(
-            1, 5.0, 11L, -1, 16,
+            1, 6.0, 10L, -1, 16,
             GunClassification.PISTOL,
             Material.WOODEN_HOE,
             "§ePistol §9⚝"
@@ -38,7 +38,7 @@ public enum GunType {
 
     ),
     RIFLE_1STAR(
-            1, 6.0, 7L, -1, 30,
+            1, 7.0, 6L, -1, 30,
             GunClassification.RIFLE,
             Material.STONE_HOE,
             "§eRifle §9⚝"
@@ -51,7 +51,7 @@ public enum GunType {
             "§fShotgun"
     ),
     SHOTGUN_1STAR(
-            1, 6.0, 25L, -1, 6,
+            1, 8.0, 25L, -1, 6,
             GunClassification.SHOTGUN,
             Material.IRON_SHOVEL,
             "§eShotgun §9⚝"
@@ -62,7 +62,7 @@ public enum GunType {
     // max 2 stars
 
     FLAMETHROWER(
-            0, 2.5, 3L, -1, 48,
+            0, 2.0, 3L, -1, 48,
             GunClassification.FLAMETHROWER,
             Material.GOLDEN_SHOVEL,
             "§eFlamethrower"
@@ -74,7 +74,7 @@ public enum GunType {
             "§bFlamethrower §9⚝"
     ),
     FLAMETHROWER_2STAR(
-            2, 3.5, 3L, -1, 70,
+            2, 4.0, 3L, -1, 90,
             GunClassification.FLAMETHROWER,
             Material.GOLDEN_SHOVEL,
             "§bFlamethrower §9⚝§4⚝"
@@ -88,13 +88,13 @@ public enum GunType {
             "§eMidas Pistol"
     ),
     MIDAS_PISTOL_1STAR(
-            1, 5.0, 11L, -1, 16,
+            1, 6.0, 10L, -1, 16,
             GunClassification.MIDAS_PISTOL,
             Material.GOLDEN_HOE,
             "§bMidas Pistol §9⚝"
     ),
     MIDAS_PISTOL_2STAR(
-            2, 6.5, 11L, -1, 18,
+            2, 8.0, 9L, -1, 20,
             GunClassification.MIDAS_PISTOL,
             Material.GOLDEN_HOE,
             "§bMidas Pistol §9⚝§4⚝"
@@ -112,19 +112,19 @@ public enum GunType {
             "§bRocket Launcher"
     ),
     ROCKET_LAUNCHER_1STAR(
-            1, 20.0, 140L, -1, 1,
+            1, 24.0, 140L, -1, 1,
             GunClassification.ROCKET_LAUNCHER,
             Material.NETHERITE_PICKAXE,
             "§dRocket Launcher §9⚝"
     ),
     ROCKET_LAUNCHER_2STAR(
-            2, 24.0, 140L, -1, 1,
+            2, 32.0, 140L, -1, 1,
             GunClassification.ROCKET_LAUNCHER,
             Material.NETHERITE_PICKAXE,
             "§dRocket Launcher §9⚝§4⚝"
     ),
     ROCKET_LAUNCHER_3STAR(
-            3, 28.0, 140L, -1, 1,
+            3, 40.0, 140L, -1, 1,
             GunClassification.ROCKET_LAUNCHER,
             Material.NETHERITE_PICKAXE,
             "§dRocket Launcher §9⚝§4⚝§2⚝"
