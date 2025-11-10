@@ -1,5 +1,6 @@
 package io.github.greatericontop.thedark.guns;
 
+import io.github.greatericontop.thedark.upgrades.UpgradeUtils;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -242,6 +243,8 @@ public enum GunType {
         im.displayName(itemName);
         im.lore(generateLore());
         im.getPersistentDataContainer().set(GunUtil.GUN_KEY, PersistentDataType.STRING, this.name());
+        im.getPersistentDataContainer().set(UpgradeUtils.TOP_PATH, PersistentDataType.INTEGER, 3); // TODO: debug
+        im.getPersistentDataContainer().set(UpgradeUtils.BOTTOM_PATH, PersistentDataType.INTEGER, 2);
         if (enhancementStarCount > 0) {
             im.addEnchant(Enchantment.LUCK, 1, true);
             im.addItemFlags(ItemFlag.HIDE_ENCHANTS);

@@ -1,6 +1,7 @@
 package io.github.greatericontop.thedark.guns;
 
 import io.github.greatericontop.thedark.TheDark;
+import io.github.greatericontop.thedark.player.PlayerProfile;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -32,10 +33,17 @@ public class ShootGunListener implements Listener {
     }
 
     @EventHandler(priority = EventPriority.HIGH) // runs later, it can be cancelled by the SignListener event
-    public void onRightClickNormal(PlayerInteractEvent event) {
+    public void onInteractNormal(PlayerInteractEvent event) {
         if (event.getHand() != EquipmentSlot.HAND)  return;
-        if (event.getAction() != Action.RIGHT_CLICK_AIR && event.getAction() != Action.RIGHT_CLICK_BLOCK)  return;
-        genericInteractEvent(event.getPlayer());
+        if ((event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK)
+                && event.getPlayer().isSneaking()) {
+            PlayerProfile profile = plugin.getGameManager().getPlayerProfile(event.getPlayer());
+            if (profile == null)  return;
+            plugin.gunUpgradeListener.openMenu(profile);
+        }
+        if (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) {
+            genericInteractEvent(event.getPlayer());
+        }
     }
 
     @EventHandler(priority = EventPriority.HIGH) // see above

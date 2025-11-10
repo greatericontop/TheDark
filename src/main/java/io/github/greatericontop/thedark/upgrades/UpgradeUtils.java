@@ -1,20 +1,23 @@
 package io.github.greatericontop.thedark.upgrades;
 
 import io.github.greatericontop.thedark.TheDark;
-import io.github.greatericontop.thedark.guns.GunType;
+import io.github.greatericontop.thedark.guns.GunClassification;
+import org.bukkit.NamespacedKey;
 
 import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
 public class UpgradeUtils {
-    private final Map<GunType, UpgradeList> upgradeList;
+    public static final NamespacedKey TOP_PATH = new NamespacedKey("thedark", "upgrade_top");
+    public static final NamespacedKey BOTTOM_PATH = new NamespacedKey("thedark", "upgrade_bottom");
+    private final Map<GunClassification, UpgradeList> upgradeList;
 
     private final TheDark plugin;
     public UpgradeUtils(TheDark plugin) {
         this.plugin = plugin;
         this.upgradeList = new HashMap<>();
-        upgradeList.put(GunType.PISTOL, new UpgradeList(
+        upgradeList.put(GunClassification.PISTOL, new UpgradeList(
                 new Upgrade("Sharper Bullets", "+1 pierce", 125),
                 new Upgrade("Even Sharper Bullets", "+1 pierce", 160),
                 new Upgrade("Hollow Point", "-1 pierce but +6 damage", 500),
@@ -27,8 +30,8 @@ public class UpgradeUtils {
     }
 
     @Nullable
-    public UpgradeList getUpgradeList(GunType gunType) {
-        return upgradeList.get(gunType);
+    public UpgradeList getUpgradeList(GunClassification classification) {
+        return upgradeList.get(classification);
     }
 
 
