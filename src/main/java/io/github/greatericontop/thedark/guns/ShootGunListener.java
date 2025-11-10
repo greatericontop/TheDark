@@ -69,7 +69,7 @@ public class ShootGunListener implements Listener {
             stack.setAmount(currentAmount - 1);
         }
 
-        GunUtil.fireProjectile(gunType, player.getEyeLocation(), player.getEyeLocation().getDirection(), player, gunType.getDamage(), plugin);
+        GunUtil.fireProjectile(gunType, player.getEyeLocation(), player.getEyeLocation().getDirection(), player, gunType.getDamage(), 2, plugin);
         cooldowns.put(player.getUniqueId(), true);
         Bukkit.getScheduler().runTaskLater(plugin, () -> cooldowns.put(player.getUniqueId(), false), gunType.getCooldownTicks());
     }

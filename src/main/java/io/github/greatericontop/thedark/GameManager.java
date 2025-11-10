@@ -1,13 +1,11 @@
 package io.github.greatericontop.thedark;
 
 import io.github.greatericontop.thedark.enemy.BaseEnemy;
-import io.github.greatericontop.thedark.enemy.other.EmeraldVindicator;
 import io.github.greatericontop.thedark.guns.GunClassification;
 import io.github.greatericontop.thedark.guns.GunUtil;
 import io.github.greatericontop.thedark.player.PlayerProfile;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Location;
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
 import java.lang.reflect.InvocationTargetException;

@@ -4,12 +4,11 @@ import io.github.greatericontop.thedark.TheDark;
 import io.github.greatericontop.thedark.player.PlayerProfile;
 import io.github.greatericontop.thedark.util.Util;
 import org.bukkit.Bukkit;
-import org.bukkit.FluidCollisionMode;
 import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
-import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -19,82 +18,63 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
+import org.bukkit.util.BoundingBox;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class GunUtil implements Listener {
     public static final NamespacedKey GUN_KEY = new NamespacedKey("thedark", "gun");
-    private static final double MAX_DISTANCE = 72.0;
+    private static final double MAX_DISTANCE = 48.0;
+
+    private record Hit(LivingEntity target, double distance) {}
 
     private final TheDark plugin;
-
     public GunUtil(TheDark plugin) {
         this.plugin = plugin;
     }
 
-    public static void fireProjectile(GunType gunType, Location sourceLoc, Vector direction, Player owner, double damage, TheDark plugin) {
-        // perform raytrace
-        RayTraceResult result = sourceLoc.getWorld().rayTrace(
-                sourceLoc, direction, MAX_DISTANCE,
-                FluidCollisionMode.NEVER, true, 0.0,
-                entity -> (entity instanceof LivingEntity && entity.getType() != EntityType.PLAYER));
-        Location targetLoc;
-        List<LivingEntity> allAffectedEntities = new ArrayList<>();
-        LivingEntity targetEntity = null;
-        if (result != null) {
-            targetLoc = result.getHitPosition().toLocation(sourceLoc.getWorld());
-            if (result.getHitEntity() != null) {
-                targetEntity = (LivingEntity) result.getHitEntity();
-                targetEntity.damage(damage, owner);
-                allAffectedEntities.add(targetEntity);
-                // TODO knockback?
+    public static void fireProjectile(GunType gunType, Location sourceLoc, Vector direction, Player owner, double damage, int pierce, TheDark plugin) {
+        direction = direction.normalize();
+        Location start = sourceLoc.clone();
+        Location end = start.clone().add(direction.clone().multiply(MAX_DISTANCE));
+        List<Hit> hits = new ArrayList<>();
+        BoundingBox boundingBox = BoundingBox.of(start, end);
+        for (Entity e : start.getWorld().getNearbyEntities(boundingBox)) {
+            if (e instanceof Player)  continue;
+            if (!(e instanceof LivingEntity target))  continue;
+            RayTraceResult hit = e.getBoundingBox().rayTrace(start.toVector(), direction, MAX_DISTANCE);
+            if (hit == null)  continue;
+            // Vector from start to the position where we touch the entity's bounding box
+            Vector delta = hit.getHitPosition().subtract(start.toVector());
+            double distance = delta.length();
+            hits.add(new Hit(target, distance));
+        }
+        hits.sort(Comparator.comparingDouble(a -> a.distance));
+        Bukkit.getScheduler().runTaskLater(plugin, () -> {
+            for (int i = 0; i < Math.min(pierce, hits.size()); i++) {
+                LivingEntity target = hits.get(i).target;
+                target.setNoDamageTicks(0);
             }
-        } else {
-            targetLoc = sourceLoc.clone().add(direction.clone().multiply(MAX_DISTANCE));
+        }, 1L);
+        for (int i = 0; i < Math.min(pierce, hits.size()); i++) {
+            LivingEntity target = hits.get(i).target;
+            target.damage(damage, owner);
         }
 
-        // special properties
-        if (gunType.getClassification() == GunClassification.SHOTGUN) {
-            for (LivingEntity e : targetLoc.getNearbyLivingEntities(2.5)) {
-                if (e.getType() == EntityType.PLAYER) {
-                    continue;
-                }
-                e.damage(damage*Util.randomDouble(0.6, 0.9), owner);
-                allAffectedEntities.add(e);
-            }
-        }
-        if (gunType.getClassification() == GunClassification.FLAMETHROWER) {
-            if (targetEntity != null && targetEntity.getFireTicks() < 80) {
-                targetEntity.setFireTicks(80);
-            }
-        }
-        if (gunType.getClassification() == GunClassification.ROCKET_LAUNCHER) {
-            for (LivingEntity e : targetLoc.getNearbyLivingEntities(4.5)) {
-                if (e.getType() == EntityType.PLAYER) {
-                    continue;
-                }
-                e.damage(damage, owner);
-                allAffectedEntities.add(e);
-            }
-            targetLoc.getWorld().spawnParticle(Particle.EXPLOSION_LARGE, targetLoc, 2);
-        }
-
-        // particles
-        Vector totalDelta = targetLoc.toVector().subtract(sourceLoc.toVector());
+        // FX
+        Vector totalDelta = end.toVector().subtract(start.toVector());
         Vector step = totalDelta.clone().normalize().multiply(0.2);
-        Location current = sourceLoc.clone();
+        Location current = start.clone();
         for (int i = 0; i < (int) (totalDelta.length() / 0.2); i++) {
             current.add(step);
             current.getWorld().spawnParticle(Particle.ASH, current, 1, 0.0, 0.0, 0.0, 0.0);
         }
-        // sound
         sourceLoc.getWorld().playSound(sourceLoc, Sound.ENTITY_GENERIC_EXPLODE, 0.45F, 1.0F);
-        // only 3 or 4 ticks of i-frames
-        Bukkit.getScheduler().runTaskLater(plugin, () -> allAffectedEntities.forEach(e -> e.setNoDamageTicks(3)), 1L);
     }
 
     public static int getDamagePositionBelowCurrent(int maxDurability, int ticksToRefill, int currentDamage) {
