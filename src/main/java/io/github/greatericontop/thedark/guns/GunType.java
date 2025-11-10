@@ -243,8 +243,8 @@ public enum GunType {
         im.displayName(itemName);
         im.lore(generateLore());
         im.getPersistentDataContainer().set(GunUtil.GUN_KEY, PersistentDataType.STRING, this.name());
-        im.getPersistentDataContainer().set(UpgradeUtils.TOP_PATH, PersistentDataType.INTEGER, 3); // TODO: debug
-        im.getPersistentDataContainer().set(UpgradeUtils.BOTTOM_PATH, PersistentDataType.INTEGER, 2);
+        im.getPersistentDataContainer().set(UpgradeUtils.TOP_PATH, PersistentDataType.INTEGER, 0);
+        im.getPersistentDataContainer().set(UpgradeUtils.BOTTOM_PATH, PersistentDataType.INTEGER, 0);
         if (enhancementStarCount > 0) {
             im.addEnchant(Enchantment.LUCK, 1, true);
             im.addItemFlags(ItemFlag.HIDE_ENCHANTS);
