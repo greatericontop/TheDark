@@ -78,6 +78,7 @@ public class ShootGunListener implements Listener {
         }
 
         GunUtil.fireProjectile(gunType, player.getEyeLocation(), player.getEyeLocation().getDirection(), player, gunType.getDamage(), 2, plugin);
+        // TODO: replace this with GunClassification or a gun firing class
         cooldowns.put(player.getUniqueId(), true);
         Bukkit.getScheduler().runTaskLater(plugin, () -> cooldowns.put(player.getUniqueId(), false), gunType.getCooldownTicks());
     }
