@@ -27,6 +27,16 @@ public class UpgradeUtils {
                 new Upgrade("Double Barrel", "Shoot 2 bullets at once", 400),
                 new Upgrade("Machine Gun Pistol", "Can fire every 3 ticks!", 1550)
         ));
+        upgradeList.put(GunClassification.RIFLE, new UpgradeList(
+                new Upgrade("High Caliber", "5 -> 9 damage", 1300),
+                new Upgrade("Even Higher Caliber", "9 -> 13 damage", 1500),
+                new Upgrade("High Energy Rounds", "25 damage per shot and deals extra knockback!", 3500),
+                new Upgrade("Doom Rounds", "These zombies won't know what hit them!", 16000),
+                new Upgrade("Faster Firing", "Decrease cooldown to 4 ticks", 1000),
+                new Upgrade("Even Faster Firing", "Decrease cooldown to 3 ticks", 1400),
+                new Upgrade("Burst", "Shoot 3 bullets instantly!", 2000),
+                new Upgrade("Ultra Assault Rifle", "5 shot high-pierce bursts with no cooldown!", 6000)
+        ));
     }
 
     @Nullable
