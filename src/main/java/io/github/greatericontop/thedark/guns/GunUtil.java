@@ -38,7 +38,7 @@ public class GunUtil implements Listener {
         this.plugin = plugin;
     }
 
-    public static void fireProjectile(GunType gunType, Location sourceLoc, Vector direction, Player owner, double damage, int pierce, TheDark plugin) {
+    public static void fireProjectile(Location sourceLoc, Vector direction, Player owner, double damage, int pierce, TheDark plugin) {
         direction = direction.normalize();
         Location start = sourceLoc.clone();
         Location end = start.clone().add(direction.clone().multiply(MAX_DISTANCE));

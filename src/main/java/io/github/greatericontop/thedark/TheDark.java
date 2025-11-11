@@ -33,6 +33,8 @@ public class TheDark extends JavaPlugin {
     public RouletteRewardClaimListener rouletteRewardClaimListener = null;
     public SwordBuyListener swordBuyListener = null;
 
+    public ShootGunListener shootGunListener = null;
+
 
 
     @Override
@@ -63,7 +65,8 @@ public class TheDark extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new PlayerShennaniganPreventionListener(this), this);
 
         this.getServer().getPluginManager().registerEvents(new GunUtil(this), this);
-        this.getServer().getPluginManager().registerEvents(new ShootGunListener(this), this);
+        shootGunListener = new ShootGunListener(this);
+        this.getServer().getPluginManager().registerEvents(shootGunListener, this);
 
         this.saveDefaultConfig();
         this.getConfig().options().copyDefaults(true);

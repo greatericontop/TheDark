@@ -2,6 +2,8 @@ package io.github.greatericontop.thedark.guns;
 
 import io.github.greatericontop.thedark.TheDark;
 import io.github.greatericontop.thedark.player.PlayerProfile;
+import io.github.greatericontop.thedark.upgrades.UpgradeUtils;
+import io.github.greatericontop.thedark.util.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -16,19 +18,20 @@ import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
+import org.bukkit.util.Vector;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
 public class ShootGunListener implements Listener {
-    private final Map<GunType, Map<UUID, Boolean>> cooldowns = new HashMap<>();
+    private final Map<GunClassification, Map<UUID, Boolean>> cooldowns = new HashMap<>();
     private final TheDark plugin;
 
     public ShootGunListener(TheDark plugin) {
         this.plugin = plugin;
-        for (GunType gunType : GunType.values()) {
-            cooldowns.put(gunType, new HashMap<>());
+        for (GunClassification classification : GunClassification.values()) {
+            cooldowns.put(classification, new HashMap<>());
         }
     }
 
@@ -60,7 +63,8 @@ public class ShootGunListener implements Listener {
         PersistentDataContainer pdc = im.getPersistentDataContainer();
         if (!pdc.has(GunUtil.GUN_KEY, PersistentDataType.STRING))  return;
         GunType gunType = GunType.valueOf(pdc.get(GunUtil.GUN_KEY, PersistentDataType.STRING));
-        Map<UUID, Boolean> cooldowns = this.cooldowns.get(gunType);
+        GunClassification gunClassification = gunType.getClassification();
+        Map<UUID, Boolean> cooldowns = this.cooldowns.get(gunClassification);
         if (cooldowns.getOrDefault(player.getUniqueId(), false))  return;
         Damageable damageableIM = (Damageable) im;
 
@@ -77,10 +81,20 @@ public class ShootGunListener implements Listener {
             stack.setAmount(currentAmount - 1);
         }
 
-        GunUtil.fireProjectile(gunType, player.getEyeLocation(), player.getEyeLocation().getDirection(), player, gunType.getDamage(), 2, plugin);
-        // TODO: replace this with GunClassification or a gun firing class
-        cooldowns.put(player.getUniqueId(), true);
-        Bukkit.getScheduler().runTaskLater(plugin, () -> cooldowns.put(player.getUniqueId(), false), gunType.getCooldownTicks());
+        // Damage/pierce/cooldown/etc handled by :GunClassification: implementation,
+        // which then finally calls :performFire:
+        gunClassification.fire(player, plugin, pdc.get(UpgradeUtils.TOP_PATH, PersistentDataType.INTEGER), pdc.get(UpgradeUtils.BOTTOM_PATH, PersistentDataType.INTEGER), pdc);
+    }
+
+    public void performFire(GunClassification classification, Player player, Vector direction, int pierce, double damage, double cooldownTicks) {
+        GunUtil.fireProjectile(player.getEyeLocation(), direction, player, damage, pierce, plugin);
+        int intCooldownTicks = Util.roundNumber(cooldownTicks);
+        if (intCooldownTicks > 0) {
+            Map<UUID, Boolean> gunCooldowns = cooldowns.get(classification);
+            gunCooldowns.put(player.getUniqueId(), true);
+            Bukkit.getScheduler().runTaskLater(plugin, () -> gunCooldowns.put(player.getUniqueId(), false), intCooldownTicks);
+        }
+        player.sendMessage(String.format("§7[Debug] fired with pierce %d, damage %.1f, cooldown %dt", pierce, damage, intCooldownTicks));
     }
 
 }
