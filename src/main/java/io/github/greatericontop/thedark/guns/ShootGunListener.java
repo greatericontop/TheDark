@@ -84,8 +84,9 @@ public class ShootGunListener implements Listener {
         gunType.fire(player, plugin, pdc.get(UpgradeListing.TOP_PATH, PersistentDataType.INTEGER), pdc.get(UpgradeListing.BOTTOM_PATH, PersistentDataType.INTEGER), pdc);
     }
 
-    public void performFire(GunType type, Player player, Vector direction, int pierce, double damage, double cooldownTicks) {
-        ShootGunHelper.fireProjectile(player.getEyeLocation(), direction, player, damage, pierce, plugin);
+    public void performFire(GunType type, Player player, Vector direction, int pierce, double damage, double cooldownTicks,
+                            double extraKBStrength) {
+        ShootGunHelper.fireProjectile(player.getEyeLocation(), direction, player, damage, pierce, plugin, extraKBStrength);
         int intCooldownTicks = Util.roundNumber(cooldownTicks);
         if (intCooldownTicks > 0) {
             Map<UUID, Boolean> gunCooldowns = cooldowns.get(type);

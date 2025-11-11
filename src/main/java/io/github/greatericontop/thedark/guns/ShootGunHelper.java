@@ -21,7 +21,8 @@ public class ShootGunHelper {
 
     private record Hit(LivingEntity target, double distance) {}
 
-    public static void fireProjectile(Location sourceLoc, Vector direction, Player owner, double damage, int pierce, TheDark plugin) {
+    public static void fireProjectile(Location sourceLoc, Vector direction, Player owner, double damage, int pierce, TheDark plugin,
+                                      double extraKBStrength) {
         direction = direction.normalize();
         Location start = sourceLoc.clone();
         Location end = start.clone().add(direction.clone().multiply(MAX_DISTANCE));
@@ -47,6 +48,10 @@ public class ShootGunHelper {
         for (int i = 0; i < Math.min(pierce, hits.size()); i++) {
             LivingEntity target = hits.get(i).target;
             target.damage(damage, owner);
+            if (extraKBStrength > 0.0) {
+                Vector knockback = direction.clone().multiply(extraKBStrength);
+                target.setVelocity(target.getVelocity().add(knockback));
+            }
         }
 
         // FX

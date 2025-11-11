@@ -9,6 +9,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
 import java.util.List;
@@ -24,6 +25,7 @@ public enum GunType {
             double damage = 4.0;
             double cooldownTicks = 10.0;
             boolean doubleBarrel = false;
+            final double extraKBStrength = 0.0;
             // This format lets earlier upgrades carry over to later ones (unless explicitly overwritten)
             if (topPath >= 1) {
                 pierce = 3;
@@ -55,10 +57,10 @@ public enum GunType {
                 Vector direction = player.getEyeLocation().getDirection();
                 Vector left = direction.clone().rotateAroundY(0.034906); // 2 degrees
                 Vector right = direction.clone().rotateAroundY(-0.034906);
-                plugin.shootGunListener.performFire(this, player, left, pierce, damage, -1.0);
-                plugin.shootGunListener.performFire(this, player, right, pierce, damage, cooldownTicks);
+                plugin.shootGunListener.performFire(this, player, left, pierce, damage, -1.0, extraKBStrength);
+                plugin.shootGunListener.performFire(this, player, right, pierce, damage, cooldownTicks, extraKBStrength);
             } else {
-                plugin.shootGunListener.performFire(this, player, player.getEyeLocation().getDirection(), pierce, damage, cooldownTicks);
+                plugin.shootGunListener.performFire(this, player, player.getEyeLocation().getDirection(), pierce, damage, cooldownTicks, extraKBStrength);
             }
         }
     },
@@ -68,7 +70,77 @@ public enum GunType {
             Material.STONE_HOE) {
         @Override
         public void fire(Player player, TheDark plugin, int topPath, int bottomPath, PersistentDataContainer extraPDC) {
-            // TODO
+            int pierce = 3;
+            double damage = 5.0;
+            double cooldownTicks = 5.0;
+            double extraKBStrength = 0.0;
+            // This format lets earlier upgrades carry over to later ones (unless explicitly overwritten)
+            if (topPath >= 1) {
+                damage = 9.0;
+            }
+            if (topPath >= 2) {
+                damage = 13.0;
+            }
+            if (topPath >= 3) {
+                damage = 25.0;
+                extraKBStrength = 0.4;
+            }
+            if (topPath >= 4) {
+                damage = 90.0;
+                extraKBStrength = 1.0;
+            }
+            if (bottomPath >= 1) {
+                cooldownTicks = 4;
+            }
+            if (bottomPath >= 2) {
+                cooldownTicks = 3;
+            }
+            if (bottomPath >= 3) {
+                pierce = 4;
+            }
+            if (bottomPath >= 4) {
+                pierce = 8;
+            }
+
+            if (bottomPath == 4) {
+                // 5 shot burst with no cooldown (5t cooldown so you don't start multiple bursts)
+                final double totalCooldownTicks = 5;
+                final int finalPierce = pierce;
+                final double finalDamage = damage;
+                final double finalExtraKBStrength = extraKBStrength;
+                plugin.shootGunListener.performFire(this, player, player.getEyeLocation().getDirection(), pierce, damage, totalCooldownTicks, extraKBStrength);
+                new BukkitRunnable() {
+                    int shotsLeft = 4;
+                    public void run() {
+                        if (shotsLeft <= 0) {
+                            this.cancel();
+                            return;
+                        }
+                        plugin.shootGunListener.performFire(RIFLE, player, player.getEyeLocation().getDirection(), finalPierce, finalDamage, -1.0, finalExtraKBStrength);
+                        shotsLeft--;
+                    }
+                }.runTaskTimer(plugin, 1L, 1L);
+            } else if (bottomPath == 3) {
+                // 3 shot burst (6t cooldown starting from the first)
+                final double totalCooldownTicks = 6;
+                final int finalPierce = pierce;
+                final double finalDamage = damage;
+                final double finalExtraKBStrength = extraKBStrength;
+                plugin.shootGunListener.performFire(this, player, player.getEyeLocation().getDirection(), pierce, damage, totalCooldownTicks, extraKBStrength);
+                new BukkitRunnable() {
+                    int shotsLeft = 2;
+                    public void run() {
+                        if (shotsLeft <= 0) {
+                            this.cancel();
+                            return;
+                        }
+                        plugin.shootGunListener.performFire(RIFLE, player, player.getEyeLocation().getDirection(), finalPierce, finalDamage, -1.0, finalExtraKBStrength);
+                        shotsLeft--;
+                    }
+                }.runTaskTimer(plugin, 2L, 2L);
+            } else {
+                plugin.shootGunListener.performFire(this, player, player.getEyeLocation().getDirection(), pierce, damage, cooldownTicks, extraKBStrength);
+            }
         }
     },
 
