@@ -1,8 +1,6 @@
 package io.github.greatericontop.thedark.guns;
 
 import io.github.greatericontop.thedark.TheDark;
-import io.github.greatericontop.thedark.player.PlayerProfile;
-import io.github.greatericontop.thedark.util.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
@@ -11,9 +9,7 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
@@ -32,11 +28,6 @@ public class GunUtil implements Listener {
     private static final double MAX_DISTANCE = 48.0;
 
     private record Hit(LivingEntity target, double distance) {}
-
-    private final TheDark plugin;
-    public GunUtil(TheDark plugin) {
-        this.plugin = plugin;
-    }
 
     public static void fireProjectile(Location sourceLoc, Vector direction, Player owner, double damage, int pierce, TheDark plugin) {
         direction = direction.normalize();
@@ -100,18 +91,6 @@ public class GunUtil implements Listener {
             return GunClassification.valueOf(pdc.get(GunUtil.GUN_KEY, PersistentDataType.STRING));
         }
         return null;
-    }
-
-    @EventHandler()
-    public void onDamageByPlayer(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Player player))  return;
-        PlayerProfile profile = plugin.getGameManager().getPlayerProfile(player);
-        if (profile == null)  return;
-        double multiplier = 0.8;
-//        if (getHeldGunClassification(player) == GunClassification.MIDAS_PISTOL) {
-//            multiplier *= 3;
-//        }
-        profile.coins += Util.roundNumber(event.getFinalDamage() * multiplier);
     }
 
 }
