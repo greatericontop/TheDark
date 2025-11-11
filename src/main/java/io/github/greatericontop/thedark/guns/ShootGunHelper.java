@@ -22,7 +22,7 @@ public class ShootGunHelper {
     private record Hit(LivingEntity target, double distance) {}
 
     public static void fireProjectile(Location sourceLoc, Vector direction, Player owner, double damage, int pierce, TheDark plugin,
-                                      double extraKBStrength) {
+                                      double extraKBStrength, boolean bypassDamageTicks) {
         direction = direction.normalize();
         Location start = sourceLoc.clone();
         Location end = start.clone().add(direction.clone().multiply(MAX_DISTANCE));
@@ -39,12 +39,19 @@ public class ShootGunHelper {
             hits.add(new Hit(target, distance));
         }
         hits.sort(Comparator.comparingDouble(a -> a.distance));
-        Bukkit.getScheduler().runTaskLater(plugin, () -> {
+        if (bypassDamageTicks) {
             for (int i = 0; i < Math.min(pierce, hits.size()); i++) {
                 LivingEntity target = hits.get(i).target;
-                target.setNoDamageTicks(0);
+                target.setLastDamage(0.0); // Lets you take damage in the same tick instead of the next
             }
-        }, 1L);
+        } else {
+            Bukkit.getScheduler().runTaskLater(plugin, () -> {
+                for (int i = 0; i < Math.min(pierce, hits.size()); i++) {
+                    LivingEntity target = hits.get(i).target;
+                    target.setNoDamageTicks(0);
+                }
+            }, 1L);
+        }
         for (int i = 0; i < Math.min(pierce, hits.size()); i++) {
             LivingEntity target = hits.get(i).target;
             target.damage(damage, owner);
