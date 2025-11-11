@@ -1,8 +1,8 @@
 package io.github.greatericontop.thedark;
 
 import io.github.greatericontop.thedark.enemy.BaseEnemy;
+import io.github.greatericontop.thedark.miscmechanic.CashGeneration;
 import io.github.greatericontop.thedark.player.PlayerProfile;
-import net.kyori.adventure.text.Component;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
@@ -16,12 +16,10 @@ import java.util.Set;
 import java.util.UUID;
 
 public class GameManager {
-
-    private final TheDark plugin;
-    // TODO: for testing
     public final Map<UUID, PlayerProfile> playerProfiles = new HashMap<>();
     public final Set<BaseEnemy> activeEnemies = new HashSet<>();
 
+    private final TheDark plugin;
     public GameManager(TheDark plugin) {
         this.plugin = plugin;
     }
@@ -49,13 +47,7 @@ public class GameManager {
             if (profile == null)  continue;
 
             enemy.extraDeathEvent(plugin, profile);
-
-            int coins = enemy.coinsToAwardOnDeath();
-//            if (GunUtil.getHeldGunClassification(killer) == GunClassification.MIDAS_PISTOL) {
-//                coins *= 3;
-//            }
-            profile.coins += coins;
-            killer.sendMessage(Component.text(String.format("§6+%d coins (kill)", coins)));
+            CashGeneration.rewardCoinsOnDeath(profile, enemy);
         }
         // (deleting afterward is easier & faster)
         activeEnemies.removeIf(BaseEnemy::isDead);

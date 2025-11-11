@@ -1,8 +1,8 @@
 package io.github.greatericontop.thedark.enemy;
 
 import io.github.greatericontop.thedark.TheDark;
+import io.github.greatericontop.thedark.miscmechanic.CashGeneration;
 import io.github.greatericontop.thedark.player.PlayerProfile;
-import io.github.greatericontop.thedark.util.Util;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -32,11 +32,7 @@ public class EnemyListener implements Listener {
         if (!(event.getDamager() instanceof Player player))  return;
         PlayerProfile profile = plugin.getGameManager().getPlayerProfile(player);
         if (profile == null)  return;
-        double multiplier = 0.8;
-//        if (getHeldGunClassification(player) == GunClassification.MIDAS_PISTOL) {
-//            multiplier *= 3;
-//        }
-        profile.coins += Util.roundNumber(event.getFinalDamage() * multiplier);
+        CashGeneration.rewardCoinsOnDamage(profile, event.getFinalDamage());
     }
 
 }
