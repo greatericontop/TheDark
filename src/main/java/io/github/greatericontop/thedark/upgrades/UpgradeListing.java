@@ -37,6 +37,16 @@ public class UpgradeListing {
                 new Upgrade("Burst", "Shoot 3 extra-pierce bullets instantly for incredible spraying!", 2000),
                 new Upgrade("Ultra Assault Rifle", "5 shot bursts with no cooldown!", 6000)
         ));
+        upgradeList.put(GunType.SHOTGUN, new ItemUpgrades(
+                new Upgrade("Bigger Blast", "Shoots 5 shells", 300),
+                new Upgrade("Even Bigger Blast", "Shoots 7 shells", 400),
+                new Upgrade("More Shells", "Crams 15 shells into the same area!", 1250),
+                new Upgrade("Wave of Destruction", "Shoots 45 shells at a time!", 2750),
+                new Upgrade("Faster Firing", "Decrease cooldown to 8.75 ticks", 200),
+                new Upgrade("Even Faster Firing", "Decrease cooldown to 7.75 ticks", 250),
+                new Upgrade("Buckshot", "Each shot does double damage!", 1000),
+                new Upgrade("Insane Buckshot", "Shots have 3 pierce and deal 14 damage!", 3400)
+        ));
     }
 
     @Nullable
