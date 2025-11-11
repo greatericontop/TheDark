@@ -34,8 +34,8 @@ public class UpgradeListing {
                 new Upgrade("Doom Rounds", "These zombies won't know what hit them!", 16000),
                 new Upgrade("Faster Firing", "Decrease cooldown to 4 ticks", 1000),
                 new Upgrade("Even Faster Firing", "Decrease cooldown to 3 ticks", 1400),
-                new Upgrade("Burst", "Shoot 3 bullets instantly!", 2000),
-                new Upgrade("Ultra Assault Rifle", "5 shot high-pierce bursts with no cooldown!", 6000)
+                new Upgrade("Burst", "Shoot 3 extra-pierce bullets instantly for incredible spraying!", 2000),
+                new Upgrade("Ultra Assault Rifle", "5 shot bursts with no cooldown!", 6000)
         ));
     }
 
