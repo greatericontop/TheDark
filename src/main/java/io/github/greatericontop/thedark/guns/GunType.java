@@ -25,7 +25,6 @@ public enum GunType {
             double damage = 4.0;
             double cooldownTicks = 10.0;
             boolean doubleBarrel = false;
-            final double extraKBStrength = 0.0;
             // This format lets earlier upgrades carry over to later ones (unless explicitly overwritten)
             if (topPath >= 1) {
                 pierce = 3;
@@ -57,10 +56,13 @@ public enum GunType {
                 Vector direction = player.getEyeLocation().getDirection();
                 Vector left = direction.clone().rotateAroundY(0.034906); // 2 degrees
                 Vector right = direction.clone().rotateAroundY(-0.034906);
-                plugin.shootGunListener.performFire(this, player, left, pierce, damage, -1.0, extraKBStrength);
-                plugin.shootGunListener.performFire(this, player, right, pierce, damage, cooldownTicks, extraKBStrength);
+                plugin.shootGunListener.performFire(this, player, left, pierce, damage, -1.0,
+                        0.0, false);
+                plugin.shootGunListener.performFire(this, player, right, pierce, damage, cooldownTicks,
+                        0.0, false);
             } else {
-                plugin.shootGunListener.performFire(this, player, player.getEyeLocation().getDirection(), pierce, damage, cooldownTicks, extraKBStrength);
+                plugin.shootGunListener.performFire(this, player, player.getEyeLocation().getDirection(), pierce, damage, cooldownTicks,
+                        0.0, false);
             }
         }
     },
@@ -108,7 +110,8 @@ public enum GunType {
                 final int finalPierce = pierce;
                 final double finalDamage = damage;
                 final double finalExtraKBStrength = extraKBStrength;
-                plugin.shootGunListener.performFire(this, player, player.getEyeLocation().getDirection(), pierce, damage, totalCooldownTicks, extraKBStrength);
+                plugin.shootGunListener.performFire(this, player, player.getEyeLocation().getDirection(), pierce, damage, totalCooldownTicks,
+                        extraKBStrength, false);
                 new BukkitRunnable() {
                     int shotsLeft = 4;
                     public void run() {
@@ -116,7 +119,8 @@ public enum GunType {
                             this.cancel();
                             return;
                         }
-                        plugin.shootGunListener.performFire(RIFLE, player, player.getEyeLocation().getDirection(), finalPierce, finalDamage, -1.0, finalExtraKBStrength);
+                        plugin.shootGunListener.performFire(RIFLE, player, player.getEyeLocation().getDirection(), finalPierce, finalDamage, -1.0,
+                                finalExtraKBStrength, false);
                         shotsLeft--;
                     }
                 }.runTaskTimer(plugin, 1L, 1L);
@@ -126,7 +130,8 @@ public enum GunType {
                 final int finalPierce = pierce;
                 final double finalDamage = damage;
                 final double finalExtraKBStrength = extraKBStrength;
-                plugin.shootGunListener.performFire(this, player, player.getEyeLocation().getDirection(), pierce, damage, totalCooldownTicks, extraKBStrength);
+                plugin.shootGunListener.performFire(this, player, player.getEyeLocation().getDirection(), pierce, damage, totalCooldownTicks,
+                        extraKBStrength, false);
                 new BukkitRunnable() {
                     int shotsLeft = 2;
                     public void run() {
@@ -134,12 +139,14 @@ public enum GunType {
                             this.cancel();
                             return;
                         }
-                        plugin.shootGunListener.performFire(RIFLE, player, player.getEyeLocation().getDirection(), finalPierce, finalDamage, -1.0, finalExtraKBStrength);
+                        plugin.shootGunListener.performFire(RIFLE, player, player.getEyeLocation().getDirection(), finalPierce, finalDamage, -1.0,
+                                finalExtraKBStrength, false);
                         shotsLeft--;
                     }
                 }.runTaskTimer(plugin, 2L, 2L);
             } else {
-                plugin.shootGunListener.performFire(this, player, player.getEyeLocation().getDirection(), pierce, damage, cooldownTicks, extraKBStrength);
+                plugin.shootGunListener.performFire(this, player, player.getEyeLocation().getDirection(), pierce, damage, cooldownTicks,
+                        extraKBStrength, false);
             }
         }
     },
