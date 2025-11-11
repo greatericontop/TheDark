@@ -17,43 +17,37 @@ public enum GunClassification {
             double damage = 4.0;
             double cooldownTicks = 10.0;
             boolean doubleBarrel = false;
-            switch (topPath) {
-                case 1 -> {
-                    pierce = 3;
-                }
-                case 2 -> {
-                    pierce = 4;
-                }
-                case 3 -> {
-                    pierce = 3;
-                    damage = 10.0;
-                }
-                case 4 -> {
-                    pierce = 8;
-                    damage = 14.0;
-                }
+            // This format lets earlier upgrades carry over to later ones (unless explicitly overwritten)
+            if (topPath >= 1) {
+                pierce = 3;
             }
-            switch (bottomPath) {
-                case 1 -> {
-                    cooldownTicks = 8.75;
-                }
-                case 2 -> {
-                    cooldownTicks = 7.75;
-                }
-                case 3 -> {
-                    cooldownTicks = 7.75;
-                    doubleBarrel = true;
-                }
-                case 4 -> {
-                    cooldownTicks = 3.0;
-                    doubleBarrel = true;
-                }
+            if (topPath >= 2) {
+                pierce = 4;
             }
-
+            if (topPath >= 3) {
+                pierce = 3;
+                damage = 10.0;
+            }
+            if (topPath >= 4) {
+                pierce = 8;
+                damage = 14.0;
+            }
+            if (bottomPath >= 1) {
+                cooldownTicks = 8.75;
+            }
+            if (bottomPath >= 2) {
+                cooldownTicks = 7.75;
+            }
+            if (bottomPath >= 3) {
+                doubleBarrel = true;
+            }
+            if (bottomPath >= 4) {
+                cooldownTicks = 3.0;
+            }
             if (doubleBarrel) {
                 Vector direction = player.getEyeLocation().getDirection();
-                Vector left = direction.clone().rotateAroundY(0.087266); // 5 degrees
-                Vector right = direction.clone().rotateAroundY(-0.087266);
+                Vector left = direction.clone().rotateAroundY(0.034906); // 2 degrees
+                Vector right = direction.clone().rotateAroundY(-0.034906);
                 plugin.shootGunListener.performFire(this, player, left, pierce, damage, -1.0);
                 plugin.shootGunListener.performFire(this, player, right, pierce, damage, cooldownTicks);
             } else {
