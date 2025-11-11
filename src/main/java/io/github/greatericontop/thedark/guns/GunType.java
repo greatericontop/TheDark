@@ -13,9 +13,7 @@ import org.bukkit.util.Vector;
 
 import java.util.List;
 
-public enum GunClassification {
-    // this enum contains the classifications of guns (compared to GunType which contains distinct types for
-    // each enhancement star), and also contains some characteristics that are constant across enhancement stars
+public enum GunType {
 
     PISTOL(30, 10, 200,
             "§ePistol", "§7A basic pistol.",
@@ -105,8 +103,8 @@ public enum GunClassification {
         return miniDescription;
     }
 
-    GunClassification(int rechargeTicks, int ammoCapacity, int baseCost,
-                      String displayName, String miniDescription, Material material) {
+    GunType(int rechargeTicks, int ammoCapacity, int baseCost,
+            String displayName, String miniDescription, Material material) {
         this.rechargeTicks = rechargeTicks;
         this.ammoCapacity = ammoCapacity;
         this.baseCost = baseCost;

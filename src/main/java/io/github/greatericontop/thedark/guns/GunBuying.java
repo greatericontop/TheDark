@@ -13,7 +13,7 @@ import java.util.List;
 
 public class GunBuying {
 
-    public static void buy(GunClassification gunType, PlayerProfile profile, Player player) {
+    public static void buy(GunType gunType, PlayerProfile profile, Player player) {
         int cost = gunType.getBaseCost();
         if (profile.coins < cost) {
             player.sendMessage("§3You don't have enough money to buy this gun!");
@@ -25,7 +25,7 @@ public class GunBuying {
         }
     }
 
-    public static boolean attemptGive(GunClassification gunType, Player player, int requestedSlot) {
+    public static boolean attemptGive(GunType gunType, Player player, int requestedSlot) {
         if (!checkGiveIsOk(gunType, player, requestedSlot)) {
             return false;
         }
@@ -35,7 +35,7 @@ public class GunBuying {
         return true;
     }
 
-    public static boolean checkGiveIsOk(GunClassification gunType, Player player, int requestedSlot) {
+    public static boolean checkGiveIsOk(GunType gunType, Player player, int requestedSlot) {
         if (requestedSlot < 1 || requestedSlot > 3) {
             player.sendMessage("§3You can only buy guns in your 3 slots!");
             return false;
@@ -53,7 +53,7 @@ public class GunBuying {
         return true;
     }
 
-    public static void debugGiveGun(GunClassification gunType, Player player, Integer forceSlot) {
+    public static void debugGiveGun(GunType gunType, Player player, Integer forceSlot) {
         int slot = forceSlot != null ? forceSlot : getFirstSpace(player);
         if (slot == -1) {
             // no space available and not forced
@@ -74,8 +74,8 @@ public class GunBuying {
         return -1;
     }
 
-    private static List<GunClassification> getGunsInInventory(Player player) {
-        List<GunClassification> guns = new ArrayList<>();
+    private static List<GunType> getGunsInInventory(Player player) {
+        List<GunType> guns = new ArrayList<>();
         for (int slot = 1; slot <= 3; slot++) {
             ItemStack stack = player.getInventory().getItem(slot);
             if (!isPopulated(stack))  continue;
@@ -83,7 +83,7 @@ public class GunBuying {
             if (im == null)  continue;
             PersistentDataContainer pdc = im.getPersistentDataContainer();
             if (pdc.has(GunUtil.GUN_KEY, PersistentDataType.STRING)) {
-                GunClassification gunType = GunClassification.valueOf(pdc.get(GunUtil.GUN_KEY, PersistentDataType.STRING));
+                GunType gunType = GunType.valueOf(pdc.get(GunUtil.GUN_KEY, PersistentDataType.STRING));
                 guns.add(gunType);
             }
         }

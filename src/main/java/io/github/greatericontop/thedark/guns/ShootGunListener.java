@@ -24,12 +24,12 @@ import java.util.Map;
 import java.util.UUID;
 
 public class ShootGunListener implements Listener {
-    private final Map<GunClassification, Map<UUID, Boolean>> cooldowns = new HashMap<>();
+    private final Map<GunType, Map<UUID, Boolean>> cooldowns = new HashMap<>();
     private final TheDark plugin;
 
     public ShootGunListener(TheDark plugin) {
         this.plugin = plugin;
-        for (GunClassification classification : GunClassification.values()) {
+        for (GunType classification : GunType.values()) {
             cooldowns.put(classification, new HashMap<>());
         }
     }
@@ -61,7 +61,7 @@ public class ShootGunListener implements Listener {
         if (im == null)  return;
         PersistentDataContainer pdc = im.getPersistentDataContainer();
         if (!pdc.has(GunUtil.GUN_KEY, PersistentDataType.STRING))  return;
-        GunClassification gunType = GunClassification.valueOf(pdc.get(GunUtil.GUN_KEY, PersistentDataType.STRING));
+        GunType gunType = GunType.valueOf(pdc.get(GunUtil.GUN_KEY, PersistentDataType.STRING));
         Map<UUID, Boolean> cooldowns = this.cooldowns.get(gunType);
         if (cooldowns.getOrDefault(player.getUniqueId(), false))  return;
         Damageable damageableIM = (Damageable) im;
@@ -79,16 +79,16 @@ public class ShootGunListener implements Listener {
             stack.setAmount(currentAmount - 1);
         }
 
-        // Damage/pierce/cooldown/etc handled by :GunClassification: implementation,
+        // Damage/pierce/cooldown/etc handled by :GunType: implementation,
         // which then finally calls :performFire:
         gunType.fire(player, plugin, pdc.get(UpgradeListing.TOP_PATH, PersistentDataType.INTEGER), pdc.get(UpgradeListing.BOTTOM_PATH, PersistentDataType.INTEGER), pdc);
     }
 
-    public void performFire(GunClassification classification, Player player, Vector direction, int pierce, double damage, double cooldownTicks) {
+    public void performFire(GunType type, Player player, Vector direction, int pierce, double damage, double cooldownTicks) {
         ShootGunHelper.fireProjectile(player.getEyeLocation(), direction, player, damage, pierce, plugin);
         int intCooldownTicks = Util.roundNumber(cooldownTicks);
         if (intCooldownTicks > 0) {
-            Map<UUID, Boolean> gunCooldowns = cooldowns.get(classification);
+            Map<UUID, Boolean> gunCooldowns = cooldowns.get(type);
             gunCooldowns.put(player.getUniqueId(), true);
             Bukkit.getScheduler().runTaskLater(plugin, () -> gunCooldowns.put(player.getUniqueId(), false), intCooldownTicks);
         }

@@ -1,7 +1,7 @@
 package io.github.greatericontop.thedark.menus;
 
 import io.github.greatericontop.thedark.TheDark;
-import io.github.greatericontop.thedark.guns.GunClassification;
+import io.github.greatericontop.thedark.guns.GunType;
 import io.github.greatericontop.thedark.guns.GunUtil;
 import io.github.greatericontop.thedark.player.PlayerProfile;
 import io.github.greatericontop.thedark.upgrades.Upgrade;
@@ -51,8 +51,8 @@ public class GunUpgradeListener extends GenericMenu {
             player.sendMessage("§cYou must be holding a weapon to upgrade it!");
             return;
         }
-        GunClassification classification = GunUtil.getHeldGunClassification(player);
-        ItemUpgrades itemUpgrades = plugin.upgradeUtils.getUpgradeList(classification);
+        GunType type = GunUtil.getHeldGunType(player);
+        ItemUpgrades itemUpgrades = plugin.upgradeUtils.getUpgradeList(type);
         if (itemUpgrades == null) {
             player.sendMessage("§cThis weapon cannot be upgraded yet!");
             return;
@@ -95,8 +95,8 @@ public class GunUpgradeListener extends GenericMenu {
             return;
         }
 
-        GunClassification classification = GunUtil.getHeldGunClassification(player);
-        ItemUpgrades itemUpgrades = plugin.upgradeUtils.getUpgradeList(classification);
+        GunType type = GunUtil.getHeldGunType(player);
+        ItemUpgrades itemUpgrades = plugin.upgradeUtils.getUpgradeList(type);
         switch (slot) {
             case TOP1 -> attemptToBuy(profile, itemUpgrades.top1(), true);
             case TOP2 -> attemptToBuy(profile, itemUpgrades.top2(), true);

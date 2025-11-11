@@ -11,7 +11,7 @@ import io.github.greatericontop.thedark.enemy.zombies.StandardZombie;
 import io.github.greatericontop.thedark.enemy.zombies.ZombieVillager;
 import io.github.greatericontop.thedark.enemy.zombies.ZombieVillagerBaby;
 import io.github.greatericontop.thedark.guns.GunBuying;
-import io.github.greatericontop.thedark.guns.GunClassification;
+import io.github.greatericontop.thedark.guns.GunType;
 import io.github.greatericontop.thedark.menus.SignListener;
 import io.github.greatericontop.thedark.player.PlayerProfile;
 import io.github.greatericontop.thedark.rounds.RoundSpawner;
@@ -112,7 +112,7 @@ public class TheDarkCommand implements CommandExecutor {
             return true;
         }
         if (args[0].equals("giveGun")) {
-            GunClassification toGive = GunClassification.valueOf(args[1]);
+            GunType toGive = GunType.valueOf(args[1]);
             if (args.length < 3) {
                 GunBuying.debugGiveGun(toGive, player, null);
             } else {
@@ -121,7 +121,7 @@ public class TheDarkCommand implements CommandExecutor {
             return true;
         }
         if (args[0].equals("buyGun")) {
-            GunClassification toGive = GunClassification.valueOf(args[1]);
+            GunType toGive = GunType.valueOf(args[1]);
             GunBuying.attemptGive(toGive, player, player.getInventory().getHeldItemSlot());
             return true;
         }
