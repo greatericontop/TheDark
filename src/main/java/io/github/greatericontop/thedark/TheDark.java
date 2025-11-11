@@ -5,7 +5,6 @@ import io.github.greatericontop.thedark.guns.GunUtil;
 import io.github.greatericontop.thedark.guns.ShootGunListener;
 import io.github.greatericontop.thedark.menus.ArmorBuyListener;
 import io.github.greatericontop.thedark.menus.ArmorEnchantmentListener;
-import io.github.greatericontop.thedark.menus.EnhancementListener;
 import io.github.greatericontop.thedark.menus.GunUpgradeListener;
 import io.github.greatericontop.thedark.menus.SignListener;
 import io.github.greatericontop.thedark.menus.SwordBuyListener;
@@ -25,7 +24,6 @@ public class TheDark extends JavaPlugin {
 
     public ArmorBuyListener armorBuyListener = null;
     public ArmorEnchantmentListener armorEnchantmentListener = null;
-    public EnhancementListener enhancementListener = null;
     public GunUpgradeListener gunUpgradeListener = null;
     public SwordBuyListener swordBuyListener = null;
 
@@ -45,8 +43,6 @@ public class TheDark extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(armorBuyListener, this);
         armorEnchantmentListener = new ArmorEnchantmentListener(this);
         this.getServer().getPluginManager().registerEvents(armorEnchantmentListener, this);
-        enhancementListener = new EnhancementListener(this);
-        this.getServer().getPluginManager().registerEvents(enhancementListener, this);
         gunUpgradeListener = new GunUpgradeListener(this);
         this.getServer().getPluginManager().registerEvents(gunUpgradeListener, this);
         swordBuyListener = new SwordBuyListener(this);
