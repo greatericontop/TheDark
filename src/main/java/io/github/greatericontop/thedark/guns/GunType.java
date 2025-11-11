@@ -156,6 +156,35 @@ public enum GunType {
             Material.IRON_SHOVEL) {
         @Override
         public void fire(Player player, TheDark plugin, int topPath, int bottomPath, PersistentDataContainer extraPDC) {
+            int shotsPerSide = 1; // = 3 total
+            double anglePerShot = 0.069813; // 4 degrees
+            int pierce = 1;
+            double damage = 4.0;
+            double cooldownTicks = 10.0;
+            if (topPath >= 1) {
+                shotsPerSide = 2; // 5
+            }
+            if (topPath >= 2) {
+                shotsPerSide = 3; // 7
+            }
+            if (topPath >= 3) {
+                shotsPerSide = 7; // 15
+                anglePerShot = 0.029920; // 12/7 degrees
+            }
+            // TODO top path 4
+            if (bottomPath >= 1) {
+                cooldownTicks = 8.75;
+            }
+            if (bottomPath >= 2) {
+                cooldownTicks = 7.75;
+            }
+            if (bottomPath >= 3) {
+                damage = 8.0;
+            }
+            if (bottomPath >= 4) {
+                pierce = 3;
+                damage = 14.0;
+            }
             // TODO
         }
     },
