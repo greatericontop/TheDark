@@ -11,7 +11,7 @@ import org.bukkit.World;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RoundUtil {
+public class RoundSpawner {
 
     public static void executeRound(OperationContext ctx, int roundNumber) {
         for (BaseOperation operation : RoundData.ROUNDS[roundNumber]) {

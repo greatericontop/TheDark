@@ -2,7 +2,7 @@ package io.github.greatericontop.thedark.guns;
 
 import io.github.greatericontop.thedark.TheDark;
 import io.github.greatericontop.thedark.player.PlayerProfile;
-import io.github.greatericontop.thedark.upgrades.UpgradeUtils;
+import io.github.greatericontop.thedark.upgrades.UpgradeListing;
 import io.github.greatericontop.thedark.util.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -81,7 +81,7 @@ public class ShootGunListener implements Listener {
 
         // Damage/pierce/cooldown/etc handled by :GunClassification: implementation,
         // which then finally calls :performFire:
-        gunType.fire(player, plugin, pdc.get(UpgradeUtils.TOP_PATH, PersistentDataType.INTEGER), pdc.get(UpgradeUtils.BOTTOM_PATH, PersistentDataType.INTEGER), pdc);
+        gunType.fire(player, plugin, pdc.get(UpgradeListing.TOP_PATH, PersistentDataType.INTEGER), pdc.get(UpgradeListing.BOTTOM_PATH, PersistentDataType.INTEGER), pdc);
     }
 
     public void performFire(GunClassification classification, Player player, Vector direction, int pierce, double damage, double cooldownTicks) {

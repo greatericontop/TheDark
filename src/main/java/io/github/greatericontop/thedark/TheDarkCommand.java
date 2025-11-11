@@ -14,7 +14,7 @@ import io.github.greatericontop.thedark.guns.GunBuying;
 import io.github.greatericontop.thedark.guns.GunClassification;
 import io.github.greatericontop.thedark.menus.SignListener;
 import io.github.greatericontop.thedark.player.PlayerProfile;
-import io.github.greatericontop.thedark.rounds.RoundUtil;
+import io.github.greatericontop.thedark.rounds.RoundSpawner;
 import io.github.greatericontop.thedark.rounds.operation.OperationContext;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -132,12 +132,12 @@ public class TheDarkCommand implements CommandExecutor {
         if (args[0].equals("startRound")) {
             int round = Integer.parseInt(args[1]);
             player.sendMessage("§7Starting round!");
-            RoundUtil.executeRound(plugin, round);
+            RoundSpawner.executeRound(plugin, round);
         }
         if (args[0].equals("startRoundHere")) {
             int round = Integer.parseInt(args[1]);
             player.sendMessage("§7Starting round here!");
-            RoundUtil.executeRound(new OperationContext(plugin, new Location[]{player.getLocation()}), round);
+            RoundSpawner.executeRound(new OperationContext(plugin, new Location[]{player.getLocation()}), round);
         }
 
         return false;

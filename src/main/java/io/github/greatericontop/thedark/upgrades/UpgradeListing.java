@@ -8,16 +8,16 @@ import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class UpgradeUtils {
+public class UpgradeListing {
     public static final NamespacedKey TOP_PATH = new NamespacedKey("thedark", "upgrade_top");
     public static final NamespacedKey BOTTOM_PATH = new NamespacedKey("thedark", "upgrade_bottom");
-    private final Map<GunClassification, UpgradeList> upgradeList;
+    private final Map<GunClassification, ItemUpgrades> upgradeList;
 
     private final TheDark plugin;
-    public UpgradeUtils(TheDark plugin) {
+    public UpgradeListing(TheDark plugin) {
         this.plugin = plugin;
         this.upgradeList = new HashMap<>();
-        upgradeList.put(GunClassification.PISTOL, new UpgradeList(
+        upgradeList.put(GunClassification.PISTOL, new ItemUpgrades(
                 new Upgrade("Sharper Bullets", "+1 pierce", 125),
                 new Upgrade("Even Sharper Bullets", "+1 pierce", 160),
                 new Upgrade("Hollow Point", "-1 pierce but +6 damage", 500),
@@ -27,7 +27,7 @@ public class UpgradeUtils {
                 new Upgrade("Double Barrel", "Shoot 2 bullets at once", 400),
                 new Upgrade("Machine Gun Pistol", "Can fire every 3 ticks!", 1550)
         ));
-        upgradeList.put(GunClassification.RIFLE, new UpgradeList(
+        upgradeList.put(GunClassification.RIFLE, new ItemUpgrades(
                 new Upgrade("High Caliber", "5 -> 9 damage", 1300),
                 new Upgrade("Even Higher Caliber", "9 -> 13 damage", 1500),
                 new Upgrade("High Energy Rounds", "25 damage per shot and deals extra knockback!", 3500),
@@ -40,7 +40,7 @@ public class UpgradeUtils {
     }
 
     @Nullable
-    public UpgradeList getUpgradeList(GunClassification classification) {
+    public ItemUpgrades getUpgradeList(GunClassification classification) {
         return upgradeList.get(classification);
     }
 

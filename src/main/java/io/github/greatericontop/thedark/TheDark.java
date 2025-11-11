@@ -8,7 +8,7 @@ import io.github.greatericontop.thedark.menus.GunUpgradeListener;
 import io.github.greatericontop.thedark.menus.SignListener;
 import io.github.greatericontop.thedark.menus.SwordBuyListener;
 import io.github.greatericontop.thedark.player.PlayerShennaniganPreventionListener;
-import io.github.greatericontop.thedark.upgrades.UpgradeUtils;
+import io.github.greatericontop.thedark.upgrades.UpgradeListing;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -19,7 +19,7 @@ public class TheDark extends JavaPlugin {
         return gameManager;
     }
 
-    public UpgradeUtils upgradeUtils = null;
+    public UpgradeListing upgradeUtils = null;
 
     public ArmorBuyListener armorBuyListener = null;
     public ArmorEnchantmentListener armorEnchantmentListener = null;
@@ -35,7 +35,7 @@ public class TheDark extends JavaPlugin {
         gameManager = new GameManager(this);
         this.getCommand("thedark").setExecutor(new TheDarkCommand(this));
 
-        upgradeUtils = new UpgradeUtils(this);
+        upgradeUtils = new UpgradeListing(this);
 
         this.getServer().getPluginManager().registerEvents(new SignListener(this), this);
         armorBuyListener = new ArmorBuyListener(this);

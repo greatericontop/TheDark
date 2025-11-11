@@ -1,7 +1,7 @@
 package io.github.greatericontop.thedark.guns;
 
 import io.github.greatericontop.thedark.TheDark;
-import io.github.greatericontop.thedark.upgrades.UpgradeUtils;
+import io.github.greatericontop.thedark.upgrades.UpgradeListing;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -125,8 +125,8 @@ public enum GunClassification {
                 Component.text(String.format("§8Capacity: %d | Reload: %.1fs", getAmmoCapacity(), getRechargeTicks() * 0.05))
         ));
         im.getPersistentDataContainer().set(GunUtil.GUN_KEY, PersistentDataType.STRING, this.name());
-        im.getPersistentDataContainer().set(UpgradeUtils.TOP_PATH, PersistentDataType.INTEGER, 0);
-        im.getPersistentDataContainer().set(UpgradeUtils.BOTTOM_PATH, PersistentDataType.INTEGER, 0);
+        im.getPersistentDataContainer().set(UpgradeListing.TOP_PATH, PersistentDataType.INTEGER, 0);
+        im.getPersistentDataContainer().set(UpgradeListing.BOTTOM_PATH, PersistentDataType.INTEGER, 0);
         stack.setItemMeta(im);
         return stack;
     }

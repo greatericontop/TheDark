@@ -1,6 +1,6 @@
 package io.github.greatericontop.thedark.upgrades;
 
-public record UpgradeList(
+public record ItemUpgrades(
     Upgrade top1,
     Upgrade top2,
     Upgrade top3,
