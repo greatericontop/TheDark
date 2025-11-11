@@ -108,9 +108,9 @@ public class GunUtil implements Listener {
         PlayerProfile profile = plugin.getGameManager().getPlayerProfile(player);
         if (profile == null)  return;
         double multiplier = 0.8;
-        if (getHeldGunClassification(player) == GunClassification.MIDAS_PISTOL) {
-            multiplier *= 3;
-        }
+//        if (getHeldGunClassification(player) == GunClassification.MIDAS_PISTOL) {
+//            multiplier *= 3;
+//        }
         profile.coins += Util.roundNumber(event.getFinalDamage() * multiplier);
     }
 
