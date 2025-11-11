@@ -11,7 +11,7 @@ import org.bukkit.persistence.PersistentDataType;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BuyGunManager {
+public class BuyGunUtil {
 
     public static void buy(GunClassification gunType, PlayerProfile profile, Player player) {
         int cost = gunType.getBaseCost();

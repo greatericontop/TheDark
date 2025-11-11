@@ -1,7 +1,7 @@
 package io.github.greatericontop.thedark.menus;
 
 import io.github.greatericontop.thedark.TheDark;
-import io.github.greatericontop.thedark.guns.BuyGunManager;
+import io.github.greatericontop.thedark.guns.BuyGunUtil;
 import io.github.greatericontop.thedark.guns.GunClassification;
 import io.github.greatericontop.thedark.player.PlayerProfile;
 import org.bukkit.Material;
@@ -48,7 +48,7 @@ public class SignListener implements Listener {
             plugin.swordBuyListener.openMenu(profile);
         } else if (signType.startsWith("buyGun_")) {
             GunClassification toBuy = GunClassification.valueOf(signType.substring(7)); // remove "buyGun_"
-            BuyGunManager.buy(toBuy, profile, player);
+            BuyGunUtil.buy(toBuy, profile, player);
         }
     }
 
