@@ -7,7 +7,6 @@ import io.github.greatericontop.thedark.util.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
@@ -35,7 +34,7 @@ public class ShootGunListener implements Listener {
         }
     }
 
-    @EventHandler(priority = EventPriority.HIGH) // runs later, it can be cancelled by the SignListener event
+    @EventHandler()
     public void onInteractNormal(PlayerInteractEvent event) {
         if (event.getHand() != EquipmentSlot.HAND)  return;
         if ((event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK)
@@ -49,7 +48,7 @@ public class ShootGunListener implements Listener {
         }
     }
 
-    @EventHandler(priority = EventPriority.HIGH) // see above
+    @EventHandler()
     public void onRightClickEntity(PlayerInteractEntityEvent event) {
         if (event.getHand() != EquipmentSlot.HAND)  return;
         genericInteractEvent(event.getPlayer());

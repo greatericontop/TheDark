@@ -31,7 +31,7 @@ public class SignListener implements Listener {
         Sign signBlock = (Sign) event.getClickedBlock().getState();
         PersistentDataContainer pdc = signBlock.getPersistentDataContainer();
         if (!pdc.has(SIGN_TYPE_KEY, PersistentDataType.STRING))  return;
-        event.setCancelled(true); // cancel the event so the gun doesn't shoot when you click a game sign
+        event.setCancelled(true);
         String signType = pdc.get(SIGN_TYPE_KEY, PersistentDataType.STRING);
         Player player = event.getPlayer();
         PlayerProfile profile = plugin.getGameManager().getPlayerProfile(player);
