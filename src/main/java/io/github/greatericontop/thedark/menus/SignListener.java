@@ -49,7 +49,6 @@ public class SignListener implements Listener {
         } else if (signType.startsWith("buyGun_")) {
             GunClassification toBuy = GunClassification.valueOf(signType.substring(7)); // remove "buyGun_"
             BuyGunManager.buy(toBuy, profile, player);
-            event.setCancelled(true); // this doesn't do anything, but this will prevent the gun shoot event from firing
         }
     }
 
