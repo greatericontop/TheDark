@@ -13,8 +13,8 @@ import java.util.List;
 
 public class BuyGunManager {
 
-    public static void buy(GunType gunType, PlayerProfile profile, Player player) {
-        int cost = gunType.getCost();
+    public static void buy(GunClassification gunType, PlayerProfile profile, Player player) {
+        int cost = gunType.getBaseCost();
         if (profile.coins < cost) {
             player.sendMessage("§3You don't have enough money to buy this gun!");
             return;
@@ -25,7 +25,7 @@ public class BuyGunManager {
         }
     }
 
-    public static boolean attemptGive(GunType gunType, Player player, int requestedSlot) {
+    public static boolean attemptGive(GunClassification gunType, Player player, int requestedSlot) {
         if (!checkGiveIsOk(gunType, player, requestedSlot)) {
             return false;
         }
@@ -35,7 +35,7 @@ public class BuyGunManager {
         return true;
     }
 
-    public static boolean checkGiveIsOk(GunType gunType, Player player, int requestedSlot) {
+    public static boolean checkGiveIsOk(GunClassification gunType, Player player, int requestedSlot) {
         if (requestedSlot < 1 || requestedSlot > 3) {
             player.sendMessage("§3You can only buy guns in your 3 slots!");
             return false;
@@ -46,14 +46,14 @@ public class BuyGunManager {
             return false;
         }
         // only 1 of each gun permitted
-        if (getGunsInInventory(player).contains(gunType.getClassification())) {
+        if (getGunsInInventory(player).contains(gunType)) {
             player.sendMessage("§3You can only have 1 of each gun!");
             return false;
         }
         return true;
     }
 
-    public static void debugGiveGun(GunType gunType, Player player, Integer forceSlot) {
+    public static void debugGiveGun(GunClassification gunType, Player player, Integer forceSlot) {
         int slot = forceSlot != null ? forceSlot : getFirstSpace(player);
         if (slot == -1) {
             // no space available and not forced
@@ -83,8 +83,8 @@ public class BuyGunManager {
             if (im == null)  continue;
             PersistentDataContainer pdc = im.getPersistentDataContainer();
             if (pdc.has(GunUtil.GUN_KEY, PersistentDataType.STRING)) {
-                GunType gunType = GunType.valueOf(pdc.get(GunUtil.GUN_KEY, PersistentDataType.STRING));
-                guns.add(gunType.getClassification());
+                GunClassification gunType = GunClassification.valueOf(pdc.get(GunUtil.GUN_KEY, PersistentDataType.STRING));
+                guns.add(gunType);
             }
         }
         return guns;

@@ -61,9 +61,8 @@ public class ShootGunListener implements Listener {
         if (im == null)  return;
         PersistentDataContainer pdc = im.getPersistentDataContainer();
         if (!pdc.has(GunUtil.GUN_KEY, PersistentDataType.STRING))  return;
-        GunType gunType = GunType.valueOf(pdc.get(GunUtil.GUN_KEY, PersistentDataType.STRING));
-        GunClassification gunClassification = gunType.getClassification();
-        Map<UUID, Boolean> cooldowns = this.cooldowns.get(gunClassification);
+        GunClassification gunType = GunClassification.valueOf(pdc.get(GunUtil.GUN_KEY, PersistentDataType.STRING));
+        Map<UUID, Boolean> cooldowns = this.cooldowns.get(gunType);
         if (cooldowns.getOrDefault(player.getUniqueId(), false))  return;
         Damageable damageableIM = (Damageable) im;
 
@@ -82,7 +81,7 @@ public class ShootGunListener implements Listener {
 
         // Damage/pierce/cooldown/etc handled by :GunClassification: implementation,
         // which then finally calls :performFire:
-        gunClassification.fire(player, plugin, pdc.get(UpgradeUtils.TOP_PATH, PersistentDataType.INTEGER), pdc.get(UpgradeUtils.BOTTOM_PATH, PersistentDataType.INTEGER), pdc);
+        gunType.fire(player, plugin, pdc.get(UpgradeUtils.TOP_PATH, PersistentDataType.INTEGER), pdc.get(UpgradeUtils.BOTTOM_PATH, PersistentDataType.INTEGER), pdc);
     }
 
     public void performFire(GunClassification classification, Player player, Vector direction, int pierce, double damage, double cooldownTicks) {

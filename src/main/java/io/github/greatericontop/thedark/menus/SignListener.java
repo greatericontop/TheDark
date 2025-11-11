@@ -2,7 +2,7 @@ package io.github.greatericontop.thedark.menus;
 
 import io.github.greatericontop.thedark.TheDark;
 import io.github.greatericontop.thedark.guns.BuyGunManager;
-import io.github.greatericontop.thedark.guns.GunType;
+import io.github.greatericontop.thedark.guns.GunClassification;
 import io.github.greatericontop.thedark.player.PlayerProfile;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -47,7 +47,7 @@ public class SignListener implements Listener {
         } else if (signType.equals("sword")) {
             plugin.swordBuyListener.openMenu(profile);
         } else if (signType.startsWith("buyGun_")) {
-            GunType toBuy = GunType.valueOf(signType.substring(7)); // remove "buyGun_"
+            GunClassification toBuy = GunClassification.valueOf(signType.substring(7)); // remove "buyGun_"
             BuyGunManager.buy(toBuy, profile, player);
             event.setCancelled(true); // this doesn't do anything, but this will prevent the gun shoot event from firing
         }

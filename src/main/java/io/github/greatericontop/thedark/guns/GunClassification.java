@@ -17,7 +17,8 @@ public enum GunClassification {
     // this enum contains the classifications of guns (compared to GunType which contains distinct types for
     // each enhancement star), and also contains some characteristics that are constant across enhancement stars
 
-    PISTOL(30, 10, "§ePistol", "§7A basic pistol.",
+    PISTOL(30, 10, 200,
+            "§ePistol", "§7A basic pistol.",
             Material.WOODEN_HOE) {
         @Override
         public void fire(Player player, TheDark plugin, int topPath, int bottomPath, PersistentDataContainer extraPDC) {
@@ -64,7 +65,8 @@ public enum GunClassification {
         }
     },
 
-    RIFLE(30, 30, "§bRifle", "§7A high-powered rifle that fires quickly.",
+    RIFLE(30, 30, 1300,
+            "§bRifle", "§7A high-powered rifle that fires quickly.",
             Material.STONE_HOE) {
         @Override
         public void fire(Player player, TheDark plugin, int topPath, int bottomPath, PersistentDataContainer extraPDC) {
@@ -72,7 +74,8 @@ public enum GunClassification {
         }
     },
 
-    SHOTGUN(40, 5, "§bShotgun", "§7This shotgun damages multiple enemies.",
+    SHOTGUN(40, 5, 400,
+            "§bShotgun", "§7This shotgun damages multiple enemies.",
             Material.IRON_SHOVEL) {
         @Override
         public void fire(Player player, TheDark plugin, int topPath, int bottomPath, PersistentDataContainer extraPDC) {
@@ -84,6 +87,7 @@ public enum GunClassification {
 
     private final int rechargeTicks;
     private final int ammoCapacity;
+    private final int baseCost;
     private final String displayName;
     private final String miniDescription;
     private final Material material;
@@ -94,13 +98,18 @@ public enum GunClassification {
     public int getAmmoCapacity() {
         return ammoCapacity;
     }
+    public int getBaseCost() {
+        return baseCost;
+    }
     public String getMiniDescription() {
         return miniDescription;
     }
 
-    GunClassification(int rechargeTicks, int ammoCapacity, String displayName, String miniDescription, Material material) {
+    GunClassification(int rechargeTicks, int ammoCapacity, int baseCost,
+                      String displayName, String miniDescription, Material material) {
         this.rechargeTicks = rechargeTicks;
         this.ammoCapacity = ammoCapacity;
+        this.baseCost = baseCost;
         this.displayName = displayName;
         this.miniDescription = miniDescription;
         this.material = material;
