@@ -197,64 +197,6 @@ public enum GunType {
         return classification.getRechargeTicks();
     }
 
-    private List<Component> generateLore() {
-        if (enhancementStarCount == 0) {
-            return List.of(
-                    Component.text(classification.getMiniDescription()),
-                    Component.text(""),
-                    Component.text(String.format("§7Damage: §c%.1f", damage)),
-                    Component.text(String.format("§7Cooldown: §f%.2fs", cooldownTicks * 0.05)),
-                    Component.text(String.format("§7Capacity: §f%d", ammoSize))
-            );
-        } else {
-            GunType root = classification.getRootGun();
-            String damageMessage, cooldownMessage, capacityMessage;
-            if (damage == root.getDamage()) {
-                damageMessage = String.format("§7Damage: §c%.1f", damage);
-            } else {
-                damageMessage = String.format("§7Damage: §8%.1f §7-> §c%.1f", root.getDamage(), damage);
-            }
-            if (cooldownTicks == root.getCooldownTicks()) {
-                cooldownMessage = String.format("§7Cooldown: §f%.2fs", cooldownTicks * 0.05);
-            } else {
-                cooldownMessage = String.format("§7Cooldown: §8%.2fs §7-> §f%.2fs", root.getCooldownTicks() * 0.05, cooldownTicks * 0.05);
-            }
-            if (ammoSize == root.getAmmoSize()) {
-                capacityMessage = String.format("§7Capacity: §f%d", ammoSize);
-            } else {
-                capacityMessage = String.format("§7Capacity: §8%d §7-> §f%d", root.getAmmoSize(), ammoSize);
-            }
-            return List.of(
-                    Component.text(String.format("§6§l%d Star", enhancementStarCount)),
-                    Component.text(""),
-                    Component.text(classification.getMiniDescription()),
-                    Component.text(""),
-                    Component.text(damageMessage),
-                    Component.text(cooldownMessage),
-                    Component.text(capacityMessage),
-                    Component.text(String.format("§7Reload Time: %.1fs", getRechargeTicks() * 0.05))
-            );
-        }
-    }
 
-    public ItemStack createFullyLoadedItemStack() {
-        ItemStack stack = new ItemStack(itemMaterial, ammoSize);
-        ItemMeta im = stack.getItemMeta();
-        im.displayName(itemName);
-        im.lore(generateLore());
-        im.getPersistentDataContainer().set(GunUtil.GUN_KEY, PersistentDataType.STRING, this.name());
-        im.getPersistentDataContainer().set(UpgradeUtils.TOP_PATH, PersistentDataType.INTEGER, 0);
-        im.getPersistentDataContainer().set(UpgradeUtils.BOTTOM_PATH, PersistentDataType.INTEGER, 0);
-        if (enhancementStarCount > 0) {
-            im.addEnchant(Enchantment.LUCK, 1, true);
-            im.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-        }
-        stack.setItemMeta(im);
-        return stack;
-    }
-
-    public int getMaxDurability() {
-        return itemMaterial.getMaxDurability();
-    }
 
 }
