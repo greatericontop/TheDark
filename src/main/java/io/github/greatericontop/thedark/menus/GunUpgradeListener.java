@@ -98,14 +98,14 @@ public class GunUpgradeListener extends GenericMenu {
         GunClassification classification = GunUtil.getHeldGunClassification(player);
         UpgradeList upgradeList = plugin.upgradeUtils.getUpgradeList(classification);
         switch (slot) {
-            case 0 -> attemptToBuy(profile, upgradeList.top1(), true);
-            case 1 -> attemptToBuy(profile, upgradeList.top2(), true);
-            case 2 -> attemptToBuy(profile, upgradeList.top3(), true);
-            case 3 -> attemptToBuy(profile, upgradeList.top4(), true);
-            case 9 -> attemptToBuy(profile, upgradeList.bottom1(), false);
-            case 10 -> attemptToBuy(profile, upgradeList.bottom2(), false);
-            case 11 -> attemptToBuy(profile, upgradeList.bottom3(), false);
-            case 12 -> attemptToBuy(profile, upgradeList.bottom4(), false);
+            case TOP1 -> attemptToBuy(profile, upgradeList.top1(), true);
+            case TOP2 -> attemptToBuy(profile, upgradeList.top2(), true);
+            case TOP3 -> attemptToBuy(profile, upgradeList.top3(), true);
+            case TOP4 -> attemptToBuy(profile, upgradeList.top4(), true);
+            case BOTTOM1 -> attemptToBuy(profile, upgradeList.bottom1(), false);
+            case BOTTOM2 -> attemptToBuy(profile, upgradeList.bottom2(), false);
+            case BOTTOM3 -> attemptToBuy(profile, upgradeList.bottom3(), false);
+            case BOTTOM4 -> attemptToBuy(profile, upgradeList.bottom4(), false);
         }
     }
 
