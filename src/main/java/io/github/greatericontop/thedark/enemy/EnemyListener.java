@@ -4,6 +4,7 @@ import io.github.greatericontop.thedark.TheDark;
 import io.github.greatericontop.thedark.miscmechanic.CashGeneration;
 import io.github.greatericontop.thedark.player.PlayerProfile;
 import org.bukkit.NamespacedKey;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -32,7 +33,9 @@ public class EnemyListener implements Listener {
         if (!(event.getDamager() instanceof Player player))  return;
         PlayerProfile profile = plugin.getGameManager().getPlayerProfile(player);
         if (profile == null)  return;
-        CashGeneration.rewardCoinsOnDamage(profile, event.getFinalDamage());
+        if (!(event.getEntity() instanceof LivingEntity target))  return;
+        double effectiveDamage = Math.min(event.getFinalDamage(), target.getHealth());
+        CashGeneration.rewardCoinsOnDamage(profile, effectiveDamage);
     }
 
 }

@@ -1,7 +1,6 @@
 package io.github.greatericontop.thedark;
 
 import io.github.greatericontop.thedark.enemy.BaseEnemy;
-import io.github.greatericontop.thedark.miscmechanic.CashGeneration;
 import io.github.greatericontop.thedark.player.PlayerProfile;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -47,7 +46,6 @@ public class GameManager {
             if (profile == null)  continue;
 
             enemy.extraDeathEvent(plugin, profile);
-            CashGeneration.rewardCoinsOnDeath(profile, enemy);
         }
         // (deleting afterward is easier & faster)
         activeEnemies.removeIf(BaseEnemy::isDead);
