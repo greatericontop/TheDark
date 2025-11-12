@@ -23,7 +23,7 @@ public enum GunType {
         public void fire(Player player, TheDark plugin, int topPath, int bottomPath, PersistentDataContainer extraPDC) {
             int pierce = 2;
             double damage = 4.0;
-            double cooldownTicks = 10.0;
+            double cooldownTicks = 11.0;
             boolean doubleBarrel = false;
             // This format lets earlier upgrades carry over to later ones (unless explicitly overwritten)
             if (topPath >= 1) {
@@ -41,10 +41,10 @@ public enum GunType {
                 damage = 14.0;
             }
             if (bottomPath >= 1) {
-                cooldownTicks = 8.75;
+                cooldownTicks = 9.0;
             }
             if (bottomPath >= 2) {
-                cooldownTicks = 7.75;
+                cooldownTicks = 7.5;
             }
             if (bottomPath >= 3) {
                 doubleBarrel = true;
@@ -160,7 +160,7 @@ public enum GunType {
             double anglePerShot = 0.069813; // 4 degrees
             int pierce = 1;
             double damage = 4.0;
-            double cooldownTicks = 10.0;
+            double cooldownTicks = 11.0;
             int verticalShotsPerSide = 0; // 1 total
             if (topPath >= 1) {
                 shotsPerSide = 2; // 5
@@ -176,10 +176,10 @@ public enum GunType {
                 verticalShotsPerSide = 1;
             }
             if (bottomPath >= 1) {
-                cooldownTicks = 8.75;
+                cooldownTicks = 9.0;
             }
             if (bottomPath >= 2) {
-                cooldownTicks = 7.75;
+                cooldownTicks = 7.5;
             }
             if (bottomPath >= 3) {
                 damage = 8.0;
