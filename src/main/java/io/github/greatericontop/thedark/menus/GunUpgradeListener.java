@@ -4,16 +4,18 @@ import io.github.greatericontop.thedark.TheDark;
 import io.github.greatericontop.thedark.guns.GunType;
 import io.github.greatericontop.thedark.guns.GunUtil;
 import io.github.greatericontop.thedark.player.PlayerProfile;
-import io.github.greatericontop.thedark.upgrades.Upgrade;
 import io.github.greatericontop.thedark.upgrades.ItemUpgrades;
+import io.github.greatericontop.thedark.upgrades.Upgrade;
 import io.github.greatericontop.thedark.upgrades.UpgradeListing;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
@@ -59,23 +61,23 @@ public class GunUpgradeListener extends GenericMenu {
         }
 
         Inventory gui = Bukkit.createInventory(player, 27, INVENTORY_NAME);
-        gui.setItem(TOP1, renderItem(topPath >= 1 ? BOUGHT : READY, itemUpgrades.top1()));
+        gui.setItem(TOP1, renderItem(topPath >= 1, itemUpgrades.top1()));
         if (topPath >= 1) {
-            gui.setItem(TOP2, renderItem(topPath >= 2 ? BOUGHT : READY, itemUpgrades.top2()));
+            gui.setItem(TOP2, renderItem(topPath >= 2, itemUpgrades.top2()));
             if (topPath >= 2 && bottomPath <= 2) {
-                gui.setItem(TOP3, renderItem(topPath >= 3 ? BOUGHT : READY, itemUpgrades.top3()));
+                gui.setItem(TOP3, renderItem(topPath >= 3, itemUpgrades.top3()));
                 if (topPath >= 3) {
-                    gui.setItem(TOP4, renderItem(topPath >= 4 ? BOUGHT : READY, itemUpgrades.top4()));
+                    gui.setItem(TOP4, renderItem(topPath >= 4, itemUpgrades.top4()));
                 }
             }
         }
-        gui.setItem(BOTTOM1, renderItem(bottomPath >= 1 ? BOUGHT : READY, itemUpgrades.bottom1()));
+        gui.setItem(BOTTOM1, renderItem(bottomPath >= 1, itemUpgrades.bottom1()));
         if (bottomPath >= 1) {
-            gui.setItem(BOTTOM2, renderItem(bottomPath >= 2 ? BOUGHT : READY, itemUpgrades.bottom2()));
+            gui.setItem(BOTTOM2, renderItem(bottomPath >= 2, itemUpgrades.bottom2()));
             if (bottomPath >= 2 && topPath <= 2) {
-                gui.setItem(BOTTOM3, renderItem(bottomPath >= 3 ? BOUGHT : READY, itemUpgrades.bottom3()));
+                gui.setItem(BOTTOM3, renderItem(bottomPath >= 3, itemUpgrades.bottom3()));
                 if (bottomPath >= 3) {
-                    gui.setItem(BOTTOM4, renderItem(bottomPath >= 4 ? BOUGHT : READY, itemUpgrades.bottom4()));
+                    gui.setItem(BOTTOM4, renderItem(bottomPath >= 4, itemUpgrades.bottom4()));
                 }
             }
         }
@@ -129,9 +131,14 @@ public class GunUpgradeListener extends GenericMenu {
         profile.getPlayer().closeInventory();
     }
 
-    private ItemStack renderItem(Material mat, Upgrade upgrade) {
+    private ItemStack renderItem(boolean isBought, Upgrade upgrade) {
+        Material mat = isBought ? BOUGHT : READY;
         ItemStack stack = new ItemStack(mat, 1);
         ItemMeta im = stack.getItemMeta();
+        if (isBought) {
+            im.addEnchant(Enchantment.LUCK, 1, true);
+            im.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        }
         im.setDisplayName("§6" + upgrade.name());
         im.setLore(List.of("§7" + upgrade.description(), String.format("§fCost: §6%d coins", upgrade.cost())));
         stack.setItemMeta(im);
