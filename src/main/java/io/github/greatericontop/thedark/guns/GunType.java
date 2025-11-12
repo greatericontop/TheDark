@@ -161,6 +161,7 @@ public enum GunType {
             int pierce = 1;
             double damage = 4.0;
             double cooldownTicks = 10.0;
+            int verticalShotsPerSide = 0; // 1 total
             if (topPath >= 1) {
                 shotsPerSide = 2; // 5
             }
@@ -171,7 +172,9 @@ public enum GunType {
                 shotsPerSide = 7; // 15
                 anglePerShot = 0.029920; // 12/7 degrees
             }
-            // TODO top path 4
+            if (topPath >= 4) {
+                verticalShotsPerSide = 1;
+            }
             if (bottomPath >= 1) {
                 cooldownTicks = 8.75;
             }
@@ -185,7 +188,21 @@ public enum GunType {
                 pierce = 3;
                 damage = 14.0;
             }
-            // TODO
+            Vector baseDirection = player.getEyeLocation().getDirection().normalize();
+            double baseR = Math.sqrt(baseDirection.getX()*baseDirection.getX() + baseDirection.getZ()*baseDirection.getZ());
+            double basePitch = Math.atan2(baseDirection.getY(), baseR);
+            double baseYaw = Math.atan2(baseDirection.getZ(), baseDirection.getX());
+            boolean firstShot = true;
+            for (int vertical = -verticalShotsPerSide; vertical <= verticalShotsPerSide; vertical++) {
+                double pitch = basePitch + anglePerShot*vertical;
+                for (int horizontal = -shotsPerSide; horizontal <= shotsPerSide; horizontal++) {
+                    double yaw = baseYaw + anglePerShot*horizontal;
+                    Vector direction = new Vector(Math.cos(pitch)*Math.cos(yaw), Math.sin(pitch), Math.cos(pitch)*Math.sin(yaw));
+                    plugin.shootGunListener.performFire(this, player, direction, pierce, damage, firstShot ? cooldownTicks : -1.0,
+                            0.0, true);
+                    firstShot = false;
+                }
+            }
         }
     },
 
