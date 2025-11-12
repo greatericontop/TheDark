@@ -1,15 +1,9 @@
 package io.github.greatericontop.thedark;
 
 import io.github.greatericontop.thedark.enemy.BaseEnemy;
-import io.github.greatericontop.thedark.enemy.other.EmeraldVindicator;
-import io.github.greatericontop.thedark.enemy.other.FatDebugZombie;
-import io.github.greatericontop.thedark.enemy.pigs.PigBrute;
-import io.github.greatericontop.thedark.enemy.pigs.PigZombie;
 import io.github.greatericontop.thedark.enemy.zombies.BasicZombie;
-import io.github.greatericontop.thedark.enemy.zombies.MilitantZombie;
-import io.github.greatericontop.thedark.enemy.zombies.StandardZombie;
-import io.github.greatericontop.thedark.enemy.zombies.ZombieVillager;
-import io.github.greatericontop.thedark.enemy.zombies.ZombieVillagerBaby;
+import io.github.greatericontop.thedark.enemy.zombies.ChainmailZombie;
+import io.github.greatericontop.thedark.enemy.zombies.HelmetZombie;
 import io.github.greatericontop.thedark.guns.GunBuying;
 import io.github.greatericontop.thedark.guns.GunType;
 import io.github.greatericontop.thedark.menus.SignListener;
@@ -58,28 +52,12 @@ public class TheDarkCommand implements CommandExecutor {
             String className = args[1];
             Class<? extends BaseEnemy> clazz;
             // ZOMBIES
-            if (className.equalsIgnoreCase("BasicZombie"))  {
+            if (className.equalsIgnoreCase("BasicZombie")) {
                 clazz = BasicZombie.class;
-            } else if (className.equalsIgnoreCase("StandardZombie"))  {
-                clazz = StandardZombie.class;
-            } else if (className.equalsIgnoreCase("MilitantZombie"))  {
-                clazz = MilitantZombie.class;
-            } else if (className.equalsIgnoreCase("ZombieVillager"))  {
-                clazz = ZombieVillager.class;
-            } else if (className.equalsIgnoreCase("ZombieVillagerBaby"))  {
-                clazz = ZombieVillagerBaby.class;
-            }
-            // PIGS
-            else if (className.equalsIgnoreCase("PigZombie"))  {
-                clazz = PigZombie.class;
-            } else if (className.equalsIgnoreCase("PigBrute"))  {
-                clazz = PigBrute.class;
-            }
-            // OTHER
-            else if (className.equalsIgnoreCase("EmeraldVindicator"))  {
-                clazz = EmeraldVindicator.class;
-            } else if (className.equalsIgnoreCase("FatDebugZombie"))  {
-                clazz = FatDebugZombie.class;
+            } else if (className.equalsIgnoreCase("HelmetZombie")) {
+                clazz = HelmetZombie.class;
+            } else if (className.equalsIgnoreCase("ChainmailZombie")) {
+                clazz = ChainmailZombie.class;
             } else {
                 player.sendMessage("§cUnknown className " + className);
                 return true;
@@ -150,7 +128,7 @@ public class TheDarkCommand implements CommandExecutor {
         }
         for (int i = 0; i < count2; i++) {
             Location adjustedLoc = loc.clone().add(new Vector(4 * (Math.random() - 0.5), 0, 4 * (Math.random() - 0.5)));
-            plugin.getGameManager().spawnEnemy(StandardZombie.class, adjustedLoc);
+            plugin.getGameManager().spawnEnemy(HelmetZombie.class, adjustedLoc);
         }
     }
 

@@ -7,9 +7,9 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.ItemStack;
 
-public class MilitantZombie extends BaseEnemy {
+public class ChainmailZombie extends BaseEnemy {
 
-    public MilitantZombie(Location spawnLocation) {
+    public ChainmailZombie(Location spawnLocation) {
         entity = (LivingEntity) spawnLocation.getWorld().spawnEntity(spawnLocation, EntityType.ZOMBIE, false);
         setUp(30.0, 0.2645); // 50% extra health, 15% faster
         entity.getEquipment().setHelmet(new ItemStack(Material.CHAINMAIL_HELMET, 1));

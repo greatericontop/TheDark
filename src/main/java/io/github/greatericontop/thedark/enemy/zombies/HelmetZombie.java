@@ -7,9 +7,9 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.ItemStack;
 
-public class StandardZombie extends BaseEnemy {
+public class HelmetZombie extends BaseEnemy {
 
-    public StandardZombie(Location spawnLocation) {
+    public HelmetZombie(Location spawnLocation) {
         entity = (LivingEntity) spawnLocation.getWorld().spawnEntity(spawnLocation, EntityType.ZOMBIE, false);
         setUp(30.0, 0.253); // 50% extra health, 10% faster
         entity.getEquipment().setHelmet(new ItemStack(Material.LEATHER_HELMET, 1));
