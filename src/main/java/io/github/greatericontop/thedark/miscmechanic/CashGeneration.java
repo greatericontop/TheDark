@@ -7,7 +7,7 @@ public class CashGeneration {
 
     public static void rewardCoinsOnDamage(PlayerProfile profile, double finalDamage) {
         // In the future, the multiplier may be dependent on which zombie is being damaged
-        double multiplier = 0.8;
+        double multiplier = 0.36;
         profile.coins += Util.roundNumber(finalDamage * multiplier);
     }
 

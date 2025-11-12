@@ -70,7 +70,7 @@ public class TheDarkCommand implements CommandExecutor {
         }
         if (args[0].equals("addMe")) {
             PlayerProfile profile = new PlayerProfile(player);
-            profile.coins = Integer.parseInt(args[1]);
+            profile.coins = 500; // Starting cash
             plugin.getGameManager().playerProfiles.put(player.getUniqueId(), profile);
             return true;
         }
