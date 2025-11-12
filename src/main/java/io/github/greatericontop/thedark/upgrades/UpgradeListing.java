@@ -31,7 +31,7 @@ public class UpgradeListing {
                 new Upgrade("High Caliber", "5 -> 9 damage", 1300),
                 new Upgrade("Even Higher Caliber", "9 -> 13 damage", 1500),
                 new Upgrade("High Energy Rounds", "25 damage per shot and deals extra knockback!", 3500),
-                new Upgrade("Doom Rounds", "These zombies won't know what hit them!", 16000),
+                new Upgrade("Doom Rounds", "These zombies won't know what hit them!", 17000),
                 new Upgrade("Faster Firing", "Decrease cooldown to 4 ticks", 1000),
                 new Upgrade("Even Faster Firing", "Decrease cooldown to 3 ticks", 1400),
                 new Upgrade("Burst", "Shoot 3 extra-pierce bullets instantly for incredible spraying!", 2000),
@@ -40,12 +40,12 @@ public class UpgradeListing {
         upgradeList.put(GunType.SHOTGUN, new ItemUpgrades(
                 new Upgrade("Bigger Blast", "Shoots 5 shells", 300),
                 new Upgrade("Even Bigger Blast", "Shoots 7 shells", 400),
-                new Upgrade("More Shells", "Crams 15 shells into the same area!", 1250),
-                new Upgrade("Wave of Destruction", "Shoots 45 shells at a time!", 2750),
+                new Upgrade("More Shells", "Crams 13 shells into the same area!", 1250),
+                new Upgrade("Wave of Destruction", "Shoots 39 shells at a time!", 2900),
                 new Upgrade("Faster Firing", "Decrease cooldown to 8.75 ticks", 200),
                 new Upgrade("Even Faster Firing", "Decrease cooldown to 7.75 ticks", 250),
-                new Upgrade("Buckshot", "Each shot does double damage!", 1000),
-                new Upgrade("Insane Buckshot", "Shots have 3 pierce and deal 14 damage!", 3400)
+                new Upgrade("Buckshot", "Each shot does double damage!", 1250),
+                new Upgrade("Insane Buckshot", "Shots have 3 pierce and deal 12 damage!", 5000)
         ));
     }
 

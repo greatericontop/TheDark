@@ -169,8 +169,8 @@ public enum GunType {
                 shotsPerSide = 3; // 7
             }
             if (topPath >= 3) {
-                shotsPerSide = 7; // 15
-                anglePerShot = 0.029920; // 12/7 degrees
+                shotsPerSide = 6; // 13
+                anglePerShot = 0.034907; // 12/6 = 2 degrees
             }
             if (topPath >= 4) {
                 verticalShotsPerSide = 1;
@@ -186,7 +186,7 @@ public enum GunType {
             }
             if (bottomPath >= 4) {
                 pierce = 3;
-                damage = 14.0;
+                damage = 12.0;
             }
             Vector baseDirection = player.getEyeLocation().getDirection().normalize();
             double baseR = Math.sqrt(baseDirection.getX()*baseDirection.getX() + baseDirection.getZ()*baseDirection.getZ());
