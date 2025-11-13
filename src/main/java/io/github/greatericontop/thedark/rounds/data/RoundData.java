@@ -14,6 +14,8 @@ public class RoundData {
             Data1To20.R6,
             Data1To20.R7,
             Data1To20.R8,
+            Data1To20.R9,
+            Data1To20.R10,
     };
 
 }
