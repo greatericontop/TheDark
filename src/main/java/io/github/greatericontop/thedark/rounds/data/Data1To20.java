@@ -19,7 +19,7 @@ public class Data1To20 {
     .getOutput();
 
     public static final BaseOperation[] R3 = new RoundOperationHelper(4 * 20)
-            .addSpawnOneAtATime(BasicZombie.class, 20, 50, false)
+            .addSpawnOneAtATime(BasicZombie.class, 15, 45, false)
             .delaySeconds(4)
             .addSpawnOneAtATime(HelmetZombie.class, 10, 80, false)
     .getOutput();
@@ -34,8 +34,8 @@ public class Data1To20 {
     .getOutput();
 
     public static final BaseOperation[] R6 = new RoundOperationHelper(4 * 20)
-            .addSpawnOneAtATime(BasicZombie.class, 25, 45, true)
-            .addSpawnOneAtATime(HelmetZombie.class, 15, 80, false)
+            .addSpawnOneAtATime(BasicZombie.class, 25, 40, true)
+            .addSpawnOneAtATime(HelmetZombie.class, 15, 75, false)
     .getOutput();
 
     public static final BaseOperation[] R7 = new RoundOperationHelper(4 * 20)
@@ -61,5 +61,6 @@ public class Data1To20 {
             .addSpawnOneAtATime(ChainmailZombie.class, 3, 30, false)
     .getOutput();
 
+    // Start with $3300 on round 11
 
 }
