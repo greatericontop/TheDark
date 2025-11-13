@@ -4,6 +4,7 @@ import io.github.greatericontop.thedark.enemy.zombies.BasicZombie;
 import io.github.greatericontop.thedark.enemy.zombies.ChainmailZombie;
 import io.github.greatericontop.thedark.enemy.zombies.HelmetZombie;
 import io.github.greatericontop.thedark.enemy.zombies.IronZombie;
+import io.github.greatericontop.thedark.enemy.zombies.ZombieVillager;
 import io.github.greatericontop.thedark.rounds.operation.BaseOperation;
 import io.github.greatericontop.thedark.rounds.operation.RoundOperationHelper;
 
@@ -70,8 +71,8 @@ public class Data1To20 {
 
     public static final BaseOperation[] R12 = new RoundOperationHelper(4 * 20)
             .addSpawnOneAtATime(HelmetZombie.class, 10, 1, false)
-            .delaySeconds(8).addSpawnOneAtATime(HelmetZombie.class, 10, 1, false)
-            .delaySeconds(8).addSpawnOneAtATime(HelmetZombie.class, 10, 1, false)
+            .delaySeconds(9).addSpawnOneAtATime(HelmetZombie.class, 10, 1, false)
+            .delaySeconds(9).addSpawnOneAtATime(HelmetZombie.class, 10, 1, false)
     .getOutput();
 
     public static final BaseOperation[] R13 = new RoundOperationHelper(4 * 20)
@@ -94,7 +95,7 @@ public class Data1To20 {
     public static final BaseOperation[] R16 = new RoundOperationHelper(4 * 20)
             .addSpawnOneAtATime(HelmetZombie.class, 6, 10, false)
             .delaySeconds(5).addSpawnOneAtATime(ChainmailZombie.class, 6, 10, false)
-            .delaySeconds(7).addSpawnOneAtATime(IronZombie.class, 3, 10, false)
+            .delaySeconds(10).addSpawnOneAtATime(IronZombie.class, 3, 10, false)
     .getOutput();
 
     public static final BaseOperation[] R17 = new RoundOperationHelper(4 * 20)
@@ -112,9 +113,12 @@ public class Data1To20 {
 
     public static final BaseOperation[] R19 = new RoundOperationHelper(4 * 20)
             .addSpawnOneAtATime(IronZombie.class, 2, 1, false)
-            .delaySeconds(5).addSpawnOneAtATime(HelmetZombie.class, 30, 40, false)
-            .delaySeconds(10)
-            .addSpawnOneAtATime(IronZombie.class, 1, 1, false)
+            .delaySeconds(7).addSpawnOneAtATime(HelmetZombie.class, 30, 30, false)
+            .delaySeconds(3).addSpawnOneAtATime(IronZombie.class, 1, 1, false)
+    .getOutput();
+
+    public static final BaseOperation[] R20 = new RoundOperationHelper(4 * 20)
+            .addSpawnOneAtATime(ZombieVillager.class, 1, 1, false)
     .getOutput();
 
 }
