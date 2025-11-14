@@ -206,6 +206,19 @@ public enum GunType {
         }
     },
 
+    FLAMETHROWER(30, 48, 500,
+            "§6Flamethrower", "§7BURN",
+            Material.GOLDEN_SHOVEL) {
+        @Override
+        public void fire(Player player, TheDark plugin, int topPath, int bottomPath, PersistentDataContainer extraPDC) {
+            int pierce = 3;
+            double damage = 1.0;
+            int fireTicks = 80;
+            double fireDamage = 1.0;
+            double cooldownTicks = 7.0;
+        }
+    },
+
     ;
 
     private final int rechargeTicks;
