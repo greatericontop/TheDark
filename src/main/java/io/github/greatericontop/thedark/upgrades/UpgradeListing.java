@@ -40,8 +40,8 @@ public class UpgradeListing {
         upgradeList.put(GunType.SHOTGUN, new ItemUpgrades(
                 new Upgrade("Bigger Blast", "Shoots 5 shells", 300),
                 new Upgrade("Even Bigger Blast", "Shoots 7 shells", 400),
-                new Upgrade("More Shells", "Crams 13 shells into the same area!", 1250),
-                new Upgrade("Wave of Destruction", "Shoots 39 shells at a time!", 2900),
+                new Upgrade("More Shells", "Crams 13 shells into the same area!", 1200),
+                new Upgrade("Wave of Destruction", "Shoots 39 shells at a time!", 3650),
                 new Upgrade("Faster Firing", "Decrease cooldown to 9 ticks", 220),
                 new Upgrade("Even Faster Firing", "Decrease cooldown to 7.5 ticks", 280),
                 new Upgrade("Buckshot", "Each shot does double damage!", 1250),

@@ -40,8 +40,8 @@ public class ZombieVillager extends EnragedEnemy {
         entity.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.23 * 2.0);
         for (Entity e : entity.getNearbyEntities(30.0, 30.0, 30.0)) {
             if (e instanceof Player p) {
-                p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 60, 1));
-                p.addPotionEffect(new PotionEffect(PotionEffectType.DARKNESS, 60, 0));
+                p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 100, 2));
+                p.addPotionEffect(new PotionEffect(PotionEffectType.DARKNESS, 100, 0));
             }
         }
     }

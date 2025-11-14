@@ -39,19 +39,21 @@ public class ShootGunHelper {
             hits.add(new Hit(target, distance));
         }
         hits.sort(Comparator.comparingDouble(a -> a.distance));
+
         if (bypassDamageTicks) {
             for (int i = 0; i < Math.min(pierce, hits.size()); i++) {
                 LivingEntity target = hits.get(i).target;
-                target.setLastDamage(0.0); // Lets you take damage in the same tick instead of the next
+                // Multiple shots in the same tick deal damage but only 0.6x damage
+                target.setLastDamage(damage * 0.4);
             }
-        } else {
-            Bukkit.getScheduler().runTaskLater(plugin, () -> {
-                for (int i = 0; i < Math.min(pierce, hits.size()); i++) {
-                    LivingEntity target = hits.get(i).target;
-                    target.setNoDamageTicks(0);
-                }
-            }, 1L);
         }
+        Bukkit.getScheduler().runTaskLater(plugin, () -> {
+            for (int i = 0; i < Math.min(pierce, hits.size()); i++) {
+                LivingEntity target = hits.get(i).target;
+                target.setNoDamageTicks(0);
+            }
+        }, 1L);
+
         for (int i = 0; i < Math.min(pierce, hits.size()); i++) {
             LivingEntity target = hits.get(i).target;
             target.damage(damage, owner);
