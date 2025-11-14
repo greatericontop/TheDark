@@ -24,7 +24,7 @@ public abstract class EnragedEnemy extends BaseEnemy {
             } else if (rageTimer < rageTimerMax/2) {
                 double greenness = (double) rageTimer / (rageTimerMax/2);
                 Particle.DustOptions options = new Particle.DustOptions(Color.fromRGB(255, (int) (255 * greenness), 0), 1);
-                entity.getWorld().spawnParticle(Particle.REDSTONE, entity.getLocation().add(0, 0.25, 0), 2, options);
+                entity.getWorld().spawnParticle(Particle.REDSTONE, entity.getLocation().add(0, 0.35, 0), 3, options);
             }
         }
     }
