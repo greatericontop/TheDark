@@ -41,14 +41,13 @@ public abstract class BaseEnemy {
             entity.setVisualFire(true);
             fireStatus.durationLeft--;
             fireStatus.ticksToDamage--;
-            if (fireStatus.ticksToDamage <= 0) {
-                entity.damage(fireStatus.damagePerSecond);
-                Bukkit.getScheduler().runTaskLater(plugin, () -> entity.setNoDamageTicks(0), 1L);
-                fireStatus.ticksToDamage = FireStatus.FIRE_DAMAGE_INTERVAL;
-            }
             if (fireStatus.durationLeft <= 0) {
                 entity.setVisualFire(false);
                 fireStatus = null;
+            } else if (fireStatus.ticksToDamage <= 0) { // If both hit 0 the same tick, no damage is applied
+                entity.damage(fireStatus.damagePerSecond);
+                Bukkit.getScheduler().runTaskLater(plugin, () -> entity.setNoDamageTicks(0), 1L);
+                fireStatus.ticksToDamage = FireStatus.FIRE_DAMAGE_INTERVAL;
             }
         }
     }
