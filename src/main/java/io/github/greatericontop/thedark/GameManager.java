@@ -40,7 +40,7 @@ public class GameManager {
         List<BaseEnemy> newActiveEnemies = new ArrayList<>(activeEnemies);
         for (BaseEnemy enemy : newActiveEnemies) {
             if (!enemy.isDead()) {
-                enemy.tick();
+                enemy.tick(plugin);
                 continue;
             }
             Player killer = enemy.getEntity().getKiller();

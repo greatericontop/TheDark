@@ -1,7 +1,9 @@
 package io.github.greatericontop.thedark.enemy;
 
 import io.github.greatericontop.thedark.TheDark;
+import io.github.greatericontop.thedark.miscmechanic.FireStatus;
 import io.github.greatericontop.thedark.player.PlayerProfile;
+import org.bukkit.Bukkit;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.entity.LivingEntity;
@@ -11,6 +13,7 @@ import java.util.UUID;
 
 public abstract class BaseEnemy {
     protected LivingEntity entity;
+    protected FireStatus fireStatus = null;
 
     public LivingEntity getEntity() {
         return entity;
@@ -31,9 +34,23 @@ public abstract class BaseEnemy {
         entity.setPersistent(true);
     }
 
-    public void tick() {
-        // This is executed each tick.
-        // By default, do nothing
+    public void tick(TheDark plugin) {
+        // This is executed each tick, this implementation contains some common behavior (fire)
+
+        if (fireStatus != null) {
+            entity.setVisualFire(true);
+            fireStatus.durationLeft--;
+            fireStatus.ticksToDamage--;
+            if (fireStatus.ticksToDamage <= 0) {
+                entity.damage(fireStatus.damagePerSecond);
+                Bukkit.getScheduler().runTaskLater(plugin, () -> entity.setNoDamageTicks(0), 1L);
+                fireStatus.ticksToDamage = FireStatus.FIRE_DAMAGE_INTERVAL;
+            }
+            if (fireStatus.durationLeft <= 0) {
+                entity.setVisualFire(false);
+                fireStatus = null;
+            }
+        }
     }
 
     public void extraDeathEvent(TheDark plugin, PlayerProfile killerProfile) {

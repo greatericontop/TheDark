@@ -1,5 +1,6 @@
 package io.github.greatericontop.thedark.enemy;
 
+import io.github.greatericontop.thedark.TheDark;
 import org.bukkit.Color;
 import org.bukkit.Particle;
 
@@ -15,7 +16,9 @@ public abstract class EnragedEnemy extends BaseEnemy {
     }
 
     @Override
-    public void tick() {
+    public void tick(TheDark plugin) {
+        super.tick(plugin);
+
         if ((!isEnraged) && rageTimer > 0) {
             rageTimer--;
             if (rageTimer == 0) {
