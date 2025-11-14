@@ -31,6 +31,11 @@ public abstract class BaseEnemy {
         entity.setPersistent(true);
     }
 
+    public void tick() {
+        // This is executed each tick.
+        // By default, do nothing
+    }
+
     public void extraDeathEvent(TheDark plugin, PlayerProfile killerProfile) {
         // This is used to add extra behavior when this enemy's entity dies
         // By default, do nothing

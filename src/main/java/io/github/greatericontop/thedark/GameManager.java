@@ -36,10 +36,13 @@ public class GameManager {
             profile.getPlayer().sendActionBar(profile.getActionBar());
             profile.updateInventory();
         }
-        // tick (dead) enemies
+        // tick enemies & remove dead ones
         List<BaseEnemy> newActiveEnemies = new ArrayList<>(activeEnemies);
         for (BaseEnemy enemy : newActiveEnemies) {
-            if (!enemy.isDead())  continue;
+            if (!enemy.isDead()) {
+                enemy.tick();
+                continue;
+            }
             Player killer = enemy.getEntity().getKiller();
             if (killer == null)  continue;
             PlayerProfile profile = getPlayerProfile(killer);

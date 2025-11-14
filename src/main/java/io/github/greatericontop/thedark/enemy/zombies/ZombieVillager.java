@@ -1,19 +1,26 @@
 package io.github.greatericontop.thedark.enemy.zombies;
 
 import io.github.greatericontop.thedark.TheDark;
-import io.github.greatericontop.thedark.enemy.BaseEnemy;
+import io.github.greatericontop.thedark.enemy.EnragedEnemy;
 import io.github.greatericontop.thedark.player.PlayerProfile;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Sound;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
-public class ZombieVillager extends BaseEnemy {
+public class ZombieVillager extends EnragedEnemy {
 
     public ZombieVillager(Location spawnLocation) {
+        super(420);
         entity = (LivingEntity) spawnLocation.getWorld().spawnEntity(spawnLocation, EntityType.ZOMBIE_VILLAGER, false);
-        setUp(400.0, 1.3, 20.0);
+        setUp(500.0, 1.2, 20.0);
         entity.getEquipment().setHelmet(new ItemStack(Material.DIAMOND_HELMET, 1));
         entity.getEquipment().setChestplate(new ItemStack(Material.DIAMOND_CHESTPLATE, 1));
         entity.getEquipment().setLeggings(new ItemStack(Material.DIAMOND_LEGGINGS, 1));
@@ -24,6 +31,18 @@ public class ZombieVillager extends BaseEnemy {
     public void extraDeathEvent(TheDark plugin, PlayerProfile killerProfile) {
         for (int i = 0; i < 6; i++) {
             plugin.getGameManager().spawnEnemy(IronZombie.class, entity.getLocation());
+        }
+    }
+
+    @Override
+    protected void enrageSelf() {
+        entity.getWorld().playSound(entity.getLocation(), Sound.ENTITY_ZOMBIE_BREAK_WOODEN_DOOR, 1.0F, 1.0F);
+        entity.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.23 * 2.0);
+        for (Entity e : entity.getNearbyEntities(30.0, 30.0, 30.0)) {
+            if (e instanceof Player p) {
+                p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 60, 1));
+                p.addPotionEffect(new PotionEffect(PotionEffectType.DARKNESS, 60, 0));
+            }
         }
     }
 
