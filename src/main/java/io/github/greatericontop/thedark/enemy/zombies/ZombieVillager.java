@@ -18,7 +18,7 @@ import org.bukkit.potion.PotionEffectType;
 public class ZombieVillager extends EnragedEnemy {
 
     public ZombieVillager(Location spawnLocation) {
-        super(480);
+        super(560);
         entity = (LivingEntity) spawnLocation.getWorld().spawnEntity(spawnLocation, EntityType.ZOMBIE_VILLAGER, false);
         setUp(400.0, 1.2, 20.0);
         entity.getEquipment().setHelmet(new ItemStack(Material.DIAMOND_HELMET, 1));
@@ -38,7 +38,7 @@ public class ZombieVillager extends EnragedEnemy {
     protected void enrageSelf() {
         entity.getWorld().playSound(entity.getLocation(), Sound.ENTITY_ZOMBIE_BREAK_WOODEN_DOOR, 1.0F, 1.0F);
         entity.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.23 * 2.0);
-        for (Entity e : entity.getNearbyEntities(30.0, 30.0, 30.0)) {
+        for (Entity e : entity.getNearbyEntities(100.0, 100.0, 100.0)) {
             if (e instanceof Player p) {
                 p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 100, 2));
                 p.addPotionEffect(new PotionEffect(PotionEffectType.DARKNESS, 100, 0));
