@@ -206,7 +206,7 @@ public enum GunType {
         }
     },
 
-    FLAMETHROWER(30, 48, 500,
+    FLAMETHROWER(30, 48, 750,
             "§6Flamethrower", "§7BURN",
             Material.GOLDEN_SHOVEL) {
         @Override
@@ -215,7 +215,7 @@ public enum GunType {
             double damage = 1.0;
             int fireTicks = 80;
             double fireDamage = 1.0;
-            double cooldownTicks = 7.0;
+            double cooldownTicks = 10.0;
         }
     },
 
