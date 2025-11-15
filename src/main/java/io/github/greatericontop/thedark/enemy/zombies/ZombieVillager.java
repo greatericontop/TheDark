@@ -20,7 +20,7 @@ public class ZombieVillager extends EnragedEnemy {
     public ZombieVillager(Location spawnLocation) {
         super(560);
         entity = (LivingEntity) spawnLocation.getWorld().spawnEntity(spawnLocation, EntityType.ZOMBIE_VILLAGER, false);
-        setUp(400.0, 1.15, 20.0);
+        setUp(350.0, 1.15, 20.0);
         entity.getEquipment().setHelmet(new ItemStack(Material.DIAMOND_HELMET, 1));
         entity.getEquipment().setChestplate(new ItemStack(Material.DIAMOND_CHESTPLATE, 1));
         entity.getEquipment().setLeggings(new ItemStack(Material.DIAMOND_LEGGINGS, 1));
