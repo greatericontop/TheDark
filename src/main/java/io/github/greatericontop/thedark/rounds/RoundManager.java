@@ -13,6 +13,10 @@ public class RoundManager {
     private int currentRound;
     private int ticksUntilCurrentRoundCanEnd;
 
+    public int getCurrentRound() {
+        return currentRound;
+    }
+
     private final TheDark plugin;
     public RoundManager(TheDark plugin) {
         this.plugin = plugin;

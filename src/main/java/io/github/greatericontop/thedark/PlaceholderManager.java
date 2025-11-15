@@ -27,6 +27,9 @@ public class PlaceholderManager extends PlaceholderExpansion {
 
     @Override
     public String onRequest(OfflinePlayer player, String args) {
+        if (args.startsWith("round")) {
+            return String.valueOf(plugin.getRoundManager().getCurrentRound());
+        }
         if (args.startsWith("enemiesleft")) {
             return String.valueOf(plugin.getGameManager().activeEnemies.size());
         }
