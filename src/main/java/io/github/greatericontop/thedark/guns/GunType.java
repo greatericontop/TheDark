@@ -262,6 +262,17 @@ public enum GunType {
         }
     },
 
+    MIDAS_PISTOL(30, 10, 500,
+            "§6Midas Pistol", "§7Turns zombies into gold! 3x coins",
+            Material.GOLDEN_HOE) {
+        @Override
+        public void fire(Player player, TheDark plugin, int topPath, int bottomPath, PersistentDataContainer extraPDC) {
+            int pierce = 2;
+            double damage = 4.0;
+            double cooldownTicks = 11.0;
+        }
+    },
+
     ;
 
     private final int rechargeTicks;
