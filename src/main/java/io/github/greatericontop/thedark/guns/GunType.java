@@ -40,8 +40,8 @@ public enum GunType {
                 damage = 10.0;
             }
             if (topPath >= 4) {
-                pierce = 8;
-                damage = 15.0;
+                pierce = 7;
+                damage = 17.0;
             }
             if (bottomPath >= 1) {
                 cooldownTicks = 9.0;
