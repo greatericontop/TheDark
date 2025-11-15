@@ -13,16 +13,16 @@ public class CashGeneration {
 
         GunType type = GunUtil.getHeldGunType(profile.getPlayer());
         if (type == GunType.MIDAS_PISTOL) {
-            double multiplier_multiplier = 3.0;
+            double multiplier_multiplier = 1.5;
             int[] upgrades = GunUtil.getUpgradesForHeldGun(profile.getPlayer());
             if (upgrades[0] >= 1) {
-                multiplier_multiplier = 4.0;
+                multiplier_multiplier = 1.75;
             }
             if (upgrades[0] >= 2) {
-                multiplier_multiplier = 5.0;
+                multiplier_multiplier = 2.0;
             }
             if (upgrades[0] >= 4) {
-                multiplier_multiplier = 12.0;
+                multiplier_multiplier = 3.0;
             }
             multiplier *= multiplier_multiplier;
         }

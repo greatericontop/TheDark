@@ -58,10 +58,10 @@ public class UpgradeListing {
                 new Upgrade("Perma-Flame", "No cooldown to fire!", 3050)
         ));
         upgradeList.put(GunType.MIDAS_PISTOL, new ItemUpgrades(
-                new Upgrade("Better Deals", "Increases cash multiplier to 4x", 250),
-                new Upgrade("Incredible Deals", "Increases cash multiplier to 5x", 350),
-                new Upgrade("Machine Gun Money Printer", "Fires twice as fast for twice the cash!", 1500),
-                new Upgrade("Zombies to Gold", "Turns zombies to gold for 12x the cash!", 4000),
+                new Upgrade("Better Deals", "Increases cash bonus from 50% -> 75%", 425),
+                new Upgrade("Incredible Deals", "Increases cash bonus from 75% -> 100%", 525),
+                new Upgrade("Machine Gun Money Printer", "Fires twice as fast for twice the cash!", 2100),
+                new Upgrade("Zombies to Gold", "Turns zombies to gold for triple the cash!", 3333),
                 new Upgrade("Zombie Business", "Sells ammo to zombies (conflict of interest?) for 60 coins per round", 500),
                 new Upgrade("More Zombie Business", "Now makes 120 coins per round", 750),
                 new Upgrade("Zombie Banking", "Makes 200 coins per round and pays 2% interest on up to 2,500 coins!", 1700),
