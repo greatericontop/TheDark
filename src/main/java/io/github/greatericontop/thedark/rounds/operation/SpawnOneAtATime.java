@@ -36,7 +36,7 @@ public class SpawnOneAtATime extends BaseOperation {
     @Override
     public int getCompletionTime() {
         // The tick after the last zombie spawns
-        return offset + spacing*(count-1) + 1;
+        return offset + spacing*(count-1) + 2;
     }
 
     private void spawnOne(OperationContext ctx, int numberRemaining) {

@@ -18,6 +18,8 @@ public abstract class BaseOperation {
     public abstract void actuallyExecute(OperationContext ctx);
 
     // Returns the time in ticks when this operation will finish. (Probably offset + duration)
+    // This needs to be the tick number *strictly after* the last zombie spawns, so that the last zombie spawns while
+    // the round manager's tick timer is 1 on the tick it spawns.
     public abstract int getCompletionTime();
 
 
