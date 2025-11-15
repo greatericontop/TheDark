@@ -101,14 +101,14 @@ public class Data1To20 {
     public static final BaseOperation[] R17 = new RoundOperationHelper(4 * 20)
             .addSpawnOneAtATime(IronZombie.class, 1, 1, true)
             .addSpawnOneAtATime(ChainmailZombie.class, 8, 10, false)
-            .delaySeconds(10)
+            .delaySeconds(15)
             .addSpawnOneAtATime(IronZombie.class, 1, 1, true)
             .addSpawnOneAtATime(ChainmailZombie.class, 8, 10, false)
     .getOutput();
 
     public static final BaseOperation[] R18 = new RoundOperationHelper(4 * 20)
             .addSpawnOneAtATime(IronZombie.class, 5, 1, false)
-            .delaySeconds(8).addSpawnOneAtATime(ChainmailZombie.class, 10, 60, false)
+            .delaySeconds(10).addSpawnOneAtATime(ChainmailZombie.class, 10, 80, false)
     .getOutput();
 
     public static final BaseOperation[] R19 = new RoundOperationHelper(4 * 20)
