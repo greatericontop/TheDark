@@ -270,6 +270,13 @@ public enum GunType {
             int pierce = 2;
             double damage = 4.0;
             double cooldownTicks = 11.0;
+            // Only effect on shooting is the speed
+            if (topPath >= 3) {
+                cooldownTicks = 5.0;
+            }
+            plugin.shootGunListener.performFire(this, player, player.getEyeLocation().getDirection(), pierce, damage, cooldownTicks,
+                    0.0, false, ShootGunHelper.MAX_DISTANCE, null,
+                    Particle.ASH, Sound.ENTITY_GENERIC_EXPLODE);
         }
     },
 

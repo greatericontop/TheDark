@@ -1,5 +1,6 @@
 package io.github.greatericontop.thedark.guns;
 
+import io.github.greatericontop.thedark.upgrades.UpgradeListing;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
@@ -36,6 +37,16 @@ public class GunUtil implements Listener {
             return GunType.valueOf(pdc.get(GunUtil.GUN_KEY, PersistentDataType.STRING));
         }
         return null;
+    }
+
+    public static int[] getUpgradesForHeldGun(Player player) {
+        ItemStack stack = player.getInventory().getItemInMainHand();
+        ItemMeta im = stack.getItemMeta();
+        if (im == null)  return null;
+        PersistentDataContainer pdc = im.getPersistentDataContainer();
+        int top = pdc.get(UpgradeListing.TOP_PATH, PersistentDataType.INTEGER);
+        int bottom = pdc.get(UpgradeListing.BOTTOM_PATH, PersistentDataType.INTEGER);
+        return new int[]{top, bottom};
     }
 
 }
