@@ -5,6 +5,8 @@ import io.github.greatericontop.thedark.miscmechanic.FireStatus;
 import io.github.greatericontop.thedark.upgrades.UpgradeListing;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
+import org.bukkit.Particle;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -58,12 +60,15 @@ public enum GunType {
                 Vector left = direction.clone().rotateAroundY(0.034906); // 2 degrees
                 Vector right = direction.clone().rotateAroundY(-0.034906);
                 plugin.shootGunListener.performFire(this, player, left, pierce, damage, -1.0,
-                        0.0, false, ShootGunHelper.MAX_DISTANCE, null);
+                        0.0, false, ShootGunHelper.MAX_DISTANCE, null,
+                        Particle.ASH, Sound.ENTITY_GENERIC_EXPLODE);
                 plugin.shootGunListener.performFire(this, player, right, pierce, damage, cooldownTicks,
-                        0.0, false, ShootGunHelper.MAX_DISTANCE, null);
+                        0.0, false, ShootGunHelper.MAX_DISTANCE, null,
+                        Particle.ASH, Sound.ENTITY_GENERIC_EXPLODE);
             } else {
                 plugin.shootGunListener.performFire(this, player, player.getEyeLocation().getDirection(), pierce, damage, cooldownTicks,
-                        0.0, false, ShootGunHelper.MAX_DISTANCE, null);
+                        0.0, false, ShootGunHelper.MAX_DISTANCE, null,
+                        Particle.ASH, Sound.ENTITY_GENERIC_EXPLODE);
             }
         }
     },
@@ -112,7 +117,8 @@ public enum GunType {
                 final double finalDamage = damage;
                 final double finalExtraKBStrength = extraKBStrength;
                 plugin.shootGunListener.performFire(this, player, player.getEyeLocation().getDirection(), pierce, damage, totalCooldownTicks,
-                        extraKBStrength, false, ShootGunHelper.MAX_DISTANCE, null);
+                        extraKBStrength, false, ShootGunHelper.MAX_DISTANCE, null,
+                        Particle.ASH, Sound.ENTITY_GENERIC_EXPLODE);
                 new BukkitRunnable() {
                     int shotsLeft = 4;
                     public void run() {
@@ -121,7 +127,8 @@ public enum GunType {
                             return;
                         }
                         plugin.shootGunListener.performFire(RIFLE, player, player.getEyeLocation().getDirection(), finalPierce, finalDamage, -1.0,
-                                finalExtraKBStrength, false, ShootGunHelper.MAX_DISTANCE, null);
+                                finalExtraKBStrength, false, ShootGunHelper.MAX_DISTANCE, null,
+                                Particle.ASH, Sound.ENTITY_GENERIC_EXPLODE);
                         shotsLeft--;
                     }
                 }.runTaskTimer(plugin, 1L, 1L);
@@ -132,7 +139,8 @@ public enum GunType {
                 final double finalDamage = damage;
                 final double finalExtraKBStrength = extraKBStrength;
                 plugin.shootGunListener.performFire(this, player, player.getEyeLocation().getDirection(), pierce, damage, totalCooldownTicks,
-                        extraKBStrength, false, ShootGunHelper.MAX_DISTANCE, null);
+                        extraKBStrength, false, ShootGunHelper.MAX_DISTANCE, null,
+                        Particle.ASH, Sound.ENTITY_GENERIC_EXPLODE);
                 new BukkitRunnable() {
                     int shotsLeft = 2;
                     public void run() {
@@ -141,13 +149,15 @@ public enum GunType {
                             return;
                         }
                         plugin.shootGunListener.performFire(RIFLE, player, player.getEyeLocation().getDirection(), finalPierce, finalDamage, -1.0,
-                                finalExtraKBStrength, false, ShootGunHelper.MAX_DISTANCE, null);
+                                finalExtraKBStrength, false, ShootGunHelper.MAX_DISTANCE, null,
+                                Particle.ASH, Sound.ENTITY_GENERIC_EXPLODE);
                         shotsLeft--;
                     }
                 }.runTaskTimer(plugin, 2L, 2L);
             } else {
                 plugin.shootGunListener.performFire(this, player, player.getEyeLocation().getDirection(), pierce, damage, cooldownTicks,
-                        extraKBStrength, false, ShootGunHelper.MAX_DISTANCE, null);
+                        extraKBStrength, false, ShootGunHelper.MAX_DISTANCE, null,
+                        Particle.ASH, Sound.ENTITY_GENERIC_EXPLODE);
             }
         }
     },
@@ -200,14 +210,15 @@ public enum GunType {
                     double yaw = baseYaw + anglePerShot*horizontal;
                     Vector direction = new Vector(Math.cos(pitch)*Math.cos(yaw), Math.sin(pitch), Math.cos(pitch)*Math.sin(yaw));
                     plugin.shootGunListener.performFire(this, player, direction, pierce, damage, firstShot ? cooldownTicks : -1.0,
-                            0.0, true, ShootGunHelper.MAX_DISTANCE, null);
+                            0.0, true, ShootGunHelper.MAX_DISTANCE, null,
+                            Particle.ASH, firstShot ? Sound.ENTITY_GENERIC_EXPLODE : null);
                     firstShot = false;
                 }
             }
         }
     },
 
-    FLAMETHROWER(60, 48, 750,
+    FLAMETHROWER(60, 48, 450,
             "§6Flamethrower", "§7BURN",
             Material.GOLDEN_SHOVEL) {
         @Override
@@ -245,7 +256,8 @@ public enum GunType {
             }
             FireStatus fireStatus = new FireStatus(fireTicks, fireDamage);
             plugin.shootGunListener.performFire(this, player, player.getEyeLocation().getDirection(), pierce, fireDamage, cooldownTicks,
-                    0.0, false, rangeBlocks, fireStatus);
+                    0.0, false, rangeBlocks, fireStatus,
+                    Particle.SMALL_FLAME, Sound.ENTITY_PLAYER_HURT_ON_FIRE);
         }
     },
 

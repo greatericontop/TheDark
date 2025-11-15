@@ -6,6 +6,8 @@ import io.github.greatericontop.thedark.player.PlayerProfile;
 import io.github.greatericontop.thedark.upgrades.UpgradeListing;
 import io.github.greatericontop.thedark.util.Util;
 import org.bukkit.Bukkit;
+import org.bukkit.Particle;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -87,9 +89,11 @@ public class ShootGunListener implements Listener {
     }
 
     public void performFire(GunType type, Player player, Vector direction, int pierce, double damage, double cooldownTicks,
-                            double extraKBStrength, boolean bypassDamageTicks, double rayDistance, @Nullable FireStatus fireStatus) {
+                            double extraKBStrength, boolean bypassDamageTicks, double rayDistance, @Nullable FireStatus fireStatus,
+                            Particle customParticle, @Nullable Sound customSound) {
         ShootGunHelper.fireProjectile(player.getEyeLocation(), direction, player, damage, pierce, plugin,
-                extraKBStrength, bypassDamageTicks, rayDistance, fireStatus);
+                extraKBStrength, bypassDamageTicks, rayDistance, fireStatus,
+                customParticle, customSound);
         int intCooldownTicks = Util.roundNumber(cooldownTicks);
         if (intCooldownTicks > 0) {
             Map<UUID, Boolean> gunCooldowns = cooldowns.get(type);

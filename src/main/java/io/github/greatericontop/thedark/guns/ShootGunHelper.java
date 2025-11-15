@@ -25,7 +25,8 @@ public class ShootGunHelper {
     private record Hit(LivingEntity target, double distance) {}
 
     public static void fireProjectile(Location sourceLoc, Vector direction, Player owner, double damage, int pierce, TheDark plugin,
-                                      double extraKBStrength, boolean bypassDamageTicks, double rayDistance, @Nullable FireStatus fireStatus) {
+                                      double extraKBStrength, boolean bypassDamageTicks, double rayDistance, @Nullable FireStatus fireStatus,
+                                      Particle customParticle, @Nullable Sound customSound) {
         direction = direction.normalize();
         Location start = sourceLoc.clone();
         Location end = start.clone().add(direction.clone().multiply(rayDistance));
@@ -80,8 +81,10 @@ public class ShootGunHelper {
         Location current = start.clone();
         for (int i = 0; i < (int) (totalDelta.length() / 0.2); i++) {
             current.add(step);
-            current.getWorld().spawnParticle(Particle.ASH, current, 1, 0.0, 0.0, 0.0, 0.0);
+            current.getWorld().spawnParticle(customParticle, current, 1, 0.0, 0.0, 0.0, 0.0);
         }
-        sourceLoc.getWorld().playSound(sourceLoc, Sound.ENTITY_GENERIC_EXPLODE, 0.45F, 1.0F);
+        if (customSound != null) {
+            sourceLoc.getWorld().playSound(sourceLoc, customSound, 0.45F, 1.0F);
+        }
     }
 }
