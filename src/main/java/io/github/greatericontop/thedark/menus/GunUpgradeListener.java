@@ -140,7 +140,7 @@ public class GunUpgradeListener extends GenericMenu {
             im.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         }
         im.setDisplayName("§6" + upgrade.name());
-        im.setLore(List.of("§7" + upgrade.description(), String.format("§fCost: §6%d coins", upgrade.cost())));
+        im.setLore(List.of("§7" + upgrade.description(), "", String.format("§fCost: §6%,d coins", upgrade.cost())));
         stack.setItemMeta(im);
         return stack;
     }

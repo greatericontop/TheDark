@@ -74,7 +74,4 @@ public class UpgradeListing {
         return upgradeList.get(type);
     }
 
-
-
-
 }
