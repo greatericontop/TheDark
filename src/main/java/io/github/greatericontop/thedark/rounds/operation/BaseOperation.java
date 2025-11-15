@@ -17,4 +17,19 @@ public abstract class BaseOperation {
     // Note: you should be able to execute this method multiple times.
     public abstract void actuallyExecute(OperationContext ctx);
 
+    // Returns the time in ticks when this operation will finish. (Probably offset + duration)
+    public abstract int getCompletionTime();
+
+
+    public static int getTotalDuration(BaseOperation[] operations) {
+        int max = 0;
+        for (BaseOperation operation : operations) {
+            int completionTime = operation.getCompletionTime();
+            if (completionTime > max) {
+                max = completionTime;
+            }
+        }
+        return max;
+    }
+
 }

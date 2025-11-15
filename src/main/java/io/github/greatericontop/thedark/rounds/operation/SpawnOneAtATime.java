@@ -33,6 +33,12 @@ public class SpawnOneAtATime extends BaseOperation {
         Bukkit.getScheduler().runTaskLater(ctx.plugin(), () -> spawnOne(ctx, count), 1L);
     }
 
+    @Override
+    public int getCompletionTime() {
+        // The tick after the last zombie spawns
+        return offset + spacing*(count-1) + 1;
+    }
+
     private void spawnOne(OperationContext ctx, int numberRemaining) {
         if (numberRemaining <= 0) {
             return;

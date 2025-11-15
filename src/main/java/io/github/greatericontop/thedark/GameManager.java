@@ -31,6 +31,8 @@ public class GameManager {
     }
 
     public void tick() {
+        // rounds
+        plugin.getRoundManager().tick();
         // tick players
         for (PlayerProfile profile : playerProfiles.values()) {
             profile.getPlayer().sendActionBar(profile.getActionBar());

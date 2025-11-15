@@ -8,6 +8,7 @@ import io.github.greatericontop.thedark.menus.GunUpgradeListener;
 import io.github.greatericontop.thedark.menus.SignListener;
 import io.github.greatericontop.thedark.menus.SwordBuyListener;
 import io.github.greatericontop.thedark.player.PlayerShennaniganPreventionListener;
+import io.github.greatericontop.thedark.rounds.RoundManager;
 import io.github.greatericontop.thedark.upgrades.UpgradeListing;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -17,6 +18,10 @@ public class TheDark extends JavaPlugin {
     private GameManager gameManager;
     public GameManager getGameManager() {
         return gameManager;
+    }
+    private RoundManager roundManager;
+    public RoundManager getRoundManager() {
+        return roundManager;
     }
 
     public UpgradeListing upgradeUtils = null;
@@ -33,6 +38,7 @@ public class TheDark extends JavaPlugin {
     @Override
     public void onEnable() {
         gameManager = new GameManager(this);
+        roundManager = new RoundManager(this);
         this.getCommand("thedark").setExecutor(new TheDarkCommand(this));
 
         upgradeUtils = new UpgradeListing(this);
