@@ -1,6 +1,7 @@
 package io.github.greatericontop.thedark.guns;
 
 import io.github.greatericontop.thedark.TheDark;
+import io.github.greatericontop.thedark.miscmechanic.FireStatus;
 import io.github.greatericontop.thedark.player.PlayerProfile;
 import io.github.greatericontop.thedark.upgrades.UpgradeListing;
 import io.github.greatericontop.thedark.util.Util;
@@ -19,6 +20,7 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.util.Vector;
 
+import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -85,9 +87,9 @@ public class ShootGunListener implements Listener {
     }
 
     public void performFire(GunType type, Player player, Vector direction, int pierce, double damage, double cooldownTicks,
-                            double extraKBStrength, boolean bypassDamageTicks) {
+                            double extraKBStrength, boolean bypassDamageTicks, double rayDistance, @Nullable FireStatus fireStatus) {
         ShootGunHelper.fireProjectile(player.getEyeLocation(), direction, player, damage, pierce, plugin,
-                extraKBStrength, bypassDamageTicks);
+                extraKBStrength, bypassDamageTicks, rayDistance, fireStatus);
         int intCooldownTicks = Util.roundNumber(cooldownTicks);
         if (intCooldownTicks > 0) {
             Map<UUID, Boolean> gunCooldowns = cooldowns.get(type);

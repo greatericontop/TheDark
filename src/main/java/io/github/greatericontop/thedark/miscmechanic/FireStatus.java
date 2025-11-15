@@ -8,7 +8,7 @@ public class FireStatus {
     public int ticksToDamage;
 
     public FireStatus(int durationLeft, double damagePerSecond) {
-        this.durationLeft = durationLeft + 1; // so 20 ticks actually sets 21 (otherwise no damage would be applied)
+        this.durationLeft = durationLeft;
         this.damagePerSecond = damagePerSecond;
         this.ticksToDamage = FIRE_DAMAGE_INTERVAL;
     }

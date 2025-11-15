@@ -1,6 +1,7 @@
 package io.github.greatericontop.thedark.guns;
 
 import io.github.greatericontop.thedark.TheDark;
+import io.github.greatericontop.thedark.miscmechanic.FireStatus;
 import io.github.greatericontop.thedark.upgrades.UpgradeListing;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
@@ -57,12 +58,12 @@ public enum GunType {
                 Vector left = direction.clone().rotateAroundY(0.034906); // 2 degrees
                 Vector right = direction.clone().rotateAroundY(-0.034906);
                 plugin.shootGunListener.performFire(this, player, left, pierce, damage, -1.0,
-                        0.0, false);
+                        0.0, false, ShootGunHelper.MAX_DISTANCE, null);
                 plugin.shootGunListener.performFire(this, player, right, pierce, damage, cooldownTicks,
-                        0.0, false);
+                        0.0, false, ShootGunHelper.MAX_DISTANCE, null);
             } else {
                 plugin.shootGunListener.performFire(this, player, player.getEyeLocation().getDirection(), pierce, damage, cooldownTicks,
-                        0.0, false);
+                        0.0, false, ShootGunHelper.MAX_DISTANCE, null);
             }
         }
     },
@@ -111,7 +112,7 @@ public enum GunType {
                 final double finalDamage = damage;
                 final double finalExtraKBStrength = extraKBStrength;
                 plugin.shootGunListener.performFire(this, player, player.getEyeLocation().getDirection(), pierce, damage, totalCooldownTicks,
-                        extraKBStrength, false);
+                        extraKBStrength, false, ShootGunHelper.MAX_DISTANCE, null);
                 new BukkitRunnable() {
                     int shotsLeft = 4;
                     public void run() {
@@ -120,7 +121,7 @@ public enum GunType {
                             return;
                         }
                         plugin.shootGunListener.performFire(RIFLE, player, player.getEyeLocation().getDirection(), finalPierce, finalDamage, -1.0,
-                                finalExtraKBStrength, false);
+                                finalExtraKBStrength, false, ShootGunHelper.MAX_DISTANCE, null);
                         shotsLeft--;
                     }
                 }.runTaskTimer(plugin, 1L, 1L);
@@ -131,7 +132,7 @@ public enum GunType {
                 final double finalDamage = damage;
                 final double finalExtraKBStrength = extraKBStrength;
                 plugin.shootGunListener.performFire(this, player, player.getEyeLocation().getDirection(), pierce, damage, totalCooldownTicks,
-                        extraKBStrength, false);
+                        extraKBStrength, false, ShootGunHelper.MAX_DISTANCE, null);
                 new BukkitRunnable() {
                     int shotsLeft = 2;
                     public void run() {
@@ -140,13 +141,13 @@ public enum GunType {
                             return;
                         }
                         plugin.shootGunListener.performFire(RIFLE, player, player.getEyeLocation().getDirection(), finalPierce, finalDamage, -1.0,
-                                finalExtraKBStrength, false);
+                                finalExtraKBStrength, false, ShootGunHelper.MAX_DISTANCE, null);
                         shotsLeft--;
                     }
                 }.runTaskTimer(plugin, 2L, 2L);
             } else {
                 plugin.shootGunListener.performFire(this, player, player.getEyeLocation().getDirection(), pierce, damage, cooldownTicks,
-                        extraKBStrength, false);
+                        extraKBStrength, false, ShootGunHelper.MAX_DISTANCE, null);
             }
         }
     },
@@ -199,23 +200,52 @@ public enum GunType {
                     double yaw = baseYaw + anglePerShot*horizontal;
                     Vector direction = new Vector(Math.cos(pitch)*Math.cos(yaw), Math.sin(pitch), Math.cos(pitch)*Math.sin(yaw));
                     plugin.shootGunListener.performFire(this, player, direction, pierce, damage, firstShot ? cooldownTicks : -1.0,
-                            0.0, true);
+                            0.0, true, ShootGunHelper.MAX_DISTANCE, null);
                     firstShot = false;
                 }
             }
         }
     },
 
-    FLAMETHROWER(30, 48, 750,
+    FLAMETHROWER(60, 48, 750,
             "§6Flamethrower", "§7BURN",
             Material.GOLDEN_SHOVEL) {
         @Override
         public void fire(Player player, TheDark plugin, int topPath, int bottomPath, PersistentDataContainer extraPDC) {
             int pierce = 3;
-            double damage = 1.0;
-            int fireTicks = 80;
+            int fireTicks = 80 + 10;
             double fireDamage = 1.0;
-            double cooldownTicks = 10.0;
+            double cooldownTicks = 8.0;
+            double rangeBlocks = 7.0;
+            if (topPath >= 1) {
+                fireTicks = 120 + 10;
+            }
+            if (topPath >= 2) {
+                fireDamage = 1.5;
+            }
+            if (topPath >= 3) {
+                fireDamage = 3.0;
+            }
+            if (topPath >= 4) {
+                fireTicks = Integer.MAX_VALUE;
+                // TODO: more damage while burning
+            }
+            if (bottomPath >= 1) {
+                rangeBlocks = 9.0;
+            }
+            if (bottomPath >= 2) {
+                cooldownTicks = 5.0;
+            }
+            if (bottomPath >= 3) {
+                rangeBlocks = 15.0;
+                pierce = 10;
+            }
+            if (bottomPath >= 4) {
+                cooldownTicks = 1.0;
+            }
+            FireStatus fireStatus = new FireStatus(fireTicks, fireDamage);
+            plugin.shootGunListener.performFire(this, player, player.getEyeLocation().getDirection(), pierce, fireDamage, cooldownTicks,
+                    0.0, false, rangeBlocks, fireStatus);
         }
     },
 

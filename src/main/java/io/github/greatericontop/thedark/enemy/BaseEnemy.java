@@ -34,6 +34,13 @@ public abstract class BaseEnemy {
         entity.setPersistent(true);
     }
 
+    public void applyFire(FireStatus newFireStatus) {
+        if (fireStatus == null || newFireStatus.damagePerSecond > fireStatus.damagePerSecond
+                || (newFireStatus.damagePerSecond == fireStatus.damagePerSecond && newFireStatus.durationLeft > fireStatus.durationLeft)) {
+            this.fireStatus = newFireStatus;
+        }
+    }
+
     public void tick(TheDark plugin) {
         // This is executed each tick, this implementation contains some common behavior (fire)
 
