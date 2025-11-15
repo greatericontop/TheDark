@@ -60,7 +60,12 @@ public class ShootGunHelper {
 
         for (int i = 0; i < Math.min(pierce, hits.size()); i++) {
             LivingEntity target = hits.get(i).target;
-            target.damage(damage, owner);
+            if (target.getPersistentDataContainer().has(FireStatus.SEVERE_FIRE_KEY)) {
+                owner.sendMessage("§7[D] severe fire");
+                target.damage(damage * 1.2, owner);
+            } else {
+                target.damage(damage, owner);
+            }
             if (fireStatus != null) {
                 // TODO: This can probably be made O(1) rather than O(N)
                 for (BaseEnemy enemy : plugin.getGameManager().activeEnemies) {

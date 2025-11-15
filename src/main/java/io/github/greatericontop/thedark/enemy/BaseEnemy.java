@@ -35,8 +35,10 @@ public abstract class BaseEnemy {
     }
 
     public void applyFire(FireStatus newFireStatus) {
-        if (fireStatus == null || newFireStatus.damagePerSecond > fireStatus.damagePerSecond
-                || (newFireStatus.damagePerSecond == fireStatus.damagePerSecond && newFireStatus.durationLeft > fireStatus.durationLeft)) {
+        // A severe status is never overwritten, but the only time it is used it has infinite duration, so this is fine
+        if (fireStatus == null || ((!fireStatus.isSevere) && newFireStatus.damagePerSecond > fireStatus.damagePerSecond)
+                || ((!fireStatus.isSevere) && newFireStatus.damagePerSecond == fireStatus.damagePerSecond && newFireStatus.durationLeft > fireStatus.durationLeft)) {
+            newFireStatus.placeSeverity(entity);
             this.fireStatus = newFireStatus;
         }
     }
@@ -50,6 +52,7 @@ public abstract class BaseEnemy {
             fireStatus.ticksToDamage--;
             if (fireStatus.durationLeft <= 0) {
                 entity.setVisualFire(false);
+                fireStatus.removeSeverity(entity);
                 fireStatus = null;
             } else if (fireStatus.ticksToDamage <= 0) { // If both hit 0 the same tick, no damage is applied
                 entity.damage(fireStatus.damagePerSecond);

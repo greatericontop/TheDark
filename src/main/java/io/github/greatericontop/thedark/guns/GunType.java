@@ -228,6 +228,7 @@ public enum GunType {
             double fireDamage = 1.0;
             double cooldownTicks = 8.0;
             double rangeBlocks = 7.0;
+            boolean isSevere = false;
             if (topPath >= 1) {
                 fireTicks = 120 + 10;
             }
@@ -239,7 +240,7 @@ public enum GunType {
             }
             if (topPath >= 4) {
                 fireTicks = Integer.MAX_VALUE;
-                // TODO: more damage while burning
+                isSevere = true;
             }
             if (bottomPath >= 1) {
                 rangeBlocks = 9.0;
@@ -254,7 +255,7 @@ public enum GunType {
             if (bottomPath >= 4) {
                 cooldownTicks = 1.0;
             }
-            FireStatus fireStatus = new FireStatus(fireTicks, fireDamage);
+            FireStatus fireStatus = new FireStatus(fireTicks, fireDamage, isSevere);
             plugin.shootGunListener.performFire(this, player, player.getEyeLocation().getDirection(), pierce, fireDamage, cooldownTicks,
                     0.0, false, rangeBlocks, fireStatus,
                     Particle.SMALL_FLAME, Sound.ENTITY_PLAYER_HURT_ON_FIRE);
