@@ -111,11 +111,24 @@ public class TheDarkCommand implements CommandExecutor {
             int round = Integer.parseInt(args[1]);
             player.sendMessage("§7Starting round!");
             RoundSpawner.executeRound(plugin, round);
+            return true;
         }
         if (args[0].equals("startRoundHere")) {
             int round = Integer.parseInt(args[1]);
             player.sendMessage("§7Starting round here!");
             RoundSpawner.executeRound(new OperationContext(plugin, new Location[]{player.getLocation()}), round);
+            return true;
+        }
+        if (args[0].equals("startGame")) {
+            player.sendMessage("§7Starting game!");
+            plugin.getRoundManager().startGame();
+            return true;
+        }
+        if (args[0].equals("startGameAt")) {
+            player.sendMessage("§7Starting game!");
+            int r = Integer.parseInt(args[1]);
+            plugin.getRoundManager().startGameAt(r);
+            return true;
         }
 
         return false;
