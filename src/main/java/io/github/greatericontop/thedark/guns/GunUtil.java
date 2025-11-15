@@ -28,8 +28,7 @@ public class GunUtil implements Listener {
         throw new RuntimeException("currentDamage is greater than last value of damageAmount (" + currentDamage + ")");
     }
 
-    public static @Nullable GunType getHeldGunType(Player player) {
-        ItemStack stack = player.getInventory().getItemInMainHand();
+    public static @Nullable GunType getHeldGunType(ItemStack stack) {
         ItemMeta im = stack.getItemMeta();
         if (im == null)  return null;
         PersistentDataContainer pdc = im.getPersistentDataContainer();
@@ -38,9 +37,12 @@ public class GunUtil implements Listener {
         }
         return null;
     }
-
-    public static int[] getUpgradesForHeldGun(Player player) {
+    public static @Nullable GunType getHeldGunType(Player player) {
         ItemStack stack = player.getInventory().getItemInMainHand();
+        return getHeldGunType(stack);
+    }
+
+    public static int[] getUpgradesForHeldGun(ItemStack stack) {
         ItemMeta im = stack.getItemMeta();
         if (im == null)  return null;
         PersistentDataContainer pdc = im.getPersistentDataContainer();
