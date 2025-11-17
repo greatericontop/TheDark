@@ -4,12 +4,17 @@ import io.github.greatericontop.thedark.enemy.BaseEnemy;
 import io.github.greatericontop.thedark.enemy.zombies.BasicZombie;
 import io.github.greatericontop.thedark.enemy.zombies.ChainmailZombie;
 import io.github.greatericontop.thedark.enemy.zombies.HelmetZombie;
+import io.github.greatericontop.thedark.enemy.zombies.IronZombie;
+import io.github.greatericontop.thedark.enemy.zombies.ZombieVillager;
 import io.github.greatericontop.thedark.guns.GunBuying;
 import io.github.greatericontop.thedark.guns.GunType;
 import io.github.greatericontop.thedark.menus.SignListener;
 import io.github.greatericontop.thedark.player.PlayerProfile;
 import io.github.greatericontop.thedark.rounds.RoundSpawner;
+import io.github.greatericontop.thedark.rounds.data.RoundData;
+import io.github.greatericontop.thedark.rounds.operation.BaseOperation;
 import io.github.greatericontop.thedark.rounds.operation.OperationContext;
+import io.github.greatericontop.thedark.rounds.operation.SpawnOneAtATime;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -129,6 +134,35 @@ public class TheDarkCommand implements CommandExecutor {
             int r = Integer.parseInt(args[1]);
             plugin.getRoundManager().startGameAt(r);
             return true;
+        }
+        if (args[0].equals("calculateCoins")) {
+            int start = Integer.parseInt(args[1]);
+            int end = Integer.parseInt(args[2]);
+            double total = 0.0;
+            for (int r = start; r <= end; r++) {
+                BaseOperation[] round = RoundData.ROUNDS[r];
+                for (BaseOperation baseOp : round) {
+                    if (baseOp instanceof SpawnOneAtATime op) {
+                        int enemyCount = op.getCount();
+                        double enemyHealth;
+                        if (op.getEnemyClass() == BasicZombie.class) {
+                            enemyHealth = 20;
+                        } else if (op.getEnemyClass() == HelmetZombie.class) {
+                            enemyHealth = 40;
+                        } else if (op.getEnemyClass() == ChainmailZombie.class) {
+                            enemyHealth = 80;
+                        } else if (op.getEnemyClass() == IronZombie.class) {
+                            enemyHealth = 160; // Default fallback
+                        } else if (op.getEnemyClass() == ZombieVillager.class) {
+                            enemyHealth = 350 + 6*160;
+                        } else {
+                            enemyHealth = 0;
+                        }
+                        total += enemyCount * enemyHealth * 0.38;
+                    }
+                }
+            }
+            player.sendMessage(String.format("§eEstimated coins from round %d to %d: §a%.2f §7(before any scaling)", start, end, total));
         }
 
         return false;

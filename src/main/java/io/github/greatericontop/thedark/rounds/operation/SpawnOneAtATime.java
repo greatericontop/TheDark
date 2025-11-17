@@ -28,6 +28,13 @@ public class SpawnOneAtATime extends BaseOperation {
         return offset;
     }
 
+    public Class<? extends BaseEnemy> getEnemyClass() {
+        return enemyClass;
+    }
+    public int getCount() {
+        return count;
+    }
+
     @Override
     public void actuallyExecute(OperationContext ctx) {
         Bukkit.getScheduler().runTaskLater(ctx.plugin(), () -> spawnOne(ctx, count), 1L);
