@@ -99,12 +99,32 @@ public class ShootGunHelper {
                                                double rayDistance, double explosionRadius, boolean secondaryExplosions) {
         direction = direction.normalize();
         // Find location where ray terminates
-        RayTraceResult hit = sourceLoc.getWorld().rayTrace(sourceLoc, direction, rayDistance, FluidCollisionMode.NEVER, true, 0.08, null);
+        RayTraceResult hit = sourceLoc.getWorld().rayTrace(sourceLoc, direction, rayDistance, FluidCollisionMode.NEVER, true, 0.08, e -> !(e instanceof Player));
         Location endLoc = sourceLoc.clone().add(direction.multiply(rayDistance));
         if (hit != null) {
             endLoc = hit.getHitPosition().toLocation(sourceLoc.getWorld());
         }
         // Explosions have limited pierce, so manually find targets and sort by distance
+        if (secondaryExplosions) {
+            for (int i = 0; i < 4; i++) {
+                // 90 degrees apart
+                Vector modifier = new Vector(direction.getX(), 0.0, direction.getZ()).normalize().rotateAroundY(1.570796 * i).multiply(explosionRadius * 0.7);
+                performExplosion(endLoc.clone().add(modifier), explosionRadius, owner, pierce, damage);
+            }
+        } else {
+            performExplosion(endLoc, explosionRadius, owner, pierce, damage);
+        }
+        // FX
+        owner.playSound(endLoc, Sound.ENTITY_GENERIC_EXPLODE, 1.0F, 1.0F);
+        Vector totalDelta = endLoc.toVector().subtract(sourceLoc.toVector());
+        Vector step = totalDelta.clone().normalize().multiply(0.2);
+        Location current = sourceLoc.clone();
+        for (int i = 0; i < (int) (totalDelta.length() / 0.2); i++) {
+            current.add(step);
+            current.getWorld().spawnParticle(Particle.ASH, current, 1, 0.0, 0.0, 0.0, 0.0);
+        }
+    }
+    private static void performExplosion(Location endLoc, double explosionRadius, Player owner, int pierce, double damage) {
         List<Hit> hits = new ArrayList<>();
         for (Entity e : endLoc.getWorld().getNearbyEntities(endLoc, explosionRadius, explosionRadius, explosionRadius)) {
             if (e instanceof Player)  continue;
@@ -122,8 +142,6 @@ public class ShootGunHelper {
                 target.damage(damage, owner);
             }
         }
-        // FX
-        owner.playSound(endLoc, Sound.ENTITY_GENERIC_EXPLODE, 1.0F, 1.0F);
         endLoc.getWorld().spawnParticle(Particle.EXPLOSION_LARGE, endLoc, 1);
     }
 
