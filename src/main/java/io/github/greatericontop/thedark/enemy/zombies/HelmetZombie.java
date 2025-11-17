@@ -11,7 +11,7 @@ public class HelmetZombie extends BaseEnemy {
 
     public HelmetZombie(Location spawnLocation) {
         entity = (LivingEntity) spawnLocation.getWorld().spawnEntity(spawnLocation, EntityType.ZOMBIE, false);
-        setUp(40.0, 1.15, 4.5);
+        setUp(40.0, 1.175, 4.5);
         entity.getEquipment().setHelmet(new ItemStack(Material.TURTLE_HELMET, 1));
     }
 
