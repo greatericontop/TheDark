@@ -288,8 +288,35 @@ public enum GunType {
             int pierce = 8;
             double damage = 5.0;
             double cooldownTicks = 20.0;
-
-
+            double explosionRadius = 3.0;
+            boolean secondaryExplosions = false;
+            if (topPath >= 1) {
+                damage = 9.0;
+            }
+            if (topPath >= 2) {
+                damage = 14.0;
+            }
+            if (topPath >= 3) {
+                damage = 35.0;
+            }
+            if (topPath >= 4) {
+                damage = 80.0;
+            }
+            if (bottomPath >= 1) {
+                cooldownTicks = 15.0;
+            }
+            if (bottomPath >= 2) {
+                cooldownTicks = 10.0;
+            }
+            if (bottomPath >= 3) {
+                explosionRadius = 5.0;
+                pierce = 16;
+            }
+            if (bottomPath >= 4) {
+                secondaryExplosions = true;
+            }
+            plugin.shootGunListener.performFireExplosion(this, player, player.getEyeLocation().getDirection(), pierce, damage, cooldownTicks,
+                    ShootGunHelper.EXPLOSION_MAX_DISTANCE, explosionRadius, secondaryExplosions);
         }
     }
 

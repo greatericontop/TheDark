@@ -88,12 +88,24 @@ public class ShootGunListener implements Listener {
         gunType.fire(player, plugin, pdc.get(UpgradeListing.TOP_PATH, PersistentDataType.INTEGER), pdc.get(UpgradeListing.BOTTOM_PATH, PersistentDataType.INTEGER), pdc);
     }
 
+
     public void performFire(GunType type, Player player, Vector direction, int pierce, double damage, double cooldownTicks,
                             double extraKBStrength, boolean bypassDamageTicks, double rayDistance, @Nullable FireStatus fireStatus,
                             Particle customParticle, @Nullable Sound customSound) {
         ShootGunHelper.fireProjectile(player.getEyeLocation(), direction, player, damage, pierce, plugin,
                 extraKBStrength, bypassDamageTicks, rayDistance, fireStatus,
                 customParticle, customSound);
+        performFireCommon(cooldownTicks, player, type, pierce, damage);
+    }
+
+    public void performFireExplosion(GunType type, Player player, Vector direction, int pierce, double damage, double cooldownTicks,
+                                     double rayDistance, double explosionRadius, boolean secondaryExplosions) {
+        ShootGunHelper.fireExplosionProjectile(player.getEyeLocation(), direction, player, damage, pierce, plugin,
+                rayDistance, explosionRadius, secondaryExplosions);
+        performFireCommon(cooldownTicks, player, type, pierce, damage);
+    }
+
+    private void performFireCommon(double cooldownTicks, Player player, GunType type, int pierce, double damage) {
         int intCooldownTicks = Util.roundNumber(cooldownTicks);
         if (intCooldownTicks > 0) {
             Map<UUID, Boolean> gunCooldowns = cooldowns.get(type);

@@ -4,6 +4,7 @@ import io.github.greatericontop.thedark.TheDark;
 import io.github.greatericontop.thedark.enemy.BaseEnemy;
 import io.github.greatericontop.thedark.miscmechanic.FireStatus;
 import org.bukkit.Bukkit;
+import org.bukkit.FluidCollisionMode;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
@@ -21,6 +22,8 @@ import java.util.List;
 
 public class ShootGunHelper {
     public static final double MAX_DISTANCE = 48.0;
+    public static final double EXPLOSION_MAX_DISTANCE = 20.0;
+    private static final double SEVERE_FIRE_MULTIPLIER = 1.2;
 
     private record Hit(LivingEntity target, double distance) {}
 
@@ -61,7 +64,7 @@ public class ShootGunHelper {
         for (int i = 0; i < Math.min(pierce, hits.size()); i++) {
             LivingEntity target = hits.get(i).target;
             if (target.getPersistentDataContainer().has(FireStatus.SEVERE_FIRE_KEY)) {
-                target.damage(damage * 1.2, owner);
+                target.damage(damage * SEVERE_FIRE_MULTIPLIER, owner);
             } else {
                 target.damage(damage, owner);
             }
@@ -91,4 +94,37 @@ public class ShootGunHelper {
             sourceLoc.getWorld().playSound(sourceLoc, customSound, 0.45F, 1.0F);
         }
     }
+
+    public static void fireExplosionProjectile(Location sourceLoc, Vector direction, Player owner, double damage, int pierce, TheDark plugin,
+                                               double rayDistance, double explosionRadius, boolean secondaryExplosions) {
+        direction = direction.normalize();
+        // Find location where ray terminates
+        RayTraceResult hit = sourceLoc.getWorld().rayTrace(sourceLoc, direction, rayDistance, FluidCollisionMode.NEVER, true, 0.08, null);
+        Location endLoc = sourceLoc.clone().add(direction.multiply(rayDistance));
+        if (hit != null) {
+            endLoc = hit.getHitPosition().toLocation(sourceLoc.getWorld());
+        }
+        // Explosions have limited pierce, so manually find targets and sort by distance
+        List<Hit> hits = new ArrayList<>();
+        for (Entity e : endLoc.getWorld().getNearbyEntities(endLoc, explosionRadius, explosionRadius, explosionRadius)) {
+            if (e instanceof Player)  continue;
+            if (!(e instanceof LivingEntity target))  continue;
+            double distanceSq = e.getLocation().distanceSquared(endLoc);
+            if (distanceSq > explosionRadius * explosionRadius)  continue;
+            hits.add(new Hit(target, distanceSq));
+        }
+        hits.sort(Comparator.comparingDouble(a -> a.distance));
+        for (int i = 0; i < Math.min(pierce, hits.size()); i++) {
+            LivingEntity target = hits.get(i).target;
+            if (target.getPersistentDataContainer().has(FireStatus.SEVERE_FIRE_KEY)) {
+                target.damage(damage * SEVERE_FIRE_MULTIPLIER, owner);
+            } else {
+                target.damage(damage, owner);
+            }
+        }
+        // FX
+        owner.playSound(endLoc, Sound.ENTITY_GENERIC_EXPLODE, 1.0F, 1.0F);
+        endLoc.getWorld().spawnParticle(Particle.EXPLOSION_LARGE, endLoc, 1);
+    }
+
 }
