@@ -1,5 +1,6 @@
 package io.github.greatericontop.thedark.miscmechanic;
 
+import io.github.greatericontop.thedark.TheDark;
 import io.github.greatericontop.thedark.guns.GunType;
 import io.github.greatericontop.thedark.guns.GunUtil;
 import io.github.greatericontop.thedark.player.PlayerProfile;
@@ -7,9 +8,16 @@ import io.github.greatericontop.thedark.util.Util;
 
 public class CashGeneration {
 
-    public static void rewardCoinsOnDamage(PlayerProfile profile, double finalDamage) {
-        // In the future, the multiplier may be dependent on which zombie is being damaged
+    public static void rewardCoinsOnDamage(PlayerProfile profile, double finalDamage, TheDark plugin) {
         double multiplier = 0.38;
+        int round = plugin.getRoundManager().getCurrentRound();
+        if (round >= 21 && round <= 25) {
+            multiplier *= 0.875;
+        } else if (round <= 30) {
+            multiplier *= 0.75;
+        } else {
+            multiplier *= 0; // TODO
+        }
 
         GunType type = GunUtil.getHeldGunType(profile.getPlayer());
         if (type == GunType.MIDAS_PISTOL) {

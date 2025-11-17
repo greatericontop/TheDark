@@ -35,7 +35,7 @@ public class EnemyListener implements Listener {
         if (profile == null)  return;
         if (!(event.getEntity() instanceof LivingEntity target))  return;
         double effectiveDamage = Math.min(event.getFinalDamage(), target.getHealth());
-        CashGeneration.rewardCoinsOnDamage(profile, effectiveDamage);
+        CashGeneration.rewardCoinsOnDamage(profile, effectiveDamage, plugin);
     }
 
 }
