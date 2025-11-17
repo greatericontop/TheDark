@@ -61,7 +61,6 @@ public class ShootGunHelper {
         for (int i = 0; i < Math.min(pierce, hits.size()); i++) {
             LivingEntity target = hits.get(i).target;
             if (target.getPersistentDataContainer().has(FireStatus.SEVERE_FIRE_KEY)) {
-                owner.sendMessage("§7[D] severe fire");
                 target.damage(damage * 1.2, owner);
             } else {
                 target.damage(damage, owner);
