@@ -280,6 +280,19 @@ public enum GunType {
         }
     },
 
+    ROCKET_LAUNCHER(2, 1, 800,
+            "§dRocket Launcher", "§7Rockets explode and damage many zombies!",
+            Material.NETHERITE_PICKAXE) {
+        @Override
+        public void fire(Player player, TheDark plugin, int topPath, int bottomPath, PersistentDataContainer extraPDC) {
+            int pierce = 8;
+            double damage = 5.0;
+            double cooldownTicks = 20.0;
+
+
+        }
+    }
+
     ;
 
     private final int rechargeTicks;

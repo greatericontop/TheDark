@@ -67,6 +67,16 @@ public class UpgradeListing {
                 new Upgrade("Zombie Banking", "Makes 200 coins per round and pays 2% interest on up to 2,500 coins!", 1700),
                 new Upgrade("Zombie Investments", "Makes 325 coins per round and pays 3% interest on up to 5,000 coins!", 3600)
         ));
+        upgradeList.put(GunType.ROCKET_LAUNCHER, new ItemUpgrades(
+                new Upgrade("Bigger Bombs", "Rockets do 9 damage instead of 5", 850),
+                new Upgrade("Even Bigger Bombs", "Rockets do 14 damage!", 1250),
+                new Upgrade("Extra Ordinance Explosives", "Rockets deal a massive 35 damage!", 3500),
+                new Upgrade("Nuclear Bombs", "These ones will wipe out almost all groups of zombies!", 10800),
+                new Upgrade("Faster Reload", "Decrease fire cooldown to 15 ticks", 400),
+                new Upgrade("Even Faster Reload", "Decrease fire cooldown to 10 ticks", 800),
+                new Upgrade("Sharpnel Blast", "Explosions are bigger and can hurt twice as many zombies.", 1750),
+                new Upgrade("Cluster Bombs", "Rockets split into 4 high-damage explosions on impact!", 9100)
+        ));
     }
 
     @Nullable
