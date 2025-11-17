@@ -11,12 +11,14 @@ public class CashGeneration {
     public static void rewardCoinsOnDamage(PlayerProfile profile, double finalDamage, TheDark plugin) {
         double multiplier = 0.38;
         int round = plugin.getRoundManager().getCurrentRound();
-        if (round >= 21 && round <= 25) {
-            multiplier *= 0.875;
-        } else if (round <= 30) {
-            multiplier *= 0.75;
-        } else {
-            multiplier *= 0; // TODO
+        if (round >= 21) {
+            if (round <= 25) {
+                multiplier *= 0.875;
+            } else if (round <= 30) {
+                multiplier *= 0.75;
+            } else {
+                multiplier *= 0; // TODO
+            }
         }
 
         GunType type = GunUtil.getHeldGunType(profile.getPlayer());
