@@ -297,10 +297,10 @@ public enum GunType {
                 damage = 14.0;
             }
             if (topPath >= 3) {
-                damage = 35.0;
+                damage = 32.0;
             }
             if (topPath >= 4) {
-                damage = 80.0;
+                damage = 75.0;
             }
             if (bottomPath >= 1) {
                 cooldownTicks = 15.0;
