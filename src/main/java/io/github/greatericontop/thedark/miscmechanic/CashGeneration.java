@@ -13,9 +13,9 @@ public class CashGeneration {
         int round = plugin.getRoundManager().getCurrentRound();
         if (round >= 21) {
             if (round <= 25) {
-                multiplier *= 0.8;
+                multiplier *= 0.7;
             } else if (round <= 30) {
-                multiplier *= 0.6;
+                multiplier *= 0.55;
             } else {
                 multiplier *= 0; // TODO
             }
