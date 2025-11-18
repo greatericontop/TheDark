@@ -20,7 +20,7 @@ public class ZombiePiglin extends EnragedEnemy {
     public ZombiePiglin(Location spawnLocation) {
         super(720);
         entity = (LivingEntity) spawnLocation.getWorld().spawnEntity(spawnLocation, EntityType.ZOMBIFIED_PIGLIN, false);
-        setUp(1000.0, 1.175, 300.0);
+        setUp(900.0, 1.175, 300.0);
         entity.getEquipment().setHelmet(new ItemStack(Material.NETHERITE_HELMET, 1));
         entity.getEquipment().setChestplate(new ItemStack(Material.DIAMOND_CHESTPLATE, 1));
         entity.getEquipment().setLeggings(new ItemStack(Material.DIAMOND_LEGGINGS, 1));
@@ -30,7 +30,7 @@ public class ZombiePiglin extends EnragedEnemy {
 
     @Override
     public void extraDeathEvent(TheDark plugin, PlayerProfile killerProfile) {
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 4; i++) {
             plugin.getGameManager().spawnEnemy(ZombieVillager.class, entity.getLocation());
         }
     }
