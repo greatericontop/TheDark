@@ -70,7 +70,7 @@ public class UpgradeListing {
         upgradeList.put(GunType.ROCKET_LAUNCHER, new ItemUpgrades(
                 new Upgrade("Bigger Bombs", "Rockets do 9 damage instead of 5", 850),
                 new Upgrade("Even Bigger Bombs", "Rockets do 14 damage!", 1250),
-                new Upgrade("Extra Ordinance Explosives", "Rockets deal a massive 35 damage!", 3950),
+                new Upgrade("Extra Ordinance Explosives", "Rockets deal a massive 32 damage!", 3950),
                 new Upgrade("Nuclear Bombs", "These ones will wipe out almost all groups of zombies!", 10800),
                 new Upgrade("Faster Reload", "Decrease fire cooldown to 15 ticks", 400),
                 new Upgrade("Even Faster Reload", "Decrease fire cooldown to 10 ticks", 800),
