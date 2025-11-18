@@ -56,4 +56,16 @@ public class Data21to30 {
             .delaySeconds(40).addSpawnOneAtATime(ZombieVillager.class, 1, 1, false)
     .getOutput();
 
+    public static final BaseOperation[] R27 = new RoundOperationHelper(4 * 20)
+            .addSpawnOneAtATime(ZombieVillager.class, 3, 100, false)
+            .delaySeconds(12)
+            .addSpawnOneAtATime(ZombieVillager.class, 2, 1, false)
+    .getOutput();
+
+    public static final BaseOperation[] R28 = new RoundOperationHelper(4 * 20)
+            .addSpawnOneAtATime(BasicZombie.class, 50, 9, true)
+            .addSpawnOneAtATime(ZombieVillager.class, 3, 120, false)
+    .getOutput();
+
+
 }
