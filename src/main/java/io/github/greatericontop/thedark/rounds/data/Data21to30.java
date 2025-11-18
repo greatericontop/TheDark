@@ -4,6 +4,7 @@ import io.github.greatericontop.thedark.enemy.zombies.BasicZombie;
 import io.github.greatericontop.thedark.enemy.zombies.ChainmailZombie;
 import io.github.greatericontop.thedark.enemy.zombies.HelmetZombie;
 import io.github.greatericontop.thedark.enemy.zombies.IronZombie;
+import io.github.greatericontop.thedark.enemy.zombies.ZombiePiglin;
 import io.github.greatericontop.thedark.enemy.zombies.ZombieVillager;
 import io.github.greatericontop.thedark.rounds.operation.BaseOperation;
 import io.github.greatericontop.thedark.rounds.operation.RoundOperationHelper;
@@ -12,6 +13,7 @@ public class Data21to30 {
 
     // Early-Mid Game (21-30)
     // Intended to be about as challenging as 1-20, maybe slightly easier
+    //   It seems way easier, actually
     // Cash generation slightly throttled (87.5% through R25, 75% through R30)
 
     public static final BaseOperation[] R21 = new RoundOperationHelper(4 * 20)
@@ -67,5 +69,14 @@ public class Data21to30 {
             .addSpawnOneAtATime(ZombieVillager.class, 3, 120, false)
     .getOutput();
 
+    public static final BaseOperation[] R29 = new RoundOperationHelper(4 * 20)
+            .addSpawnOneAtATime(ZombieVillager.class, 1, 1, false)
+            .delaySeconds(4).addSpawnOneAtATime(IronZombie.class, 18, 1, false)
+            .delaySeconds(8).addSpawnOneAtATime(ZombieVillager.class, 1, 1, false)
+    .getOutput();
+
+    public static final BaseOperation[] R30 = new RoundOperationHelper(4 * 20)
+            .addSpawnOneAtATime(ZombiePiglin.class, 1, 1, false)
+    .getOutput();
 
 }
