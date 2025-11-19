@@ -285,7 +285,7 @@ public enum GunType {
             Material.NETHERITE_PICKAXE) {
         @Override
         public void fire(Player player, TheDark plugin, int topPath, int bottomPath, PersistentDataContainer extraPDC) {
-            int pierce = 8;
+            int pierce = 6;
             double damage = 5.0;
             double cooldownTicks = 20.0;
             double explosionRadius = 3.0;
@@ -310,7 +310,7 @@ public enum GunType {
             }
             if (bottomPath >= 3) {
                 explosionRadius = 5.0;
-                pierce = 16;
+                pierce = 12;
             }
             if (bottomPath >= 4) {
                 secondaryExplosions = true;
