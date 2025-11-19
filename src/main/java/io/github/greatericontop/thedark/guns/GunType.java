@@ -91,11 +91,11 @@ public enum GunType {
             }
             if (topPath >= 3) {
                 damage = 25.0;
-                extraKBStrength = 0.6;
+                extraKBStrength = 0.45;
             }
             if (topPath >= 4) {
                 damage = 90.0;
-                extraKBStrength = 1.5;
+                extraKBStrength = 1.0;
             }
             if (bottomPath >= 1) {
                 cooldownTicks = 4;
