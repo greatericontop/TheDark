@@ -21,7 +21,7 @@ public class UpgradeListing {
                 new Upgrade("Sharper Bullets", "+1 pierce", 125),
                 new Upgrade("Even Sharper Bullets", "+1 pierce", 160),
                 new Upgrade("Hollow Point", "-1 pierce but +6 damage", 500),
-                new Upgrade("50 Cal", "Incredible pierce and damage!", 2300),
+                new Upgrade("50 Cal", "Incredible pierce and damage!", 2200),
                 new Upgrade("Faster Firing", "Decrease cooldown to 9 ticks", 110),
                 new Upgrade("Even Faster Firing", "Decrease cooldown to 7.5 ticks", 140),
                 new Upgrade("Double Barrel", "Shoot 2 bullets at once", 400),
