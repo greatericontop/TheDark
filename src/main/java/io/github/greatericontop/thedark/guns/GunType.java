@@ -225,7 +225,7 @@ public enum GunType {
         public void fire(Player player, TheDark plugin, int topPath, int bottomPath, PersistentDataContainer extraPDC) {
             int pierce = 3;
             int fireTicks = 80 + 10;
-            double fireDamage = 1.0;
+            double fireDamage = 3.0;
             double cooldownTicks = 8.0;
             double rangeBlocks = 7.0;
             boolean isSevere = false;
@@ -233,10 +233,10 @@ public enum GunType {
                 fireTicks = 120 + 10;
             }
             if (topPath >= 2) {
-                fireDamage = 1.5;
+                fireDamage = 4.5;
             }
             if (topPath >= 3) {
-                fireDamage = 3.0;
+                fireDamage = 9.0;
             }
             if (topPath >= 4) {
                 fireTicks = Integer.MAX_VALUE;
@@ -256,7 +256,7 @@ public enum GunType {
                 cooldownTicks = 1.0;
             }
             FireStatus fireStatus = new FireStatus(fireTicks, fireDamage, isSevere);
-            plugin.shootGunListener.performFire(this, player, player.getEyeLocation().getDirection(), pierce, fireDamage, cooldownTicks,
+            plugin.shootGunListener.performFire(this, player, player.getEyeLocation().getDirection(), pierce, fireDamage*0.5, cooldownTicks,
                     0.0, false, rangeBlocks, fireStatus,
                     Particle.SMALL_FLAME, Sound.ENTITY_PLAYER_HURT_ON_FIRE);
         }
