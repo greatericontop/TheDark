@@ -18,7 +18,7 @@ import org.bukkit.potion.PotionEffectType;
 public class ZombiePiglin extends EnragedEnemy {
 
     public ZombiePiglin(Location spawnLocation) {
-        super(720);
+        super(800);
         entity = (LivingEntity) spawnLocation.getWorld().spawnEntity(spawnLocation, EntityType.ZOMBIFIED_PIGLIN, false);
         setUp(900.0, 1.175, 300.0);
         entity.getEquipment().setHelmet(new ItemStack(Material.NETHERITE_HELMET, 1));

@@ -18,7 +18,7 @@ import org.bukkit.potion.PotionEffectType;
 public class ZombieVillager extends EnragedEnemy {
 
     public ZombieVillager(Location spawnLocation) {
-        super(560);
+        super(600);
         entity = (LivingEntity) spawnLocation.getWorld().spawnEntity(spawnLocation, EntityType.ZOMBIE_VILLAGER, false);
         setUp(350.0, 1.175, 20.0);
         entity.getEquipment().setHelmet(new ItemStack(Material.DIAMOND_HELMET, 1));
@@ -29,7 +29,7 @@ public class ZombieVillager extends EnragedEnemy {
 
     @Override
     public void extraDeathEvent(TheDark plugin, PlayerProfile killerProfile) {
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 4; i++) {
             plugin.getGameManager().spawnEnemy(IronZombie.class, entity.getLocation());
         }
     }
