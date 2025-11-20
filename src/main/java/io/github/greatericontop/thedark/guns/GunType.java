@@ -44,16 +44,16 @@ public enum GunType {
                 damage = 18.0;
             }
             if (bottomPath >= 1) {
-                cooldownTicks = 9.0;
+                cooldownTicks = 8.5;
             }
             if (bottomPath >= 2) {
-                cooldownTicks = 7.5;
+                cooldownTicks = 6.5;
             }
             if (bottomPath >= 3) {
                 doubleBarrel = true;
             }
             if (bottomPath >= 4) {
-                cooldownTicks = 3.0;
+                cooldownTicks = 2.0;
             }
             if (doubleBarrel) {
                 Vector direction = player.getEyeLocation().getDirection();
@@ -73,7 +73,7 @@ public enum GunType {
         }
     },
 
-    RIFLE(30, 30, 1300,
+    RIFLE(30, 30, 1100,
             "§bRifle", "§7A high-powered rifle that fires quickly.",
             Material.STONE_HOE) {
         @Override
@@ -187,10 +187,10 @@ public enum GunType {
                 verticalShotsPerSide = 1;
             }
             if (bottomPath >= 1) {
-                cooldownTicks = 9.0;
+                cooldownTicks = 8.5;
             }
             if (bottomPath >= 2) {
-                cooldownTicks = 7.5;
+                cooldownTicks = 6.5;
             }
             if (bottomPath >= 3) {
                 damage = 8.0;

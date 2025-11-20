@@ -22,18 +22,18 @@ public class UpgradeListing {
                 new Upgrade("Even Sharper Bullets", "+1 pierce", 160),
                 new Upgrade("Hollow Point", "-1 pierce but +6 damage", 500),
                 new Upgrade("50 Cal", "Incredible pierce and damage!", 2200),
-                new Upgrade("Faster Firing", "Decrease cooldown to 9 ticks", 110),
-                new Upgrade("Even Faster Firing", "Decrease cooldown to 7.5 ticks", 140),
+                new Upgrade("Faster Firing", "Decrease cooldown to 8.5 ticks", 110),
+                new Upgrade("Even Faster Firing", "Decrease cooldown to 6.5 ticks", 150),
                 new Upgrade("Double Barrel", "Shoot 2 bullets at once", 400),
-                new Upgrade("Machine Gun Pistol", "Can fire every 3 ticks!", 1550)
+                new Upgrade("Machine Gun Pistol", "Can fire every 2 ticks!", 1550)
         ));
         upgradeList.put(GunType.RIFLE, new ItemUpgrades(
-                new Upgrade("High Caliber", "5 -> 9 damage", 1300),
-                new Upgrade("Even Higher Caliber", "9 -> 13 damage", 1500),
-                new Upgrade("High Energy Rounds", "25 damage per shot and deals extra knockback!", 3500),
-                new Upgrade("Doom Rounds", "These zombies won't know what hit them!", 17000),
-                new Upgrade("Faster Firing", "Decrease cooldown to 4 ticks", 1000),
-                new Upgrade("Even Faster Firing", "Decrease cooldown to 3 ticks", 1400),
+                new Upgrade("High Caliber", "5 -> 9 damage", 1100),
+                new Upgrade("Even Higher Caliber", "9 -> 13 damage", 1300),
+                new Upgrade("High Energy Rounds", "25 damage per shot and deals extra knockback!", 3200),
+                new Upgrade("Doom Rounds", "These zombies won't know what hit them!", 16000),
+                new Upgrade("Faster Firing", "Decrease cooldown to 4 ticks", 550),
+                new Upgrade("Even Faster Firing", "Decrease cooldown to 3 ticks", 800),
                 new Upgrade("Burst", "Shoot 3 extra-pierce bullets instantly for incredible spraying!", 2000),
                 new Upgrade("Ultra Assault Rifle", "5 shot bursts with no cooldown!", 6000)
         ));
@@ -42,8 +42,8 @@ public class UpgradeListing {
                 new Upgrade("Even Bigger Blast", "Shoots 7 shells", 400),
                 new Upgrade("More Shells", "Crams 13 shells into the same area!", 1200),
                 new Upgrade("Wave of Destruction", "Shoots 39 shells at a time!", 3750),
-                new Upgrade("Faster Firing", "Decrease cooldown to 9 ticks", 220),
-                new Upgrade("Even Faster Firing", "Decrease cooldown to 7.5 ticks", 280),
+                new Upgrade("Faster Firing", "Decrease cooldown to 8.5 ticks", 220),
+                new Upgrade("Even Faster Firing", "Decrease cooldown to 6.5 ticks", 300),
                 new Upgrade("Buckshot", "Each shot does double damage!", 1250),
                 new Upgrade("Insane Buckshot", "Shots have 3 pierce and deal 12 damage!", 4800)
         ));
