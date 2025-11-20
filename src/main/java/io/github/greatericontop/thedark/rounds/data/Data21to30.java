@@ -12,7 +12,8 @@ import io.github.greatericontop.thedark.rounds.operation.RoundOperationHelper;
 public class Data21to30 {
 
     // Early-Mid Game (21-30)
-    // Some of these are starting to get stressful
+    // Difficulty is hard to precisely control so we'll just shoot for "fair" difficulty in general. If this ends up
+    //   feeling easier/harder that can just feed into the uniqueness of the rounds.
     // Cash generation slightly throttled (87.5% through R25, 75% through R30)
 
     public static final BaseOperation[] R21 = new RoundOperationHelper(4 * 20)
