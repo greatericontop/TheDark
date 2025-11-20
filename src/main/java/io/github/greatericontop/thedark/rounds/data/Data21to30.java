@@ -48,7 +48,7 @@ public class Data21to30 {
     .getOutput();
 
     public static final BaseOperation[] R25 = new RoundOperationHelper(4 * 20)
-            .addSpawnOneAtATime(ChainmailZombie.class, 25, 20, true)
+            .addSpawnOneAtATime(ChainmailZombie.class, 20, 25, true)
             .addSpawnOneAtATime(IronZombie.class, 10, 50, false)
     .getOutput();
 
@@ -61,7 +61,7 @@ public class Data21to30 {
     public static final BaseOperation[] R27 = new RoundOperationHelper(4 * 20)
             .addSpawnOneAtATime(ZombieVillager.class, 3, 100, false)
             .delaySeconds(12)
-            .addSpawnOneAtATime(ZombieVillager.class, 2, 1, false)
+            .addSpawnOneAtATime(ZombieVillager.class, 1, 1, false)
     .getOutput();
 
     public static final BaseOperation[] R28 = new RoundOperationHelper(4 * 20)
