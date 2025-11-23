@@ -287,7 +287,7 @@ public enum GunType {
         public void fire(Player player, TheDark plugin, int topPath, int bottomPath, PersistentDataContainer extraPDC) {
             int pierce = 6;
             double damage = 5.0;
-            double cooldownTicks = 20.0;
+            double cooldownTicks = 24.0;
             double explosionRadius = 3.0;
             boolean secondaryExplosions = false;
             if (topPath >= 1) {
@@ -303,10 +303,10 @@ public enum GunType {
                 damage = 75.0;
             }
             if (bottomPath >= 1) {
-                cooldownTicks = 15.0;
+                cooldownTicks = 18.0;
             }
             if (bottomPath >= 2) {
-                cooldownTicks = 10.0;
+                cooldownTicks = 12.0;
             }
             if (bottomPath >= 3) {
                 explosionRadius = 5.0;

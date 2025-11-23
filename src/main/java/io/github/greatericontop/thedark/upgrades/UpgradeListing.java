@@ -72,8 +72,8 @@ public class UpgradeListing {
                 new Upgrade("Even Bigger Bombs", "Rockets do 14 damage!", 1250),
                 new Upgrade("Extra Ordinance Explosives", "Rockets deal a massive 32 damage!", 3950),
                 new Upgrade("Nuclear Bombs", "These ones will wipe out almost all groups of zombies!", 10800),
-                new Upgrade("Faster Reload", "Decrease fire cooldown to 15 ticks", 400),
-                new Upgrade("Even Faster Reload", "Decrease fire cooldown to 10 ticks", 800),
+                new Upgrade("Faster Reload", "Decrease fire cooldown to 18 ticks", 400),
+                new Upgrade("Even Faster Reload", "Decrease fire cooldown to 12 ticks", 800),
                 new Upgrade("Sharpnel Blast", "Explosions are bigger and can hurt twice as many zombies.", 1750),
                 new Upgrade("Cluster Bombs", "Rockets split into 4 high-damage explosions on impact!", 9100)
         ));
