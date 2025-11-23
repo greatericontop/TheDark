@@ -19,7 +19,7 @@ import java.util.List;
 
 public enum GunType {
 
-    PISTOL(30, 10, 200,
+    PISTOL(30, 12, 200,
             "§ePistol", "§7A basic pistol.",
             Material.WOODEN_HOE) {
         @Override
@@ -44,10 +44,10 @@ public enum GunType {
                 damage = 18.0;
             }
             if (bottomPath >= 1) {
-                cooldownTicks = 8.5;
+                cooldownTicks = 8.75;
             }
             if (bottomPath >= 2) {
-                cooldownTicks = 6.5;
+                cooldownTicks = 7.0;
             }
             if (bottomPath >= 3) {
                 doubleBarrel = true;
@@ -162,7 +162,7 @@ public enum GunType {
         }
     },
 
-    SHOTGUN(40, 5, 400,
+    SHOTGUN(30, 5, 400,
             "§bShotgun", "§7This shotgun damages multiple enemies.",
             Material.IRON_SHOVEL) {
         @Override
@@ -187,10 +187,10 @@ public enum GunType {
                 verticalShotsPerSide = 1;
             }
             if (bottomPath >= 1) {
-                cooldownTicks = 8.5;
+                cooldownTicks = 8.75;
             }
             if (bottomPath >= 2) {
-                cooldownTicks = 6.5;
+                cooldownTicks = 7.0;
             }
             if (bottomPath >= 3) {
                 damage = 8.0;
