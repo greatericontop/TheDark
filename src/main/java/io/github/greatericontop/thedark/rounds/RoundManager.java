@@ -71,15 +71,15 @@ public class RoundManager {
                 switch (type) {
                     case MIDAS_PISTOL -> {
                         switch (upgrades[1]) {
-                            case 1 -> profile.coins += 60;
-                            case 2 -> profile.coins += 120;
+                            case 1 -> profile.coins += 70;
+                            case 2 -> profile.coins += 140;
                             case 3 -> {
-                                profile.coins += 200;
+                                profile.coins += 225;
                                 int interestableAmount = Math.min(profile.coins, 2500);
                                 profile.coins += Util.roundNumber(0.02 * interestableAmount);
                             }
                             case 4 -> {
-                                profile.coins += 325;
+                                profile.coins += 500;
                                 int interestableAmount = Math.min(profile.coins, 5000);
                                 profile.coins += Util.roundNumber(0.03 * interestableAmount);
                             }

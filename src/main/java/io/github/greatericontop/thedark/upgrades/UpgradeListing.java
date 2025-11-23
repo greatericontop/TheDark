@@ -58,14 +58,14 @@ public class UpgradeListing {
                 new Upgrade("Perma-Flame", "No cooldown to fire!", 3050)
         ));
         upgradeList.put(GunType.MIDAS_PISTOL, new ItemUpgrades(
-                new Upgrade("Better Deals", "Increases cash bonus from 50% -> 75%", 425),
-                new Upgrade("Incredible Deals", "Increases cash bonus from 75% -> 100%", 525),
+                new Upgrade("Better Deals", "Increases cash bonus from 60% -> 90%", 425),
+                new Upgrade("Incredible Deals", "Increases cash bonus from 90% -> 120%", 525),
                 new Upgrade("Machine Gun Money Printer", "Fires twice as fast for twice the cash!", 2100),
-                new Upgrade("Zombies to Gold", "Turns zombies to gold for triple the cash!", 3333),
-                new Upgrade("Zombie Business", "Sells ammo to zombies (conflict of interest?) for 60 coins per round", 500),
-                new Upgrade("More Zombie Business", "Now makes 120 coins per round", 750),
-                new Upgrade("Zombie Banking", "Makes 200 coins per round and pays 2% interest on up to 2,500 coins!", 1700),
-                new Upgrade("Zombie Investments", "Makes 325 coins per round and pays 3% interest on up to 5,000 coins!", 3600)
+                new Upgrade("Zombies to Gold", "Turns zombies to gold for 250% more cash!", 3333),
+                new Upgrade("Zombie Business", "Sells ammo to zombies (conflict of interest?) for 70 coins per round", 500),
+                new Upgrade("More Zombie Business", "Now makes 140 coins per round", 750),
+                new Upgrade("Zombie Banking", "Makes 225 coins per round and pays 2% interest on up to 2,500 coins!", 1350),
+                new Upgrade("Zombie Investments", "Makes 500 coins per round and pays 3% interest on up to 5,000 coins!", 3450)
         ));
         upgradeList.put(GunType.ROCKET_LAUNCHER, new ItemUpgrades(
                 new Upgrade("Bigger Bombs", "Rockets do 9 damage instead of 5", 850),
