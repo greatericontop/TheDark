@@ -22,8 +22,8 @@ public class UpgradeListing {
                 new Upgrade("Even Sharper Bullets", "+1 pierce", 160),
                 new Upgrade("Hollow Point", "-1 pierce but +6 damage", 500),
                 new Upgrade("50 Cal", "Incredible pierce and damage!", 2200),
-                new Upgrade("Faster Firing", "Decrease cooldown to 8.5 ticks", 110),
-                new Upgrade("Even Faster Firing", "Decrease cooldown to 6.5 ticks", 150),
+                new Upgrade("Faster Firing", "Decrease cooldown to 8.75 ticks", 110),
+                new Upgrade("Even Faster Firing", "Decrease cooldown to 7 ticks", 150),
                 new Upgrade("Double Barrel", "Shoot 2 bullets at once", 400),
                 new Upgrade("Machine Gun Pistol", "Can fire every 2 ticks!", 1550)
         ));
@@ -42,8 +42,8 @@ public class UpgradeListing {
                 new Upgrade("Even Bigger Blast", "Shoots 7 shells", 400),
                 new Upgrade("More Shells", "Crams 13 shells into the same area!", 1200),
                 new Upgrade("Wave of Destruction", "Shoots 39 shells at a time!", 3750),
-                new Upgrade("Faster Firing", "Decrease cooldown to 8.5 ticks", 220),
-                new Upgrade("Even Faster Firing", "Decrease cooldown to 6.5 ticks", 300),
+                new Upgrade("Faster Firing", "Decrease cooldown to 8.75 ticks", 220),
+                new Upgrade("Even Faster Firing", "Decrease cooldown to 7 ticks", 300),
                 new Upgrade("Buckshot", "Each shot does double damage!", 1250),
                 new Upgrade("Insane Buckshot", "Shots have 3 pierce and deal 12 damage!", 4800)
         ));
