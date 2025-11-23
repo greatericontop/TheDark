@@ -10,6 +10,7 @@ import io.github.greatericontop.thedark.enemy.zombies.ZombieVillager;
 import io.github.greatericontop.thedark.guns.GunBuying;
 import io.github.greatericontop.thedark.guns.GunType;
 import io.github.greatericontop.thedark.menus.SignListener;
+import io.github.greatericontop.thedark.miscmechanic.CashGeneration;
 import io.github.greatericontop.thedark.player.PlayerProfile;
 import io.github.greatericontop.thedark.rounds.RoundSpawner;
 import io.github.greatericontop.thedark.rounds.data.RoundData;
@@ -139,7 +140,8 @@ public class TheDarkCommand implements CommandExecutor {
         if (args[0].equals("calculateCoins")) {
             int start = Integer.parseInt(args[1]);
             int end = Integer.parseInt(args[2]);
-            double total = 0.0;
+            double totalHp = 0.0;
+            double totalCoins = 0.0;
             for (int r = start; r <= end; r++) {
                 BaseOperation[] round = RoundData.ROUNDS[r];
                 for (BaseOperation baseOp : round) {
@@ -153,7 +155,7 @@ public class TheDarkCommand implements CommandExecutor {
                         } else if (op.getEnemyClass() == ChainmailZombie.class) {
                             enemyHealth = 80;
                         } else if (op.getEnemyClass() == IronZombie.class) {
-                            enemyHealth = 160; // Default fallback
+                            enemyHealth = 160;
                         } else if (op.getEnemyClass() == ZombieVillager.class) {
                             enemyHealth = 350 + 4*160;
                         } else if (op.getEnemyClass() == ZombiePiglin.class) {
@@ -161,11 +163,14 @@ public class TheDarkCommand implements CommandExecutor {
                         } else {
                             enemyHealth = 0;
                         }
-                        total += enemyCount * enemyHealth * 0.38;
+                        totalHp += enemyCount * enemyHealth;
+                        totalCoins += enemyCount * enemyHealth * 0.38 * CashGeneration.getCashScale(r);
                     }
                 }
             }
-            player.sendMessage(String.format("§eEstimated coins from round %d to %d: §a%.2f §7(before any scaling)", start, end, total));
+            player.sendMessage(String.format("§eHealth from round %d to %d: §a%.2f §7(including scaling)", start, end, totalHp));
+            player.sendMessage(String.format("§eEstimated coins: §a%.2f §7(including scaling)", start, end, totalCoins));
+            return true;
         }
 
         return false;

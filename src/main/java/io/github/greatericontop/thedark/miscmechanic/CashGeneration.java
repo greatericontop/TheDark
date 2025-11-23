@@ -8,18 +8,29 @@ import io.github.greatericontop.thedark.util.Util;
 
 public class CashGeneration {
 
+    public static double getCashScale(int round) {
+        if (round <= 20) {
+            return 1.0;
+        }
+        if (round <= 25) {
+            return 0.7;
+        }
+        if (round <= 30) {
+            return 0.55;
+        }
+        if (round <= 35) {
+            return 0; // TODO
+        }
+        if (round <= 40) {
+            return 0; // TODO
+        }
+        return 0.0; // TODO
+    }
+
     public static void rewardCoinsOnDamage(PlayerProfile profile, double finalDamage, TheDark plugin) {
         double multiplier = 0.38;
         int round = plugin.getRoundManager().getCurrentRound();
-        if (round >= 21) {
-            if (round <= 25) {
-                multiplier *= 0.7;
-            } else if (round <= 30) {
-                multiplier *= 0.55;
-            } else {
-                multiplier *= 0; // TODO
-            }
-        }
+        multiplier *= getCashScale(round);
 
         GunType type = GunUtil.getHeldGunType(profile.getPlayer());
         if (type == GunType.MIDAS_PISTOL) {
