@@ -168,7 +168,7 @@ public class TheDarkCommand implements CommandExecutor {
                     }
                 }
             }
-            player.sendMessage(String.format("§eHealth from round %d to %d: §a%.2f §7(including scaling)", start, end, totalHp));
+            player.sendMessage(String.format("§eHealth from round %d to %d: §a%.2f", start, end, totalHp));
             player.sendMessage(String.format("§eEstimated coins: §a%.2f §7(including scaling)", totalCoins));
             return true;
         }
