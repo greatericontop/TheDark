@@ -1,6 +1,7 @@
 package io.github.greatericontop.thedark.enemy;
 
 import io.github.greatericontop.thedark.TheDark;
+import io.github.greatericontop.thedark.miscmechanic.CashGeneration;
 import io.github.greatericontop.thedark.miscmechanic.FireStatus;
 import io.github.greatericontop.thedark.player.PlayerProfile;
 import org.bukkit.Bukkit;
@@ -56,6 +57,7 @@ public abstract class BaseEnemy {
                 fireStatus = null;
             } else if (fireStatus.ticksToDamage <= 0) { // If both hit 0 the same tick, no damage is applied
                 entity.damage(fireStatus.damagePerSecond);
+                CashGeneration.rewardCoinsOnDamage(fireStatus.playerProfile, fireStatus.damagePerSecond, plugin);
                 Bukkit.getScheduler().runTaskLater(plugin, () -> entity.setNoDamageTicks(0), 1L);
                 fireStatus.ticksToDamage = FireStatus.FIRE_DAMAGE_INTERVAL;
             }

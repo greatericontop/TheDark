@@ -2,6 +2,7 @@ package io.github.greatericontop.thedark.guns;
 
 import io.github.greatericontop.thedark.TheDark;
 import io.github.greatericontop.thedark.miscmechanic.FireStatus;
+import io.github.greatericontop.thedark.player.PlayerProfile;
 import io.github.greatericontop.thedark.upgrades.UpgradeListing;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
@@ -255,7 +256,12 @@ public enum GunType {
             if (bottomPath >= 4) {
                 cooldownTicks = 1.0;
             }
-            FireStatus fireStatus = new FireStatus(fireTicks, fireDamage, isSevere);
+            PlayerProfile profile = plugin.getGameManager().getPlayerProfile(player);
+            if (profile == null) {
+                player.sendMessage("§cNo profile found, can't tag your fire!");
+                return;
+            }
+            FireStatus fireStatus = new FireStatus(profile, fireTicks, fireDamage, isSevere);
             plugin.shootGunListener.performFire(this, player, player.getEyeLocation().getDirection(), pierce, fireDamage*0.5, cooldownTicks,
                     0.0, false, rangeBlocks, fireStatus,
                     Particle.SMALL_FLAME, Sound.ENTITY_PLAYER_HURT_ON_FIRE);

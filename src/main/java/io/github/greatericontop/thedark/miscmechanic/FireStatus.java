@@ -1,5 +1,6 @@
 package io.github.greatericontop.thedark.miscmechanic;
 
+import io.github.greatericontop.thedark.player.PlayerProfile;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.persistence.PersistentDataType;
@@ -8,12 +9,14 @@ public class FireStatus {
     public static final int FIRE_DAMAGE_INTERVAL = 20;
     public static final NamespacedKey SEVERE_FIRE_KEY = new NamespacedKey("thedark", "severe_fire");
 
+    public PlayerProfile playerProfile;
     public int durationLeft;
     public double damagePerSecond;
     public int ticksToDamage;
     public boolean isSevere;
 
-    public FireStatus(int durationLeft, double damagePerSecond, boolean isSevere) {
+    public FireStatus(PlayerProfile playerProfile, int durationLeft, double damagePerSecond, boolean isSevere) {
+        this.playerProfile = playerProfile;
         this.durationLeft = durationLeft;
         this.damagePerSecond = damagePerSecond;
         this.ticksToDamage = FIRE_DAMAGE_INTERVAL;
