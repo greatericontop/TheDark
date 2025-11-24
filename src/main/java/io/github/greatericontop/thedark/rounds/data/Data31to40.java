@@ -3,6 +3,7 @@ package io.github.greatericontop.thedark.rounds.data;
 import io.github.greatericontop.thedark.enemy.zombies.BasicZombie;
 import io.github.greatericontop.thedark.enemy.zombies.ChainmailZombie;
 import io.github.greatericontop.thedark.enemy.zombies.HelmetZombie;
+import io.github.greatericontop.thedark.enemy.zombies.ZombiePiglin;
 import io.github.greatericontop.thedark.enemy.zombies.ZombieVillager;
 import io.github.greatericontop.thedark.rounds.operation.BaseOperation;
 import io.github.greatericontop.thedark.rounds.operation.RoundOperationHelper;
@@ -39,6 +40,10 @@ public class Data31to40 {
     .getOutput();
 
     public static final BaseOperation[] R34 = new RoundOperationHelper(4 * 20)
+            .addSpawnOneAtATime(ChainmailZombie.class, 20, 40, true) // 40s
+            .delaySeconds(5).addSpawnOneAtATime(ZombieVillager.class, 1, 1, false)
+            .delaySeconds(15).addSpawnOneAtATime(ZombieVillager.class, 1, 1, false)
+            .delaySeconds(15).addSpawnOneAtATime(ZombiePiglin.class, 1, 1, false)
     .getOutput();
 
     public static final BaseOperation[] R35 = new RoundOperationHelper(4 * 20)
