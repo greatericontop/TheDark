@@ -1,5 +1,6 @@
 package io.github.greatericontop.thedark.rounds.data;
 
+import io.github.greatericontop.thedark.enemy.zombies.BasicZombie;
 import io.github.greatericontop.thedark.enemy.zombies.ChainmailZombie;
 import io.github.greatericontop.thedark.enemy.zombies.HelmetZombie;
 import io.github.greatericontop.thedark.enemy.zombies.ZombieVillager;
@@ -19,7 +20,6 @@ public class Data31to40 {
             .delaySeconds(6).addSpawnOneAtATime(ChainmailZombie.class, 10, 1, false)
     .getOutput();
 
-    // Hard one!
     public static final BaseOperation[] R32 = new RoundOperationHelper(4 * 20)
             .addSpawnOneAtATime(HelmetZombie.class, 20, 40, true) // 40s
             .delaySeconds(10).addSpawnOneAtATime(ChainmailZombie.class, 50, 1, false)
@@ -44,7 +44,9 @@ public class Data31to40 {
     public static final BaseOperation[] R35 = new RoundOperationHelper(4 * 20)
     .getOutput();
 
+    // Hard one!
     public static final BaseOperation[] R36 = new RoundOperationHelper(4 * 20)
+            .addSpawnOneAtATime(BasicZombie.class, 500, 1, false)
     .getOutput();
 
 }
