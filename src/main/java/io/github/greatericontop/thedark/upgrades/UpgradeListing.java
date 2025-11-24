@@ -30,7 +30,7 @@ public class UpgradeListing {
         upgradeList.put(GunType.RIFLE, new ItemUpgrades(
                 new Upgrade("High Caliber", "5 -> 9 damage", 1100),
                 new Upgrade("Even Higher Caliber", "9 -> 13 damage", 1300),
-                new Upgrade("High Energy Rounds", "25 damage per shot and deals extra knockback!", 3200),
+                new Upgrade("High Energy Rounds", "30 damage per shot and deals extra knockback!", 3400),
                 new Upgrade("Doom Rounds", "These zombies won't know what hit them!", 16000),
                 new Upgrade("Faster Firing", "Decrease cooldown to 4 ticks", 550),
                 new Upgrade("Even Faster Firing", "Decrease cooldown to 3 ticks", 800),
