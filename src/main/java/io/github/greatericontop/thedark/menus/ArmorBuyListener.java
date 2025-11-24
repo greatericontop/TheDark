@@ -13,36 +13,21 @@ import org.bukkit.inventory.Inventory;
 
 public class ArmorBuyListener extends GenericMenu {
     public static final Component INVENTORY_NAME = Component.text("§c[TheDark] §bArmor Upgrades");
-    private static final int NUMBER_UPGRADES = 8;
+    private static final int NUMBER_UPGRADES = 3;
     private static final String[] NAMES = {
             "§7Leather Armor",
             "§fChain Armor",
             "§f§lIron Armor",
-            "§bDiamond Chestplate",
-            "§bDiamond Leggings",
-            "§bDiamond Boots",
-            "§bDiamond Helmet",
-            "§8§lNetherite Armor",
     };
     private static final int[] COSTS = {
             500,
             1000,
-            2000,
-            5000,
-            10000,
-            25000,
-            100000,
-            600000,
+            1500
     };
     public static final Material[][] ARMOR_MATERIALS = {
             {Material.LEATHER_HELMET, Material.LEATHER_CHESTPLATE, Material.LEATHER_LEGGINGS, Material.LEATHER_BOOTS},
             {Material.CHAINMAIL_HELMET, Material.CHAINMAIL_CHESTPLATE, Material.CHAINMAIL_LEGGINGS, Material.CHAINMAIL_BOOTS},
             {Material.IRON_HELMET, Material.IRON_CHESTPLATE, Material.IRON_LEGGINGS, Material.IRON_BOOTS},
-            {Material.IRON_HELMET, Material.DIAMOND_CHESTPLATE, Material.IRON_LEGGINGS, Material.IRON_BOOTS},
-            {Material.IRON_HELMET, Material.DIAMOND_CHESTPLATE, Material.DIAMOND_LEGGINGS, Material.IRON_BOOTS},
-            {Material.IRON_HELMET, Material.DIAMOND_CHESTPLATE, Material.DIAMOND_LEGGINGS, Material.DIAMOND_BOOTS},
-            {Material.DIAMOND_HELMET, Material.DIAMOND_CHESTPLATE, Material.DIAMOND_LEGGINGS, Material.DIAMOND_BOOTS},
-            {Material.NETHERITE_HELMET, Material.NETHERITE_CHESTPLATE, Material.NETHERITE_LEGGINGS, Material.NETHERITE_BOOTS},
     };
 
     private final TheDark plugin;
