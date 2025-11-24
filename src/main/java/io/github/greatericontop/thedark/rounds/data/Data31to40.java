@@ -22,8 +22,8 @@ public class Data31to40 {
     // Hard one!
     public static final BaseOperation[] R32 = new RoundOperationHelper(4 * 20)
             .addSpawnOneAtATime(HelmetZombie.class, 20, 40, true) // 40s
-            .delaySeconds(10).addSpawnOneAtATime(ChainmailZombie.class, 75, 1, false)
-            .delaySeconds(30).addSpawnOneAtATime(ChainmailZombie.class, 75, 1, false)
+            .delaySeconds(10).addSpawnOneAtATime(ChainmailZombie.class, 50, 1, false)
+            .delaySeconds(30).addSpawnOneAtATime(ChainmailZombie.class, 50, 1, false)
     .getOutput();
 
     public static final BaseOperation[] R33 = new RoundOperationHelper(4 * 20)
