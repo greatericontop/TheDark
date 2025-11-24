@@ -19,10 +19,10 @@ public class CashGeneration {
             return 0.55;
         }
         if (round <= 35) {
-            return 0; // TODO
+            return 0.325; // TODO
         }
         if (round <= 40) {
-            return 0; // TODO
+            return 0.25; // TODO
         }
         return 0.0; // TODO
     }

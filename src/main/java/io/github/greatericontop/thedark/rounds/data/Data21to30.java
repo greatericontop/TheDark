@@ -14,7 +14,7 @@ public class Data21to30 {
     // Early-Mid Game (21-30)
     // Difficulty is hard to precisely control so we'll just shoot for "fair" difficulty in general. If this ends up
     //   feeling easier/harder that can just feed into the uniqueness of the rounds.
-    // Cash generation slightly throttled (87.5% through R25, 75% through R30)
+    // Cash generation slightly throttled
 
     public static final BaseOperation[] R21 = new RoundOperationHelper(4 * 20)
             .addSpawnOneAtATime(HelmetZombie.class, 8, 1, false)

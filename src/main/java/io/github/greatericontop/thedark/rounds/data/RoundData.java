@@ -36,6 +36,9 @@ public class RoundData {
             Data21to30.R28,
             Data21to30.R29,
             Data21to30.R30,
+            Data31to40.R31,
+            Data31to40.R32,
+            Data31to40.R33,
     };
 
 }
