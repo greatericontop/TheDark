@@ -20,7 +20,7 @@ public class PiglinBrute extends EnragedEnemy {
     public PiglinBrute(Location spawnLocation) {
         super(1100);
         entity = (LivingEntity) spawnLocation.getWorld().spawnEntity(spawnLocation, EntityType.PIGLIN_BRUTE, false);
-        setUp(3200.0, 1.175, 300.0);
+        setUp(4000.0, 1.175, 300.0);
         entity.getEquipment().setHelmet(new ItemStack(Material.NETHERITE_HELMET, 1));
         entity.getEquipment().setChestplate(new ItemStack(Material.NETHERITE_CHESTPLATE, 1));
         entity.getEquipment().setLeggings(new ItemStack(Material.NETHERITE_LEGGINGS, 1));

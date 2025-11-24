@@ -22,6 +22,9 @@ public class EnemyListener implements Listener {
 
     @EventHandler()
     public void onDeath(EntityDeathEvent event) {
+        if (event.getEntity().getKiller() != null) {
+            event.getEntity().getKiller().sendMessage("entity died: "+event.getEntity().getType().name());
+        }
         if (event.getEntity().getPersistentDataContainer().has(NO_DROP_ITEMS, PersistentDataType.INTEGER)) {
             event.getDrops().clear();
             event.setDroppedExp(0);
