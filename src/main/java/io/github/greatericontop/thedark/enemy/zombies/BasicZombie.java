@@ -9,7 +9,7 @@ public class BasicZombie extends BaseEnemy {
 
     public BasicZombie(Location spawnLocation) {
         entity = (LivingEntity) spawnLocation.getWorld().spawnEntity(spawnLocation, EntityType.ZOMBIE, false);
-        setUp(20.0, 1.0, 3.0);
+        setUp(20.0, 1.0, 4.0);
     }
 
 }

@@ -11,7 +11,7 @@ public class ChainmailZombie extends BaseEnemy {
 
     public ChainmailZombie(Location spawnLocation) {
         entity = (LivingEntity) spawnLocation.getWorld().spawnEntity(spawnLocation, EntityType.ZOMBIE, false);
-        setUp(80.0, 1.35, 6.0);
+        setUp(80.0, 1.35, 7.0);
         entity.getEquipment().setHelmet(new ItemStack(Material.CHAINMAIL_HELMET, 1));
         entity.getEquipment().setChestplate(new ItemStack(Material.CHAINMAIL_CHESTPLATE, 1));
         entity.getEquipment().setLeggings(new ItemStack(Material.CHAINMAIL_LEGGINGS, 1));
