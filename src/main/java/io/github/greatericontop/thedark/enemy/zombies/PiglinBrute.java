@@ -15,23 +15,23 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-public class ZombiePiglin extends EnragedEnemy {
+public class PiglinBrute extends EnragedEnemy {
 
-    public ZombiePiglin(Location spawnLocation) {
-        super(900);
-        entity = (LivingEntity) spawnLocation.getWorld().spawnEntity(spawnLocation, EntityType.ZOMBIFIED_PIGLIN, false);
-        setUp(900.0, 1.175, 300.0);
+    public PiglinBrute(Location spawnLocation) {
+        super(1100);
+        entity = (LivingEntity) spawnLocation.getWorld().spawnEntity(spawnLocation, EntityType.PIGLIN_BRUTE, false);
+        setUp(3200.0, 1.175, 300.0);
         entity.getEquipment().setHelmet(new ItemStack(Material.NETHERITE_HELMET, 1));
-        entity.getEquipment().setChestplate(new ItemStack(Material.DIAMOND_CHESTPLATE, 1));
-        entity.getEquipment().setLeggings(new ItemStack(Material.DIAMOND_LEGGINGS, 1));
-        entity.getEquipment().setBoots(new ItemStack(Material.DIAMOND_BOOTS, 1));
-        entity.getEquipment().setItemInMainHand(new ItemStack(Material.GOLDEN_SWORD, 1));
+        entity.getEquipment().setChestplate(new ItemStack(Material.NETHERITE_CHESTPLATE, 1));
+        entity.getEquipment().setLeggings(new ItemStack(Material.NETHERITE_LEGGINGS, 1));
+        entity.getEquipment().setBoots(new ItemStack(Material.NETHERITE_BOOTS, 1));
+        entity.getEquipment().setItemInMainHand(new ItemStack(Material.NETHERITE_SWORD, 1));
     }
 
     @Override
     public void extraDeathEvent(TheDark plugin, PlayerProfile killerProfile) {
         for (int i = 0; i < 4; i++) {
-            plugin.getGameManager().spawnEnemy(ZombieVillager.class, entity.getLocation());
+            plugin.getGameManager().spawnEnemy(ZombiePiglin.class, entity.getLocation());
         }
     }
 
