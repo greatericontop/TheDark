@@ -19,12 +19,15 @@ public class CashGeneration {
             return 0.55;
         }
         if (round <= 35) {
-            return 0.35; // TODO
+            return 0.35;
         }
         if (round <= 40) {
-            return 0.3; // TODO
+            return 0.3;
         }
-        return 0.0; // TODO
+        if (round <= 50) {
+            return 0.25;
+        }
+        return 0.0;
     }
 
     public static void rewardCoinsOnDamage(PlayerProfile profile, double finalDamage, TheDark plugin) {
