@@ -23,7 +23,7 @@ import java.util.List;
 public class ShootGunHelper {
     public static final double MAX_DISTANCE = 48.0;
     public static final double EXPLOSION_MAX_DISTANCE = 20.0;
-    private static final double SEVERE_FIRE_MULTIPLIER = 1.2;
+    private static final double SEVERE_FIRE_MULTIPLIER = 1.25;
 
     private record Hit(LivingEntity target, double distance) {}
 

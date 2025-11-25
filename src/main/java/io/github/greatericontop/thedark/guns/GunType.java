@@ -226,7 +226,7 @@ public enum GunType {
         public void fire(Player player, TheDark plugin, int topPath, int bottomPath, PersistentDataContainer extraPDC) {
             int pierce = 3;
             int fireTicks = 80 + 10;
-            double fireDamage = 3.0;
+            double fireDamage = 4.0;
             double cooldownTicks = 8.0;
             double rangeBlocks = 7.0;
             boolean isSevere = false;
@@ -234,10 +234,10 @@ public enum GunType {
                 fireTicks = 120 + 10;
             }
             if (topPath >= 2) {
-                fireDamage = 4.5;
+                fireDamage = 6.0;
             }
             if (topPath >= 3) {
-                fireDamage = 9.0;
+                fireDamage = 12.0;
             }
             if (topPath >= 4) {
                 fireTicks = Integer.MAX_VALUE;
