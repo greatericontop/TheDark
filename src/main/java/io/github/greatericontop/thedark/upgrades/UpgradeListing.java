@@ -41,11 +41,11 @@ public class UpgradeListing {
                 new Upgrade("Bigger Blast", "Shoots 5 shells", 300),
                 new Upgrade("Even Bigger Blast", "Shoots 7 shells", 400),
                 new Upgrade("More Shells", "Crams 13 shells into the same area!", 1200),
-                new Upgrade("Wave of Destruction", "Shoots 39 shells at a time!", 3750),
+                new Upgrade("Wave of Destruction", "Shoots 39 shells at a time!", 3600),
                 new Upgrade("Faster Firing", "Decrease cooldown to 8.75 ticks", 220),
                 new Upgrade("Even Faster Firing", "Decrease cooldown to 7 ticks", 300),
                 new Upgrade("Buckshot", "Each shot does double damage!", 1250),
-                new Upgrade("Insane Buckshot", "Shots have 3 pierce and deal 16 damage!", 4800)
+                new Upgrade("Insane Buckshot", "Shots have 3 pierce and deal 16 damage!", 5000)
         ));
         upgradeList.put(GunType.FLAMETHROWER, new ItemUpgrades(
                 new Upgrade("High Octane", "Burn lasts an extra 2 seconds", 250),

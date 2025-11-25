@@ -50,8 +50,8 @@ public class ShootGunHelper {
         if (bypassDamageTicks) {
             for (int i = 0; i < Math.min(pierce, hits.size()); i++) {
                 LivingEntity target = hits.get(i).target;
-                // Multiple shots in the same tick deal 0.85x damage
-                target.setLastDamage(damage * 0.15);
+                // Multiple shots in the same tick deal 0.9x damage
+                target.setLastDamage(damage * 0.1);
             }
         }
         Bukkit.getScheduler().runTaskLater(plugin, () -> {
