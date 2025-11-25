@@ -45,7 +45,7 @@ public class UpgradeListing {
                 new Upgrade("Faster Firing", "Decrease cooldown to 8.75 ticks", 220),
                 new Upgrade("Even Faster Firing", "Decrease cooldown to 7 ticks", 300),
                 new Upgrade("Buckshot", "Each shot does double damage!", 1250),
-                new Upgrade("Insane Buckshot", "Shots have 3 pierce and deal 12 damage!", 4800)
+                new Upgrade("Insane Buckshot", "Shots have 3 pierce and deal 16 damage!", 4800)
         ));
         upgradeList.put(GunType.FLAMETHROWER, new ItemUpgrades(
                 new Upgrade("High Octane", "Burn lasts an extra 2 seconds", 250),
