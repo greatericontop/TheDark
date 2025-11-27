@@ -13,7 +13,7 @@ public class ZombieVillagerBaby extends BaseEnemy {
 
     public ZombieVillagerBaby(Location spawnLocation) {
         entity = (LivingEntity) spawnLocation.getWorld().spawnEntity(spawnLocation, EntityType.ZOMBIE_VILLAGER, false);
-        setUp(500.0, 1.1, 300.0);
+        setUp(400.0, 1.1, 300.0);
         entity.getEquipment().setHelmet(new ItemStack(Material.DRAGON_HEAD, 1));
         entity.getEquipment().setChestplate(new ItemStack(Material.DIAMOND_CHESTPLATE, 1));
         entity.getEquipment().setLeggings(new ItemStack(Material.DIAMOND_LEGGINGS, 1));

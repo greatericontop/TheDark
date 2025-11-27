@@ -8,6 +8,7 @@ import io.github.greatericontop.thedark.enemy.zombies.IronZombie;
 import io.github.greatericontop.thedark.enemy.zombies.PiglinBrute;
 import io.github.greatericontop.thedark.enemy.zombies.ZombiePiglin;
 import io.github.greatericontop.thedark.enemy.zombies.ZombieVillager;
+import io.github.greatericontop.thedark.enemy.zombies.ZombieVillagerBaby;
 import io.github.greatericontop.thedark.guns.GunBuying;
 import io.github.greatericontop.thedark.guns.GunType;
 import io.github.greatericontop.thedark.menus.SignListener;
@@ -164,6 +165,8 @@ public class TheDarkCommand implements CommandExecutor {
                         } else if (op.getEnemyClass() == PiglinBrute.class) {
                             //enemyHealth = 17780;
                             enemyHealth = 12920;
+                        } else if (op.getEnemyClass() == ZombieVillagerBaby.class) {
+                            enemyHealth = 400+160;
                         } else {
                             enemyHealth = 0;
                         }
