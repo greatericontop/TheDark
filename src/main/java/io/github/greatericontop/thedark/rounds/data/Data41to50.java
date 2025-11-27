@@ -43,8 +43,10 @@ public class Data41to50 {
     .getOutput();
 
     public static final BaseOperation[] R46 = new RoundOperationHelper(4 * 20)
-            .addSpawnOneAtATime(ZombiePiglin.class, 5, 1, false)
-            .addSpawnOneAtATime(ZombieVillagerBaby.class, 15, 80, false)
+            .addSpawnOneAtATime(ZombiePiglin.class, 4, 1, false)
+            .addSpawnOneAtATime(ZombieVillagerBaby.class, 3, 1, false)
+            .delaySeconds(6).addSpawnOneAtATime(ZombieVillagerBaby.class, 3, 1, false)
+            .delaySeconds(6).addSpawnOneAtATime(ZombieVillagerBaby.class, 3, 1, false)
     .getOutput();
 
     public static final BaseOperation[] R47 = new RoundOperationHelper(4 * 20)
@@ -53,9 +55,13 @@ public class Data41to50 {
     .getOutput();
 
     public static final BaseOperation[] R48 = new RoundOperationHelper(4 * 20)
-            .addSpawnOneAtATime(ZombiePiglin.class, 5, 1, false)
-            .addSpawnOneAtATime(ZombieVillager.class, 5, 1, false)
-            .addSpawnOneAtATime(ZombieVillagerBaby.class, 10, 80, false)
+            .addSpawnOneAtATime(ZombieVillagerBaby.class, 3, 1, false)
+            .delaySeconds(5).addSpawnOneAtATime(ZombieVillagerBaby.class, 3, 1, false)
+            .delaySeconds(5).addSpawnOneAtATime(ZombieVillagerBaby.class, 3, 1, false)
+            .delaySeconds(5).addSpawnOneAtATime(ZombieVillagerBaby.class, 3, 1, false)
+            .delaySeconds(5).addSpawnOneAtATime(ZombieVillagerBaby.class, 3, 1, false)
+            .delaySeconds(5).addSpawnOneAtATime(ZombieVillagerBaby.class, 3, 1, false)
+            .delaySeconds(5).addSpawnOneAtATime(ZombieVillagerBaby.class, 5, 1, false)
     .getOutput();
 
     public static final BaseOperation[] R49 = new RoundOperationHelper(4 * 20)
@@ -63,10 +69,6 @@ public class Data41to50 {
     .getOutput();
 
     /*
-     * 46 babies + piglins
-     * 47* extra insanely high total hp
-     * 48* high total hp + babies
-     * 49* onslaught of z villagers, but not insanely bad
      * 50* final boss
      */
 
