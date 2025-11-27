@@ -31,7 +31,7 @@ public class PiglinBrute extends EnragedEnemy {
 
     @Override
     public void extraDeathEvent(TheDark plugin, PlayerProfile killerProfile) {
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 2; i++) {
             plugin.getGameManager().spawnEnemy(ZombiePiglin.class, entity.getLocation());
         }
     }

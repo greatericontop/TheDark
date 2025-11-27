@@ -162,7 +162,7 @@ public class TheDarkCommand implements CommandExecutor {
                         } else if (op.getEnemyClass() == ZombiePiglin.class) {
                             enemyHealth = 4860;
                         } else if (op.getEnemyClass() == PiglinBrute.class) {
-                            enemyHealth = 17780;
+                            enemyHealth = 12920;
                         } else {
                             enemyHealth = 0;
                         }
