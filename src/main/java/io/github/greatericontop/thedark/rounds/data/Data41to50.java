@@ -42,6 +42,26 @@ public class Data41to50 {
             .addSpawnOneAtATime(PiglinBrute.class, 3, 1, false)
     .getOutput();
 
+    public static final BaseOperation[] R46 = new RoundOperationHelper(4 * 20)
+            .addSpawnOneAtATime(ZombiePiglin.class, 5, 1, false)
+            .addSpawnOneAtATime(ZombieVillagerBaby.class, 20, 60, false)
+    .getOutput();
+
+    public static final BaseOperation[] R47 = new RoundOperationHelper(4 * 20)
+            .addSpawnOneAtATime(ZombiePiglin.class, 15, 1, false)
+            .addSpawnOneAtATime(PiglinBrute.class, 2, 1, false)
+    .getOutput();
+
+    public static final BaseOperation[] R48 = new RoundOperationHelper(4 * 20)
+            .addSpawnOneAtATime(ZombiePiglin.class, 10, 1, false)
+            .addSpawnOneAtATime(ZombieVillager.class, 10, 1, false)
+            .addSpawnOneAtATime(ZombieVillagerBaby.class, 10, 60, false)
+    .getOutput();
+
+    public static final BaseOperation[] R49 = new RoundOperationHelper(4 * 20)
+            .addSpawnOneAtATime(ZombieVillager.class, 45, 25, false)
+    .getOutput();
+
     /*
      * 46 babies + piglins
      * 47* extra insanely high total hp
