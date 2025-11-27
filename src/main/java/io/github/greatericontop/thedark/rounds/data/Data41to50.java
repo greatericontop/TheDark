@@ -44,22 +44,22 @@ public class Data41to50 {
 
     public static final BaseOperation[] R46 = new RoundOperationHelper(4 * 20)
             .addSpawnOneAtATime(ZombiePiglin.class, 5, 1, false)
-            .addSpawnOneAtATime(ZombieVillagerBaby.class, 20, 60, false)
+            .addSpawnOneAtATime(ZombieVillagerBaby.class, 15, 80, false)
     .getOutput();
 
     public static final BaseOperation[] R47 = new RoundOperationHelper(4 * 20)
-            .addSpawnOneAtATime(ZombiePiglin.class, 15, 1, false)
+            .addSpawnOneAtATime(ZombiePiglin.class, 10, 1, false)
             .addSpawnOneAtATime(PiglinBrute.class, 2, 1, false)
     .getOutput();
 
     public static final BaseOperation[] R48 = new RoundOperationHelper(4 * 20)
-            .addSpawnOneAtATime(ZombiePiglin.class, 10, 1, false)
-            .addSpawnOneAtATime(ZombieVillager.class, 10, 1, false)
-            .addSpawnOneAtATime(ZombieVillagerBaby.class, 10, 60, false)
+            .addSpawnOneAtATime(ZombiePiglin.class, 5, 1, false)
+            .addSpawnOneAtATime(ZombieVillager.class, 5, 1, false)
+            .addSpawnOneAtATime(ZombieVillagerBaby.class, 10, 80, false)
     .getOutput();
 
     public static final BaseOperation[] R49 = new RoundOperationHelper(4 * 20)
-            .addSpawnOneAtATime(ZombieVillager.class, 45, 25, false)
+            .addSpawnOneAtATime(ZombieVillager.class, 40, 30, false)
     .getOutput();
 
     /*

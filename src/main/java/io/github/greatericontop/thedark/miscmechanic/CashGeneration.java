@@ -21,8 +21,11 @@ public class CashGeneration {
         if (round <= 40) {
             return 0.35;
         }
-        if (round <= 50) {
+        if (round <= 45) {
             return 0.25;
+        }
+        if (round <= 50) {
+            return 0.2;
         }
         return 0.0;
     }
