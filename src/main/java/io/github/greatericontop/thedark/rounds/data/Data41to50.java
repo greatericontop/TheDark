@@ -28,9 +28,9 @@ public class Data41to50 {
     .getOutput();
 
     public static final BaseOperation[] R43 = new RoundOperationHelper(4 * 20)
-            .addSpawnOneAtATime(IronZombie.class, 35, 10, true)
+            .addSpawnOneAtATime(IronZombie.class, 35, 12, true)
             .delaySeconds(4).addSpawnOneAtATime(ZombieVillagerBaby.class, 2, 1, false)
-            .delaySeconds(10).addSpawnOneAtATime(ZombieVillagerBaby.class, 3, 1, false)
+            .delaySeconds(12).addSpawnOneAtATime(ZombieVillagerBaby.class, 3, 1, false)
     .getOutput();
 
     public static final BaseOperation[] R44 = new RoundOperationHelper(4 * 20)
