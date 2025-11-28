@@ -50,7 +50,8 @@ public class Data41to50 {
     .getOutput();
 
     public static final BaseOperation[] R47 = new RoundOperationHelper(4 * 20)
-            .addSpawnOneAtATime(ZombiePiglin.class, 10, 1, false)
+            // Hoping to be able to make this round beefier later if weapons get stronger
+            .addSpawnOneAtATime(ZombiePiglin.class, 6, 1, false)
             .addSpawnOneAtATime(PiglinBrute.class, 2, 1, false)
     .getOutput();
 
