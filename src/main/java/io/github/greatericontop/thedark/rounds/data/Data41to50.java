@@ -2,6 +2,7 @@ package io.github.greatericontop.thedark.rounds.data;
 
 import io.github.greatericontop.thedark.enemy.zombies.ChainmailZombie;
 import io.github.greatericontop.thedark.enemy.zombies.IronZombie;
+import io.github.greatericontop.thedark.enemy.zombies.MegaPiglinBrute;
 import io.github.greatericontop.thedark.enemy.zombies.PiglinBrute;
 import io.github.greatericontop.thedark.enemy.zombies.ZombiePiglin;
 import io.github.greatericontop.thedark.enemy.zombies.ZombieVillager;
@@ -51,7 +52,7 @@ public class Data41to50 {
 
     public static final BaseOperation[] R47 = new RoundOperationHelper(4 * 20)
             // Hoping to be able to make this round beefier later if weapons get stronger
-            .addSpawnOneAtATime(ZombiePiglin.class, 6, 1, false)
+            .addSpawnOneAtATime(ZombiePiglin.class, 7, 1, false)
             .addSpawnOneAtATime(PiglinBrute.class, 2, 1, false)
     .getOutput();
 
@@ -69,8 +70,8 @@ public class Data41to50 {
             .addSpawnOneAtATime(ZombieVillager.class, 40, 30, false)
     .getOutput();
 
-    /*
-     * 50* final boss
-     */
+    public static final BaseOperation[] R50 = new RoundOperationHelper(4 * 20)
+            .addSpawnOneAtATime(MegaPiglinBrute.class, 1, 1, false)
+    .getOutput();
 
 }
