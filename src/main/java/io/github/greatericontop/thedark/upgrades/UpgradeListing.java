@@ -52,9 +52,9 @@ public class UpgradeListing {
                 new Upgrade("Pure Burn", "Fire deals 50% more damage", 450),
                 new Upgrade("Soul Fire", "Fire deals 12 damage per second!", 1400),
                 new Upgrade("Nether Master's Napalm", "Fire lasts FOREVER and enemies take 25% more damage while burning!", 6750),
-                new Upgrade("Better Pumps", "Flames travel 2 blocks farther and can hit an extra zombie", 225),
+                new Upgrade("Better Pumps", "Flames travel 3 blocks farther and can hit an extra zombie", 225),
                 new Upgrade("Ultra Fast Pumps", "Decrease cooldown from 8 ticks to 5!", 600),
-                new Upgrade("Heat Sustaining Mixtures", "Flames now travel 15 blocks and can hit 10 zombies!", 1250),
+                new Upgrade("Heat Sustaining Mixtures", "Flames now travel 18 blocks and can hit 10 zombies!", 1250),
                 new Upgrade("Perma-Flame", "No cooldown to fire!", 3050)
         ));
         upgradeList.put(GunType.MIDAS_PISTOL, new ItemUpgrades(

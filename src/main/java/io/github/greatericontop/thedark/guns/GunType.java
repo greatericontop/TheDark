@@ -55,6 +55,7 @@ public enum GunType {
             }
             if (bottomPath >= 4) {
                 cooldownTicks = 2.0;
+                damage = 5;
             }
             if (doubleBarrel) {
                 Vector direction = player.getEyeLocation().getDirection();
@@ -97,6 +98,7 @@ public enum GunType {
             if (topPath >= 4) {
                 damage = 100.0;
                 extraKBStrength = 1.1;
+                pierce = 4;
             }
             if (bottomPath >= 1) {
                 cooldownTicks = 4;
@@ -106,9 +108,11 @@ public enum GunType {
             }
             if (bottomPath >= 3) {
                 pierce = 4;
+                damage += 2.0;
             }
             if (bottomPath >= 4) {
                 pierce = 8;
+                damage += 4.0; // +6.0 total
             }
 
             if (bottomPath == 4) {
@@ -219,7 +223,7 @@ public enum GunType {
         }
     },
 
-    FLAMETHROWER(60, 48, 450,
+    FLAMETHROWER(40, 48, 450,
             "§6Flamethrower", "§7BURN",
             Material.GOLDEN_SHOVEL) {
         @Override
@@ -244,17 +248,18 @@ public enum GunType {
                 isSevere = true;
             }
             if (bottomPath >= 1) {
-                rangeBlocks = 9.0;
+                rangeBlocks = 10.0;
             }
             if (bottomPath >= 2) {
                 cooldownTicks = 5.0;
             }
             if (bottomPath >= 3) {
-                rangeBlocks = 15.0;
+                rangeBlocks = 18.0;
                 pierce = 10;
             }
             if (bottomPath >= 4) {
                 cooldownTicks = 1.0;
+                fireDamage *= 1.5;
             }
             PlayerProfile profile = plugin.getGameManager().getPlayerProfile(player);
             if (profile == null) {
@@ -304,9 +309,11 @@ public enum GunType {
             }
             if (topPath >= 3) {
                 damage = 32.0;
+                pierce = 7;
             }
             if (topPath >= 4) {
                 damage = 75.0;
+                pierce = 9;
             }
             if (bottomPath >= 1) {
                 cooldownTicks = 18.0;
@@ -317,9 +324,11 @@ public enum GunType {
             if (bottomPath >= 3) {
                 explosionRadius = 5.0;
                 pierce = 12;
+                damage += 4.0;
             }
             if (bottomPath >= 4) {
                 secondaryExplosions = true;
+                damage += 8.0; // +12.0 total
             }
             plugin.shootGunListener.performFireExplosion(this, player, player.getEyeLocation().getDirection(), pierce, damage, cooldownTicks,
                     ShootGunHelper.EXPLOSION_MAX_DISTANCE, explosionRadius, secondaryExplosions);
