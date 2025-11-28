@@ -20,7 +20,7 @@ public class MegaPiglinBrute extends EnragedEnemy {
     public MegaPiglinBrute(Location spawnLocation) {
         super(1200);
         entity = (LivingEntity) spawnLocation.getWorld().spawnEntity(spawnLocation, EntityType.PIGLIN_BRUTE, false);
-        setUp(7777.0, 1.175, 300.0);
+        setUp(8888.0, 1.175, 300.0);
         entity.getEquipment().setItemInMainHand(new ItemStack(Material.NETHERITE_AXE, 1));
         ((org.bukkit.entity.PiglinBrute) entity).setImmuneToZombification(true);
         // TODO: 1.21 api for increased size
