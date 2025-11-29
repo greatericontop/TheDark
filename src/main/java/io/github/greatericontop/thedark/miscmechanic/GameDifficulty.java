@@ -3,8 +3,8 @@ package io.github.greatericontop.thedark.miscmechanic;
 public enum GameDifficulty {
     IRON(0.9, 28.0, true),
     GOLD(1.0, 24.0, true),
-    DIAMOND(1.05, 20.0, true),
-    NETHERITE(1.05, 20.0, false),
+    DIAMOND(1.07, 20.0, true),
+    NETHERITE(1.07, 20.0, false),
 
     ;
 
