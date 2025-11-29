@@ -14,6 +14,7 @@ import io.github.greatericontop.thedark.guns.GunBuying;
 import io.github.greatericontop.thedark.guns.GunType;
 import io.github.greatericontop.thedark.menus.SignListener;
 import io.github.greatericontop.thedark.miscmechanic.CashGeneration;
+import io.github.greatericontop.thedark.miscmechanic.GameDifficulty;
 import io.github.greatericontop.thedark.player.PlayerProfile;
 import io.github.greatericontop.thedark.rounds.RoundSpawner;
 import io.github.greatericontop.thedark.rounds.data.RoundData;
@@ -140,7 +141,7 @@ public class TheDarkCommand implements CommandExecutor {
             plugin.getRoundManager().startGameAt(r);
             return true;
         }
-        if (args[0].equals("calculateCoins")) {
+        if (args[0].equals("calculate")) {
             int start = Integer.parseInt(args[1]);
             int end = Integer.parseInt(args[2]);
             double totalHp = 0.0;
@@ -169,7 +170,7 @@ public class TheDarkCommand implements CommandExecutor {
                         } else if (op.getEnemyClass() == ZombieVillagerBaby.class) {
                             enemyHealth = 400+160;
                         } else if (op.getEnemyClass() == MegaPiglinBrute.class) {
-                            enemyHealth = 7777 + 12920*2;
+                            enemyHealth = 10000 + 12920*2;
                         } else {
                             enemyHealth = 0;
                         }
@@ -181,6 +182,11 @@ public class TheDarkCommand implements CommandExecutor {
             player.sendMessage(String.format("§eHealth from round %d to %d: §a%.2f", start, end, totalHp));
             player.sendMessage(String.format("§eEstimated coins: §a%.2f §7(including scaling)", totalCoins));
             return true;
+        }
+        if (args[0].equals("difficulty")) {
+            GameDifficulty difficulty = GameDifficulty.valueOf(args[1]);
+            plugin.getGameManager().setDifficulty(difficulty);
+            player.sendMessage("§3Set game difficulty to §6" + difficulty.name());
         }
 
         return false;
