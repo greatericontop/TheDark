@@ -112,11 +112,12 @@ public class GunUpgradeListener extends GenericMenu {
     }
 
     private void attemptToBuy(PlayerProfile profile, Upgrade upgrade, boolean isTop) {
-        if (profile.coins < upgrade.cost()) {
+        int cost = (int) (Math.round(upgrade.cost() * plugin.getGameManager().getDifficulty().getCostMultiplier() / 5)) * 5;
+        if (profile.coins < cost) {
             profile.getPlayer().sendMessage("§cYou can't afford this!");
             return;
         }
-        profile.coins -= upgrade.cost();
+        profile.coins -= cost;
         ItemStack stack = profile.getPlayer().getInventory().getItemInMainHand();
         ItemMeta im = stack.getItemMeta();
         if (isTop) {
@@ -140,7 +141,8 @@ public class GunUpgradeListener extends GenericMenu {
             im.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         }
         im.setDisplayName("§6" + upgrade.name());
-        im.setLore(List.of("§7" + upgrade.description(), "", String.format("§fCost: §6%,d coins", upgrade.cost())));
+        int cost = (int) (Math.round(upgrade.cost() * plugin.getGameManager().getDifficulty().getCostMultiplier() / 5)) * 5;
+        im.setLore(List.of("§7" + upgrade.description(), "", String.format("§fCost: §6%,d coins", cost)));
         stack.setItemMeta(im);
         return stack;
     }

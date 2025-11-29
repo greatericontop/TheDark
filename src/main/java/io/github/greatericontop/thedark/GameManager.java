@@ -1,6 +1,7 @@
 package io.github.greatericontop.thedark;
 
 import io.github.greatericontop.thedark.enemy.BaseEnemy;
+import io.github.greatericontop.thedark.miscmechanic.GameDifficulty;
 import io.github.greatericontop.thedark.player.PlayerProfile;
 import org.bukkit.Location;
 import org.bukkit.attribute.Attribute;
@@ -20,11 +21,13 @@ public class GameManager {
     public final Set<BaseEnemy> activeEnemies = new HashSet<>();
 
     private int tickNum;
+    private GameDifficulty difficulty;
 
     private final TheDark plugin;
     public GameManager(TheDark plugin) {
         this.plugin = plugin;
         this.tickNum = 0;
+        this.difficulty = GameDifficulty.GOLD;
     }
 
     public PlayerProfile getPlayerProfile(Player player) {
@@ -32,6 +35,12 @@ public class GameManager {
     }
     public PlayerProfile getPlayerProfile(UUID uuid) {
         return playerProfiles.get(uuid);
+    }
+    public GameDifficulty getDifficulty() {
+        return difficulty;
+    }
+    public void setDifficulty(GameDifficulty difficulty) {
+        this.difficulty = difficulty;
     }
 
     public void tick() {
@@ -42,9 +51,11 @@ public class GameManager {
         for (PlayerProfile profile : playerProfiles.values()) {
             profile.getPlayer().sendActionBar(profile.getActionBar());
             profile.updateInventory();
-            if (tickNum % 60 == 0) {
+            if (tickNum % 50 == 0) {
                 profile.getPlayer().setFoodLevel(20);
-                profile.getPlayer().setHealth(Math.min(profile.getPlayer().getHealth()+1.0, profile.getPlayer().getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue()));
+                if (difficulty.hasNaturalRegeneration()) {
+                    profile.getPlayer().setHealth(Math.min(profile.getPlayer().getHealth()+1.0, profile.getPlayer().getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue()));
+                }
             }
         }
         // tick enemies & remove dead ones

@@ -18,4 +18,14 @@ public enum GameDifficulty {
         this.naturalRegeneration = naturalRegeneration;
     }
 
+    public double getCostMultiplier() {
+        return costMultiplier;
+    }
+    public double getPlayerMaxHealth() {
+        return playerMaxHealth;
+    }
+    public boolean hasNaturalRegeneration() {
+        return naturalRegeneration;
+    }
+
 }
