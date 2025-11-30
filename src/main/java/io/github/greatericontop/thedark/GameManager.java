@@ -53,9 +53,14 @@ public class GameManager {
             profile.updateInventory();
             if (tickNum % 50 == 0) {
                 profile.getPlayer().setFoodLevel(20);
-                if (difficulty.hasNaturalRegeneration()) {
-                    profile.getPlayer().setHealth(Math.min(profile.getPlayer().getHealth()+1.0, profile.getPlayer().getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue()));
+                double maxHealth = profile.getPlayer().getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
+                if (maxHealth != difficulty.getPlayerMaxHealth()) {
+                    profile.getPlayer().getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(difficulty.getPlayerMaxHealth());
                 }
+                if (difficulty.hasNaturalRegeneration()) {
+                    profile.getPlayer().setHealth(Math.min(profile.getPlayer().getHealth()+1.0, maxHealth));
+                }
+
             }
         }
         // tick enemies & remove dead ones
