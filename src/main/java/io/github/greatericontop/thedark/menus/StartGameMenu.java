@@ -29,26 +29,26 @@ public class StartGameMenu extends GenericMenu {
         Player player = profile.getPlayer();
         Inventory gui = Bukkit.createInventory(player, 9, INVENTORY_NAME);
 
-        gui.setItem(IRON_SLOT, Util.createItemStack(Material.IRON_SWORD, 1,
-                "§fIron §eDifficulty",
+        gui.setItem(IRON_SLOT, Util.createItemStack(Material.IRON_BLOCK, 1,
+                "§fIron Difficulty",
                 "§7Upgrades cost §e10% §7less",
                 "§7Max health up to §e14 §7hearts",
                 "",
                 "§aClick to start!"));
-        gui.setItem(GOLD_SLOT, Util.createItemStack(Material.GOLDEN_SWORD, 1,
-                "§6Gold §eDifficulty",
+        gui.setItem(GOLD_SLOT, Util.createItemStack(Material.GOLD_BLOCK, 1,
+                "§6Gold Difficulty",
                 "§7Normal upgrade costs",
                 "§7Max health up to §e12 §7hearts",
                 "",
                 "§aClick to start!"));
-        gui.setItem(DIAMOND_SLOT, Util.createItemStack(Material.DIAMOND_SWORD, 1,
-                "§bDiamond §eDifficulty",
+        gui.setItem(DIAMOND_SLOT, Util.createItemStack(Material.DIAMOND_BLOCK, 1,
+                "§bDiamond Difficulty",
                 "§7Upgrades cost §e7% §7more",
                 "§7Max health up to §e10 §7hearts",
                 "",
                 "§aClick to start!"));
-        gui.setItem(NETHERITE_SLOT, Util.createItemStack(Material.NETHERITE_SWORD, 1,
-                "§8Netherite §eDifficulty",
+        gui.setItem(NETHERITE_SLOT, Util.createItemStack(Material.NETHERITE_BLOCK, 1,
+                "§8Netherite Difficulty",
                 "§bDiamond §7rules apply",
                 "§4No natural regeneration",
                 "",
