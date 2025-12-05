@@ -114,7 +114,6 @@ public class GameManager {
     }
 
     public void gameOverLose() {
-        plugin.getRoundManager().reset();
         for (PlayerProfile profile : playerProfiles.values()) {
             Player p = profile.getPlayer();
             p.showTitle(Title.title(Component.text("§cGame Over!"), Component.text("§7You survived until round " + plugin.getRoundManager().getCurrentRound())));
@@ -122,6 +121,7 @@ public class GameManager {
             p.setGameMode(GameMode.SPECTATOR);
         }
         playerProfiles.clear();
+        plugin.getRoundManager().reset();
         activeEnemies.clear();
     }
 
