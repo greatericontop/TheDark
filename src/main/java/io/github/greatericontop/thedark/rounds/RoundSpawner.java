@@ -13,17 +13,12 @@ import java.util.List;
 
 public class RoundSpawner {
 
-    public static void executeRound(OperationContext ctx, int roundNumber) {
-        for (BaseOperation operation : RoundData.ROUNDS[roundNumber]) {
-            operation.execute(ctx);
-        }
-    }
-    public static void executeRound(TheDark plugin, int roundNumber) {
+    public static Location[] getSpawnableLocations(TheDark plugin) {
         List<Location> locations = new ArrayList<>();
         List validSpawnLocations = plugin.getConfig().getList("valid-spawn-locations");
         if (validSpawnLocations == null) {
             plugin.getLogger().warning(":valid-spawn-locations: is null! (can't execute round)");
-            return;
+            return null;
         }
         for (Object o : validSpawnLocations) {
             if (!(o instanceof List locationObject)) {
@@ -45,7 +40,20 @@ public class RoundSpawner {
             double z = (double) locationObject.get(3);
             locations.add(new Location(world, x, y, z));
         }
-        OperationContext ctx = new OperationContext(plugin, locations.toArray(new Location[0]));
+        return locations.toArray(new Location[0]);
+    }
+
+    public static void executeRound(OperationContext ctx, int roundNumber) {
+        for (BaseOperation operation : RoundData.ROUNDS[roundNumber]) {
+            operation.execute(ctx);
+        }
+    }
+    public static void executeRound(TheDark plugin, int roundNumber) {
+        Location[] locations = getSpawnableLocations(plugin);
+        if (locations == null) {
+            return;
+        }
+        OperationContext ctx = new OperationContext(plugin, locations);
         executeRound(ctx, roundNumber);
     }
 

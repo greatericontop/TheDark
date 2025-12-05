@@ -3,6 +3,8 @@ package io.github.greatericontop.thedark;
 import io.github.greatericontop.thedark.enemy.BaseEnemy;
 import io.github.greatericontop.thedark.miscmechanic.GameDifficulty;
 import io.github.greatericontop.thedark.player.PlayerProfile;
+import io.github.greatericontop.thedark.rounds.RoundSpawner;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
@@ -41,6 +43,22 @@ public class GameManager {
     }
     public void setDifficulty(GameDifficulty difficulty) {
         this.difficulty = difficulty;
+    }
+
+    public void startNewGame() {
+        Location[] locations = RoundSpawner.getSpawnableLocations(plugin);
+        if (locations == null) {
+            plugin.getLogger().warning("No valid spawn locations!");
+        }
+        for (Player p : Bukkit.getOnlinePlayers()) {
+            PlayerProfile profile = new PlayerProfile(p);
+            profile.coins = 500;
+            playerProfiles.put(p.getUniqueId(), profile);
+            if (locations != null) {
+                p.teleport(locations[(int) (Math.random() * locations.length)]);
+            }
+        }
+        plugin.getRoundManager().startGame();
     }
 
     public void tick() {

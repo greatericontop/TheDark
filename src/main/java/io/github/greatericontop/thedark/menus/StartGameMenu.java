@@ -71,22 +71,22 @@ public class StartGameMenu extends GenericMenu {
         switch (slot) {
             case (IRON_SLOT) -> {
                 plugin.getGameManager().setDifficulty(GameDifficulty.IRON);
-                plugin.getRoundManager().startGame();
+                plugin.getGameManager().startNewGame();
                 player.closeInventory();
             }
             case (GOLD_SLOT) -> {
                 plugin.getGameManager().setDifficulty(GameDifficulty.GOLD);
-                plugin.getRoundManager().startGame();
+                plugin.getGameManager().startNewGame();
                 player.closeInventory();
             }
             case (DIAMOND_SLOT) -> {
                 plugin.getGameManager().setDifficulty(GameDifficulty.DIAMOND);
-                plugin.getRoundManager().startGame();
+                plugin.getGameManager().startNewGame();
                 player.closeInventory();
             }
             case (NETHERITE_SLOT) -> {
                 plugin.getGameManager().setDifficulty(GameDifficulty.NETHERITE);
-                plugin.getRoundManager().startGame();
+                plugin.getGameManager().startNewGame();
                 player.closeInventory();
             }
         }
