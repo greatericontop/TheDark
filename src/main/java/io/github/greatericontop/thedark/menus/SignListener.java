@@ -34,6 +34,12 @@ public class SignListener implements Listener {
         event.setCancelled(true);
         String signType = pdc.get(SIGN_TYPE_KEY, PersistentDataType.STRING);
         Player player = event.getPlayer();
+
+        if (signType.equals("startGame")) {
+            // No profile needed, we just make one temporarily because of API
+            plugin.startGameMenu.openMenu(new PlayerProfile(player));
+        }
+
         PlayerProfile profile = plugin.getGameManager().getPlayerProfile(player);
         if (profile == null) {
             player.sendMessage("§cYou don't have a profile!");
@@ -46,8 +52,6 @@ public class SignListener implements Listener {
             plugin.armorEnchantmentListener.openMenu(profile);
         } else if (signType.equals("sword")) {
             plugin.swordBuyListener.openMenu(profile);
-        } else if (signType.equals("startGame")) {
-            plugin.startGameMenu.openMenu(profile);
         } else if (signType.startsWith("buyGun_")) {
             GunType toBuy = GunType.valueOf(signType.substring(7)); // remove "buyGun_"
             GunBuying.buy(toBuy, profile, player);
