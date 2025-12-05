@@ -63,11 +63,6 @@ public class StartGameMenu extends GenericMenu {
         event.setCancelled(true);
         int slot = event.getSlot();
         Player player = (Player) event.getWhoClicked();
-        PlayerProfile profile = plugin.getGameManager().getPlayerProfile(player);
-        if (profile == null) {
-            player.sendMessage("§cYou don't have a profile!");
-            return;
-        }
         switch (slot) {
             case (IRON_SLOT) -> {
                 plugin.getGameManager().setDifficulty(GameDifficulty.IRON);
