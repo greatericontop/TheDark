@@ -4,8 +4,13 @@ import io.github.greatericontop.thedark.enemy.BaseEnemy;
 import io.github.greatericontop.thedark.miscmechanic.GameDifficulty;
 import io.github.greatericontop.thedark.player.PlayerProfile;
 import io.github.greatericontop.thedark.rounds.RoundSpawner;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.title.Title;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
+import org.bukkit.GameRule;
 import org.bukkit.Location;
+import org.bukkit.Sound;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 
@@ -49,14 +54,15 @@ public class GameManager {
         Location[] locations = RoundSpawner.getSpawnableLocations(plugin);
         if (locations == null) {
             plugin.getLogger().warning("No valid spawn locations!");
+            return;
         }
+        locations[0].getWorld().setGameRule(GameRule.NATURAL_REGENERATION, false);
         for (Player p : Bukkit.getOnlinePlayers()) {
             PlayerProfile profile = new PlayerProfile(p);
             profile.coins = 500;
             playerProfiles.put(p.getUniqueId(), profile);
-            if (locations != null) {
-                p.teleport(locations[(int) (Math.random() * locations.length)]);
-            }
+            p.setGameMode(GameMode.ADVENTURE);
+            p.teleport(locations[(int) (Math.random() * locations.length)]);
         }
         plugin.getRoundManager().startGame();
     }
@@ -66,9 +72,13 @@ public class GameManager {
         // rounds
         plugin.getRoundManager().tick();
         // tick players
+        boolean atLeastOnePlayerAlive = false;
         for (PlayerProfile profile : playerProfiles.values()) {
             profile.getPlayer().sendActionBar(profile.getActionBar());
             profile.updateInventory();
+            if (profile.getPlayer().getGameMode() != GameMode.SPECTATOR) {
+                atLeastOnePlayerAlive = true;
+            }
             if (tickNum % 50 == 0) {
                 profile.getPlayer().setFoodLevel(20);
                 double maxHealth = profile.getPlayer().getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
@@ -80,6 +90,10 @@ public class GameManager {
                 }
 
             }
+        }
+        if (!atLeastOnePlayerAlive) {
+            gameOverLose();
+            return;
         }
         // tick enemies & remove dead ones
         List<BaseEnemy> newActiveEnemies = new ArrayList<>(activeEnemies);
@@ -97,6 +111,18 @@ public class GameManager {
         }
         // (deleting afterward is easier & faster)
         activeEnemies.removeIf(BaseEnemy::isDead);
+    }
+
+    public void gameOverLose() {
+        plugin.getRoundManager().reset();
+        for (PlayerProfile profile : playerProfiles.values()) {
+            Player p = profile.getPlayer();
+            p.showTitle(Title.title(Component.text("§cGame Over!"), Component.text("§7You survived until round " + plugin.getRoundManager().getCurrentRound())));
+            p.playSound(p.getLocation(), Sound.ENTITY_ENDER_DRAGON_DEATH, 1.0F, 1.0F);
+            p.setGameMode(GameMode.SPECTATOR);
+        }
+        playerProfiles.clear();
+        activeEnemies.clear();
     }
 
     public void spawnEnemy(Class<? extends BaseEnemy> enemyClass, Location loc) {

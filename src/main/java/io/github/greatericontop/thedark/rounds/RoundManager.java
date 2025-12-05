@@ -10,6 +10,8 @@ import io.github.greatericontop.thedark.util.Util;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.title.Title;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
+import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -38,6 +40,11 @@ public class RoundManager {
         startNextRound();
     }
 
+    public void reset() {
+        currentRound = 0;
+        ticksUntilCurrentRoundCanEnd = 0;
+    }
+
     public void tick() {
         if (currentRound == 0)  return;
         ticksUntilCurrentRoundCanEnd--;
@@ -60,6 +67,13 @@ public class RoundManager {
         for (Player p : Bukkit.getOnlinePlayers()) {
             p.showTitle(Title.title(Component.text(String.format("§cRound %d", currentRound)), Component.text("")));
             p.playSound(p.getLocation(), Sound.ENTITY_ZOMBIE_VILLAGER_CURE, 1.0F, 1.0F);
+            if (p.getGameMode() == GameMode.SPECTATOR) {
+                // Revive
+                p.setGameMode(GameMode.ADVENTURE);
+                Location[] locations = RoundSpawner.getSpawnableLocations(plugin);
+                p.teleport(locations[(int) (Math.random() * locations.length)]);
+                p.setHealth(4.0); // Fairly arbitrary small number
+            }
         }
         for (PlayerProfile profile : plugin.getGameManager().playerProfiles.values()) {
             for (int slot = 1; slot <= 3; slot++) {
