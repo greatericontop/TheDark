@@ -2,9 +2,9 @@ package io.github.greatericontop.thedark.upgrades;
 
 import io.github.greatericontop.thedark.TheDark;
 import io.github.greatericontop.thedark.guns.GunType;
+import io.github.greatericontop.thedark.miscmechanic.GameDifficulty;
 import org.bukkit.NamespacedKey;
 
-import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -79,9 +79,22 @@ public class UpgradeListing {
         ));
     }
 
-    @Nullable
     public ItemUpgrades getUpgradeList(GunType type) {
         return upgradeList.get(type);
+    }
+
+    public int getSellValue(GunType type, int top, int bottom, GameDifficulty difficulty) {
+        int totalSpent = type.getBaseCost();
+        ItemUpgrades upgrades = upgradeList.get(type);
+        if (top >= 1)  totalSpent += GameDifficulty.getAdjustedCost(upgrades.top1().cost(), difficulty);
+        if (top >= 2)  totalSpent += GameDifficulty.getAdjustedCost(upgrades.top2().cost(), difficulty);
+        if (top >= 3)  totalSpent += GameDifficulty.getAdjustedCost(upgrades.top3().cost(), difficulty);
+        if (top >= 4)  totalSpent += GameDifficulty.getAdjustedCost(upgrades.top4().cost(), difficulty);
+        if (bottom >= 1)  totalSpent += GameDifficulty.getAdjustedCost(upgrades.bottom1().cost(), difficulty);
+        if (bottom >= 2)  totalSpent += GameDifficulty.getAdjustedCost(upgrades.bottom2().cost(), difficulty);
+        if (bottom >= 3)  totalSpent += GameDifficulty.getAdjustedCost(upgrades.bottom3().cost(), difficulty);
+        if (bottom >= 4)  totalSpent += GameDifficulty.getAdjustedCost(upgrades.bottom4().cost(), difficulty);
+        return (int) (totalSpent * 0.75);
     }
 
 }

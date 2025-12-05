@@ -3,10 +3,12 @@ package io.github.greatericontop.thedark.menus;
 import io.github.greatericontop.thedark.TheDark;
 import io.github.greatericontop.thedark.guns.GunType;
 import io.github.greatericontop.thedark.guns.GunUtil;
+import io.github.greatericontop.thedark.miscmechanic.GameDifficulty;
 import io.github.greatericontop.thedark.player.PlayerProfile;
 import io.github.greatericontop.thedark.upgrades.ItemUpgrades;
 import io.github.greatericontop.thedark.upgrades.Upgrade;
 import io.github.greatericontop.thedark.upgrades.UpgradeListing;
+import io.github.greatericontop.thedark.util.Util;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -25,7 +27,7 @@ import java.util.List;
 public class GunUpgradeListener extends GenericMenu {
     public static final Component INVENTORY_NAME = Component.text("§c[TheDark] §2Weapon Upgrade");
     private static final Material BOUGHT = Material.LIME_STAINED_GLASS_PANE;
-    private static final Material READY = Material.WHITE_STAINED_GLASS_PANE;
+    private static final Material READY = Material.WHITE_STAINED_GLASS;
     private static final int TOP1 = 0;
     private static final int TOP2 = 1;
     private static final int TOP3 = 2;
@@ -34,6 +36,7 @@ public class GunUpgradeListener extends GenericMenu {
     private static final int BOTTOM2 = 19;
     private static final int BOTTOM3 = 20;
     private static final int BOTTOM4 = 21;
+    private static final int SELL = 26;
 
     private final TheDark plugin;
     public GunUpgradeListener(TheDark plugin) {
@@ -81,6 +84,8 @@ public class GunUpgradeListener extends GenericMenu {
                 }
             }
         }
+        int sellValue = plugin.upgradeUtils.getSellValue(type, topPath, bottomPath, plugin.getGameManager().getDifficulty());
+        gui.setItem(SELL, Util.createItemStack(Material.RED_STAINED_GLASS_PANE, 1, "§cSell", String.format("§6+%,d coins", sellValue)));
         player.openInventory(gui);
     }
 
@@ -89,7 +94,7 @@ public class GunUpgradeListener extends GenericMenu {
         if (!event.getView().title().equals(INVENTORY_NAME))  return;
         event.setCancelled(true);
         int slot = event.getSlot();
-        if (event.getClickedInventory().getItem(slot) == null || event.getClickedInventory().getItem(slot).getType() != READY)  return;
+        if (event.getClickedInventory().getItem(slot) == null || (event.getSlot() != SELL && event.getClickedInventory().getItem(slot).getType() != READY))  return;
         Player player = (Player) event.getWhoClicked();
         PlayerProfile profile = plugin.getGameManager().getPlayerProfile(player);
         if (profile == null) {
@@ -108,11 +113,20 @@ public class GunUpgradeListener extends GenericMenu {
             case BOTTOM2 -> attemptToBuy(profile, itemUpgrades.bottom2(), false);
             case BOTTOM3 -> attemptToBuy(profile, itemUpgrades.bottom3(), false);
             case BOTTOM4 -> attemptToBuy(profile, itemUpgrades.bottom4(), false);
+            case SELL -> {
+                ItemMeta im = player.getInventory().getItemInMainHand().getItemMeta();
+                Integer topPath = im.getPersistentDataContainer().get(UpgradeListing.TOP_PATH, PersistentDataType.INTEGER);
+                Integer bottomPath = im.getPersistentDataContainer().get(UpgradeListing.BOTTOM_PATH, PersistentDataType.INTEGER);
+                int sellValue = plugin.upgradeUtils.getSellValue(type, topPath, bottomPath, plugin.getGameManager().getDifficulty());
+                profile.coins += sellValue;
+                player.getInventory().getItemInMainHand().setAmount(0);
+                player.closeInventory();
+            }
         }
     }
 
     private void attemptToBuy(PlayerProfile profile, Upgrade upgrade, boolean isTop) {
-        int cost = (int) (Math.round(upgrade.cost() * plugin.getGameManager().getDifficulty().getCostMultiplier() / 5)) * 5;
+        int cost = GameDifficulty.getAdjustedCost(upgrade.cost(), plugin.getGameManager().getDifficulty());
         if (profile.coins < cost) {
             profile.getPlayer().sendMessage("§cYou can't afford this!");
             return;
@@ -141,7 +155,7 @@ public class GunUpgradeListener extends GenericMenu {
             im.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         }
         im.setDisplayName("§6" + upgrade.name());
-        int cost = (int) (Math.round(upgrade.cost() * plugin.getGameManager().getDifficulty().getCostMultiplier() / 5)) * 5;
+        int cost = GameDifficulty.getAdjustedCost(upgrade.cost(), plugin.getGameManager().getDifficulty());
         im.setLore(List.of("§7" + upgrade.description(), "", String.format("§fCost: §6%,d coins", cost)));
         stack.setItemMeta(im);
         return stack;

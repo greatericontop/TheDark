@@ -28,4 +28,8 @@ public enum GameDifficulty {
         return naturalRegeneration;
     }
 
+    public static int getAdjustedCost(int stdCost, GameDifficulty difficulty) {
+        return (int) (Math.round(stdCost * difficulty.getCostMultiplier() / 5)) * 5;
+    }
+
 }
