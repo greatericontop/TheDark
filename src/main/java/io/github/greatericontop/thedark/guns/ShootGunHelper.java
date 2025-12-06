@@ -11,6 +11,7 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
 import org.bukkit.util.BoundingBox;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
@@ -29,7 +30,8 @@ public class ShootGunHelper {
 
     public static void fireProjectile(Location sourceLoc, Vector direction, Player owner, double damage, int pierce, TheDark plugin,
                                       double extraKBStrength, boolean bypassDamageTicks, double rayDistance, @Nullable FireStatus fireStatus,
-                                      Particle customParticle, @Nullable Sound customSound) {
+                                      Particle customParticle, @Nullable Sound customSound,
+                                      @Nullable PotionEffect potionEffect) {
         direction = direction.normalize();
         Location start = sourceLoc.clone();
         Location end = start.clone().add(direction.clone().multiply(rayDistance));
@@ -79,6 +81,9 @@ public class ShootGunHelper {
             if (extraKBStrength > 0.0) {
                 Vector knockback = direction.clone().multiply(extraKBStrength);
                 target.setVelocity(target.getVelocity().add(knockback));
+            }
+            if (potionEffect != null) {
+                target.addPotionEffect(potionEffect);
             }
         }
 

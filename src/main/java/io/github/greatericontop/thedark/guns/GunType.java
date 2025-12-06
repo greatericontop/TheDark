@@ -13,6 +13,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
@@ -63,20 +65,23 @@ public enum GunType {
                 Vector right = direction.clone().rotateAroundY(-0.034906);
                 plugin.shootGunListener.performFire(this, player, left, pierce, damage, -1.0,
                         0.0, false, ShootGunHelper.MAX_DISTANCE, null,
-                        Particle.ASH, Sound.ENTITY_GENERIC_EXPLODE);
+                        Particle.ASH, Sound.ENTITY_GENERIC_EXPLODE,
+                        null);
                 plugin.shootGunListener.performFire(this, player, right, pierce, damage, cooldownTicks,
                         0.0, false, ShootGunHelper.MAX_DISTANCE, null,
-                        Particle.ASH, Sound.ENTITY_GENERIC_EXPLODE);
+                        Particle.ASH, Sound.ENTITY_GENERIC_EXPLODE,
+                        null);
             } else {
                 plugin.shootGunListener.performFire(this, player, player.getEyeLocation().getDirection(), pierce, damage, cooldownTicks,
                         0.0, false, ShootGunHelper.MAX_DISTANCE, null,
-                        Particle.ASH, Sound.ENTITY_GENERIC_EXPLODE);
+                        Particle.ASH, Sound.ENTITY_GENERIC_EXPLODE,
+                        null);
             }
         }
     },
 
     RIFLE(30, 30, 1100,
-            "§bRifle", "§7A high-powered rifle that fires quickly.",
+            "§cRifle", "§7A high-powered rifle that fires quickly.",
             Material.STONE_HOE) {
         @Override
         public void fire(Player player, TheDark plugin, int topPath, int bottomPath, PersistentDataContainer extraPDC) {
@@ -123,7 +128,8 @@ public enum GunType {
                 final double finalExtraKBStrength = extraKBStrength;
                 plugin.shootGunListener.performFire(this, player, player.getEyeLocation().getDirection(), pierce, damage, totalCooldownTicks,
                         extraKBStrength, false, ShootGunHelper.MAX_DISTANCE, null,
-                        Particle.ASH, Sound.ENTITY_GENERIC_EXPLODE);
+                        Particle.ASH, Sound.ENTITY_GENERIC_EXPLODE,
+                        null);
                 new BukkitRunnable() {
                     int shotsLeft = 4;
                     public void run() {
@@ -133,7 +139,8 @@ public enum GunType {
                         }
                         plugin.shootGunListener.performFire(RIFLE, player, player.getEyeLocation().getDirection(), finalPierce, finalDamage, -1.0,
                                 finalExtraKBStrength, false, ShootGunHelper.MAX_DISTANCE, null,
-                                Particle.ASH, Sound.ENTITY_GENERIC_EXPLODE);
+                                Particle.ASH, Sound.ENTITY_GENERIC_EXPLODE,
+                                null);
                         shotsLeft--;
                     }
                 }.runTaskTimer(plugin, 1L, 1L);
@@ -145,7 +152,8 @@ public enum GunType {
                 final double finalExtraKBStrength = extraKBStrength;
                 plugin.shootGunListener.performFire(this, player, player.getEyeLocation().getDirection(), pierce, damage, totalCooldownTicks,
                         extraKBStrength, false, ShootGunHelper.MAX_DISTANCE, null,
-                        Particle.ASH, Sound.ENTITY_GENERIC_EXPLODE);
+                        Particle.ASH, Sound.ENTITY_GENERIC_EXPLODE,
+                        null);
                 new BukkitRunnable() {
                     int shotsLeft = 2;
                     public void run() {
@@ -155,20 +163,22 @@ public enum GunType {
                         }
                         plugin.shootGunListener.performFire(RIFLE, player, player.getEyeLocation().getDirection(), finalPierce, finalDamage, -1.0,
                                 finalExtraKBStrength, false, ShootGunHelper.MAX_DISTANCE, null,
-                                Particle.ASH, Sound.ENTITY_GENERIC_EXPLODE);
+                                Particle.ASH, Sound.ENTITY_GENERIC_EXPLODE,
+                                null);
                         shotsLeft--;
                     }
                 }.runTaskTimer(plugin, 2L, 2L);
             } else {
                 plugin.shootGunListener.performFire(this, player, player.getEyeLocation().getDirection(), pierce, damage, cooldownTicks,
                         extraKBStrength, false, ShootGunHelper.MAX_DISTANCE, null,
-                        Particle.ASH, Sound.ENTITY_GENERIC_EXPLODE);
+                        Particle.ASH, Sound.ENTITY_GENERIC_EXPLODE,
+                        null);
             }
         }
     },
 
     SHOTGUN(30, 5, 400,
-            "§bShotgun", "§7This shotgun damages multiple enemies.",
+            "§6Shotgun", "§7This shotgun damages multiple enemies.",
             Material.IRON_SHOVEL) {
         @Override
         public void fire(Player player, TheDark plugin, int topPath, int bottomPath, PersistentDataContainer extraPDC) {
@@ -216,7 +226,8 @@ public enum GunType {
                     Vector direction = new Vector(Math.cos(pitch)*Math.cos(yaw), Math.sin(pitch), Math.cos(pitch)*Math.sin(yaw));
                     plugin.shootGunListener.performFire(this, player, direction, pierce, damage, firstShot ? cooldownTicks : -1.0,
                             0.0, true, ShootGunHelper.MAX_DISTANCE, null,
-                            Particle.ASH, firstShot ? Sound.ENTITY_GENERIC_EXPLODE : null);
+                            Particle.ASH, firstShot ? Sound.ENTITY_GENERIC_EXPLODE : null,
+                            null);
                     firstShot = false;
                 }
             }
@@ -224,7 +235,7 @@ public enum GunType {
     },
 
     FLAMETHROWER(40, 48, 450,
-            "§6Flamethrower", "§7BURN",
+            "§4Flamethrower", "§7BURN",
             Material.GOLDEN_SHOVEL) {
         @Override
         public void fire(Player player, TheDark plugin, int topPath, int bottomPath, PersistentDataContainer extraPDC) {
@@ -269,7 +280,8 @@ public enum GunType {
             FireStatus fireStatus = new FireStatus(profile, fireTicks, fireDamage, isSevere);
             plugin.shootGunListener.performFire(this, player, player.getEyeLocation().getDirection(), pierce, fireDamage*0.5, cooldownTicks,
                     0.0, false, rangeBlocks, fireStatus,
-                    Particle.SMALL_FLAME, Sound.ENTITY_PLAYER_HURT_ON_FIRE);
+                    Particle.SMALL_FLAME, Sound.ENTITY_PLAYER_HURT_ON_FIRE,
+                    null);
         }
     },
 
@@ -287,7 +299,8 @@ public enum GunType {
             }
             plugin.shootGunListener.performFire(this, player, player.getEyeLocation().getDirection(), pierce, damage, cooldownTicks,
                     0.0, false, ShootGunHelper.MAX_DISTANCE, null,
-                    Particle.ASH, Sound.ENTITY_GENERIC_EXPLODE);
+                    Particle.ASH, Sound.ENTITY_GENERIC_EXPLODE,
+                    null);
         }
     },
 
@@ -332,6 +345,70 @@ public enum GunType {
             }
             plugin.shootGunListener.performFireExplosion(this, player, player.getEyeLocation().getDirection(), pierce, damage, cooldownTicks,
                     ShootGunHelper.EXPLOSION_MAX_DISTANCE, explosionRadius, secondaryExplosions);
+        }
+    },
+
+    ICE_BLASTER(30, 15, 350,
+            "§bIce Blaster", "§7Zombies struggle to move in the cold.",
+            Material.DIAMOND_SHOVEL) {
+        @Override
+        public void fire(Player player, TheDark plugin, int topPath, int bottomPath, PersistentDataContainer extraPDC) {
+            int pierce = 2;
+            double damage = 4.0;
+            double cooldownTicks = 11.0;
+            int slowTicks = 40;
+            int slowPotency = 1; // slowness 2
+            boolean tripleShot = false;
+            if (topPath >= 1) {
+                slowTicks = 80;
+            }
+            if (topPath >= 2) {
+                pierce = 4;
+            }
+            if (topPath >= 3) {
+                slowPotency = 3; // slowness 4
+            }
+            if (topPath >= 4) {
+                slowTicks = 160;
+                slowPotency = 6; // completely frozen
+            }
+            if (bottomPath >= 1) {
+                cooldownTicks = 7.0;
+            }
+            if (bottomPath >= 2) {
+                damage = 8.0;
+            }
+            if (bottomPath >= 3) {
+                cooldownTicks = 3.0;
+            }
+            if (bottomPath >= 4) {
+                tripleShot = true;
+                damage = 14.0;
+                pierce += 1;
+            }
+
+            if (tripleShot) {
+                Vector direction = player.getEyeLocation().getDirection();
+                Vector left = direction.clone().rotateAroundY(0.069813); // 4 degrees
+                Vector right = direction.clone().rotateAroundY(-0.069813);
+                plugin.shootGunListener.performFire(this, player, left, pierce, damage, -1.0,
+                        0.0, false, ShootGunHelper.MAX_DISTANCE, null,
+                        Particle.SNOWFLAKE, Sound.BLOCK_POWDER_SNOW_STEP,
+                        new PotionEffect(PotionEffectType.SLOW, slowTicks, slowPotency));
+                plugin.shootGunListener.performFire(this, player, direction, pierce, damage, -1.0,
+                        0.0, false, ShootGunHelper.MAX_DISTANCE, null,
+                        Particle.SNOWFLAKE, Sound.BLOCK_POWDER_SNOW_STEP,
+                        new PotionEffect(PotionEffectType.SLOW, slowTicks, slowPotency));
+                plugin.shootGunListener.performFire(this, player, right, pierce, damage, cooldownTicks,
+                        0.0, false, ShootGunHelper.MAX_DISTANCE, null,
+                        Particle.SNOWFLAKE, Sound.BLOCK_POWDER_SNOW_STEP,
+                        new PotionEffect(PotionEffectType.SLOW, slowTicks, slowPotency));
+            } else {
+                plugin.shootGunListener.performFire(this, player, player.getEyeLocation().getDirection(), pierce, damage, cooldownTicks,
+                        0.0, false, ShootGunHelper.MAX_DISTANCE, null,
+                        Particle.SNOWFLAKE, Sound.BLOCK_POWDER_SNOW_STEP,
+                        new PotionEffect(PotionEffectType.SLOW, slowTicks, slowPotency));
+            }
         }
     }
 

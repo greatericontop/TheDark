@@ -20,6 +20,7 @@ import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
+import org.bukkit.potion.PotionEffect;
 import org.bukkit.util.Vector;
 
 import javax.annotation.Nullable;
@@ -91,10 +92,12 @@ public class ShootGunListener implements Listener {
 
     public void performFire(GunType type, Player player, Vector direction, int pierce, double damage, double cooldownTicks,
                             double extraKBStrength, boolean bypassDamageTicks, double rayDistance, @Nullable FireStatus fireStatus,
-                            Particle customParticle, @Nullable Sound customSound) {
+                            Particle customParticle, @Nullable Sound customSound,
+                            @Nullable PotionEffect potionEffect) {
         ShootGunHelper.fireProjectile(player.getEyeLocation(), direction, player, damage, pierce, plugin,
                 extraKBStrength, bypassDamageTicks, rayDistance, fireStatus,
-                customParticle, customSound);
+                customParticle, customSound,
+                potionEffect);
         performFireCommon(cooldownTicks, player, type, pierce, damage);
     }
 
