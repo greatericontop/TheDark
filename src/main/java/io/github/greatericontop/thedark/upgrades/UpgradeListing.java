@@ -77,6 +77,16 @@ public class UpgradeListing {
                 new Upgrade("Sharpnel Blast", "Explosions are bigger and can hurt twice as many zombies.", 1750),
                 new Upgrade("Cluster Bombs", "Rockets split into 4 high-damage explosions on impact!", 9100)
         ));
+        upgradeList.put(GunType.ICE_BLASTER, new ItemUpgrades(
+                new Upgrade("Longer Freeze", "Freezes zombies for an extra 2 seconds", 250),
+                new Upgrade("Piercing Ice", "Ice can hit 2 more zombies", 500),
+                new Upgrade("Mega Freeze", "Freezing effect upgraded to slowness IV!", 700),
+                new Upgrade("Absolute Zero", "Absolute zero freezing ice freezes zombies solid for 8 seconds!", 5000),
+                new Upgrade("Faster Firing", "Decrease cooldown to 7 ticks", 300),
+                new Upgrade("Icicles", "Sharp icicles now deal 8 damage", 650),
+                new Upgrade("Ultra Fast Firing", "Decrease cooldown to 3 ticks", 1000),
+                new Upgrade("Glacial Barrage", "Shoots 3 shards of ice at once that each deal 14 damage!", 4500)
+        ));
     }
 
     public ItemUpgrades getUpgradeList(GunType type) {
