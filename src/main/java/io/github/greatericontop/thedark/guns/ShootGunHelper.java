@@ -49,13 +49,6 @@ public class ShootGunHelper {
         }
         hits.sort(Comparator.comparingDouble(a -> a.distance));
 
-        if (bypassDamageTicks) {
-            for (int i = 0; i < Math.min(pierce, hits.size()); i++) {
-                LivingEntity target = hits.get(i).target;
-                // Multiple shots in the same tick deal 0.9x damage
-                target.setLastDamage(damage * 0.1);
-            }
-        }
         Bukkit.getScheduler().runTaskLater(plugin, () -> {
             for (int i = 0; i < Math.min(pierce, hits.size()); i++) {
                 LivingEntity target = hits.get(i).target;
@@ -84,6 +77,16 @@ public class ShootGunHelper {
             }
             if (potionEffect != null) {
                 target.addPotionEffect(potionEffect);
+            }
+        }
+
+        if (bypassDamageTicks) {
+            for (int i = 0; i < Math.min(pierce, hits.size()); i++) {
+                LivingEntity target = hits.get(i).target;
+                // Multiple shots in the same tick deal 0.9x damage
+                // Put this after .damage just to be safe, but it seems to work before as well. I'm guessing the
+                // damage events get queued for later, instead of running while .damage is called.
+                target.setLastDamage(damage * 0.1);
             }
         }
 
