@@ -24,6 +24,8 @@ import java.util.Set;
 import java.util.UUID;
 
 public class GameManager {
+    private static final int VICTORY_THRESHOLD = 50 + 1;
+
     public final Map<UUID, PlayerProfile> playerProfiles = new HashMap<>();
     public final Set<BaseEnemy> activeEnemies = new HashSet<>();
 
@@ -95,6 +97,10 @@ public class GameManager {
             gameOverLose();
             return;
         }
+        if (plugin.getRoundManager().getCurrentRound() == VICTORY_THRESHOLD) {
+            gameOverWin();
+            return;
+        }
         // tick enemies & remove dead ones
         List<BaseEnemy> newActiveEnemies = new ArrayList<>(activeEnemies);
         for (BaseEnemy enemy : newActiveEnemies) {
@@ -111,6 +117,16 @@ public class GameManager {
         }
         // (deleting afterward is easier & faster)
         activeEnemies.removeIf(BaseEnemy::isDead);
+    }
+
+    public void gameOverWin() {
+        for (PlayerProfile profile : playerProfiles.values()) {
+            Player p = profile.getPlayer();
+            p.showTitle(Title.title(Component.text("§aVictory!"), Component.text("")));
+            p.playSound(p.getLocation(), Sound.ENTITY_ENDER_DRAGON_DEATH, 1.0F, 1.0F);
+        }
+        playerProfiles.clear();
+        plugin.getRoundManager().reset();
     }
 
     public void gameOverLose() {

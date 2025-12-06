@@ -56,10 +56,6 @@ public class RoundManager {
     private void startNextRound() {
         currentRound++;
         if (currentRound >= RoundData.ROUNDS.length) {
-            for (Player p : Bukkit.getOnlinePlayers()) {
-                p.showTitle(Title.title(Component.text("§aVictory!"), Component.text("")));
-                p.playSound(p.getLocation(), Sound.ENTITY_ENDER_DRAGON_DEATH, 1.0F, 1.0F);
-            }
             ticksUntilCurrentRoundCanEnd = Integer.MAX_VALUE;
             return;
         }
