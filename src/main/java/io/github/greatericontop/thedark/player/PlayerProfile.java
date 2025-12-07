@@ -3,7 +3,6 @@ package io.github.greatericontop.thedark.player;
 import io.github.greatericontop.thedark.guns.GunType;
 import io.github.greatericontop.thedark.guns.GunUtil;
 import io.github.greatericontop.thedark.menus.ArmorBuyListener;
-import io.github.greatericontop.thedark.menus.SwordBuyListener;
 import io.github.greatericontop.thedark.util.Util;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
@@ -81,8 +80,7 @@ public class PlayerProfile {
         }
 
         // SWORD
-        Material swordMaterial = SwordBuyListener.SWORD_MATERIALS[swordTier - 1];
-        ItemStack sword = new ItemStack(swordMaterial, 1);
+        ItemStack sword = new ItemStack(Material.STONE_SWORD, 1);
         if (swordSharpnessOne) {
             sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         }
