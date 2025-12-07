@@ -19,7 +19,6 @@ import io.github.greatericontop.thedark.player.PlayerProfile;
 import io.github.greatericontop.thedark.rounds.RoundSpawner;
 import io.github.greatericontop.thedark.rounds.data.RoundData;
 import io.github.greatericontop.thedark.rounds.operation.BaseOperation;
-import io.github.greatericontop.thedark.rounds.operation.OperationContext;
 import io.github.greatericontop.thedark.rounds.operation.SpawnOneAtATime;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -122,12 +121,6 @@ public class TheDarkCommand implements CommandExecutor {
             int round = Integer.parseInt(args[1]);
             player.sendMessage("§7Starting round!");
             RoundSpawner.executeRound(plugin, round);
-            return true;
-        }
-        if (args[0].equals("startRoundHere")) {
-            int round = Integer.parseInt(args[1]);
-            player.sendMessage("§7Starting round here!");
-            RoundSpawner.executeRound(new OperationContext(plugin, new Location[]{player.getLocation()}), round);
             return true;
         }
         if (args[0].equals("startGame")) {

@@ -1,7 +1,6 @@
 package io.github.greatericontop.thedark.rounds;
 
 import io.github.greatericontop.thedark.TheDark;
-import io.github.greatericontop.thedark.rounds.data.LateGame;
 import io.github.greatericontop.thedark.rounds.data.RoundData;
 import io.github.greatericontop.thedark.rounds.operation.BaseOperation;
 import io.github.greatericontop.thedark.rounds.operation.OperationContext;
@@ -44,24 +43,22 @@ public class RoundSpawner {
         return locations.toArray(new Location[0]);
     }
 
-    public static void executeRound(OperationContext ctx, int roundNumber) {
-        BaseOperation[] roundData;
-        if (roundNumber < RoundData.ROUNDS.length) {
-            roundData = RoundData.ROUNDS[roundNumber];
-        } else {
-            roundData = LateGame.generateRound(roundNumber);
-        }
-        for (BaseOperation operation : roundData) {
+    public static void executeRound(OperationContext ctx, BaseOperation[] round) {
+        for (BaseOperation operation : round) {
             operation.execute(ctx);
         }
     }
     public static void executeRound(TheDark plugin, int roundNumber) {
+        executeRound(plugin, RoundData.ROUNDS[roundNumber]);
+    }
+    public static void executeRound(TheDark plugin, BaseOperation[] round) {
         Location[] locations = getSpawnableLocations(plugin);
         if (locations == null) {
             return;
         }
         OperationContext ctx = new OperationContext(plugin, locations);
-        executeRound(ctx, roundNumber);
+        executeRound(ctx, round);
     }
+
 
 }

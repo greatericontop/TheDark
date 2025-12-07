@@ -7,7 +7,7 @@ api-version: 1.19
 commands:
   thedark:
     description: TheDark Command
-    usage: §c/thedark §6[§finfo, spawnMob, addMe, addCoins, setSign, giveGun, buyGun, emerald, startRound, startRoundHere, startGame, startGameAt, calculate, difficulty§6]
+    usage: §c/thedark §6[§finfo, spawnMob, addMe, addCoins, setSign, giveGun, buyGun, emerald, startRound, startGame, startGameAt, calculate, difficulty§6]
     permission: thedark.command
     permission-message: §cNo permission!
 
