@@ -19,6 +19,7 @@ import org.bukkit.inventory.ItemStack;
 public class RoundManager {
     private int currentRound;
     private int ticksUntilCurrentRoundCanEnd;
+    private boolean lateGameDelayPassed;
 
     public int getCurrentRound() {
         return currentRound;
@@ -29,6 +30,7 @@ public class RoundManager {
         this.plugin = plugin;
         this.currentRound = 0;
         this.ticksUntilCurrentRoundCanEnd = 0;
+        this.lateGameDelayPassed = false;
     }
 
     public void startGame() {
@@ -43,22 +45,25 @@ public class RoundManager {
     public void reset() {
         currentRound = 0;
         ticksUntilCurrentRoundCanEnd = 0;
+        lateGameDelayPassed = false;
     }
 
     public void tick() {
         if (currentRound == 0)  return;
         ticksUntilCurrentRoundCanEnd--;
         if (ticksUntilCurrentRoundCanEnd <= 0 && plugin.getGameManager().activeEnemies.isEmpty()) {
+            if (currentRound == RoundData.ROUNDS.length - 1) {
+                if (!lateGameDelayPassed) {
+                    lateGameDelayPassed = true;
+                    ticksUntilCurrentRoundCanEnd = 160;
+                }
+            }
             startNextRound();
         }
     }
 
     private void startNextRound() {
         currentRound++;
-        if (currentRound >= RoundData.ROUNDS.length) {
-            ticksUntilCurrentRoundCanEnd = Integer.MAX_VALUE;
-            return;
-        }
         ticksUntilCurrentRoundCanEnd = BaseOperation.getTotalDuration(RoundData.ROUNDS[currentRound]);
         for (Player p : Bukkit.getOnlinePlayers()) {
             p.showTitle(Title.title(Component.text(String.format("§cRound %d", currentRound)), Component.text("")));

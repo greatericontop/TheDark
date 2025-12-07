@@ -1,6 +1,7 @@
 package io.github.greatericontop.thedark.rounds;
 
 import io.github.greatericontop.thedark.TheDark;
+import io.github.greatericontop.thedark.rounds.data.LateGame;
 import io.github.greatericontop.thedark.rounds.data.RoundData;
 import io.github.greatericontop.thedark.rounds.operation.BaseOperation;
 import io.github.greatericontop.thedark.rounds.operation.OperationContext;
@@ -44,7 +45,13 @@ public class RoundSpawner {
     }
 
     public static void executeRound(OperationContext ctx, int roundNumber) {
-        for (BaseOperation operation : RoundData.ROUNDS[roundNumber]) {
+        BaseOperation[] roundData;
+        if (roundNumber < RoundData.ROUNDS.length) {
+            roundData = RoundData.ROUNDS[roundNumber];
+        } else {
+            roundData = LateGame.generateRound(roundNumber);
+        }
+        for (BaseOperation operation : roundData) {
             operation.execute(ctx);
         }
     }
