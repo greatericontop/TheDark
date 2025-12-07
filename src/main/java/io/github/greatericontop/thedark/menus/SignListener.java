@@ -49,8 +49,6 @@ public class SignListener implements Listener {
 
         if (signType.equals("armor")) {
             plugin.armorBuyListener.openMenu(profile);
-        } else if (signType.equals("armorEnchantment")) {
-            plugin.armorEnchantmentListener.openMenu(profile);
         } else if (signType.startsWith("buyGun_")) {
             GunType toBuy = GunType.valueOf(signType.substring(7)); // remove "buyGun_"
             GunBuying.buy(toBuy, profile, player);
