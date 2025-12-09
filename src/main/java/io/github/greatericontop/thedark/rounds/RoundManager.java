@@ -60,6 +60,7 @@ public class RoundManager {
                 if (!lateGameDelayPassed) {
                     lateGameDelayPassed = true;
                     ticksUntilCurrentRoundCanEnd = 160;
+                    return;
                 }
             }
             startNextRound();
