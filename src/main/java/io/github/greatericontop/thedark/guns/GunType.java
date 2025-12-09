@@ -410,7 +410,17 @@ public enum GunType {
                         new PotionEffect(PotionEffectType.SLOW, slowTicks, slowPotency));
             }
         }
-    }
+    },
+
+    DEBUG(2, 64, 100_000_000,
+            "§5Debug", "§7Yes.",
+            Material.NETHERITE_PICKAXE) {
+        @Override
+        public void fire(Player player, TheDark plugin, int topPath, int bottomPath, PersistentDataContainer extraPDC) {
+            plugin.shootGunListener.performFireExplosion(this, player, player.getEyeLocation().getDirection(), 100, 1000.0, 1,
+                    ShootGunHelper.EXPLOSION_MAX_DISTANCE, 5.0, true);
+        }
+    },
 
     ;
 
