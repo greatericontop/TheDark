@@ -20,7 +20,7 @@ import org.bukkit.inventory.ItemStack;
 public class RoundManager {
     private int currentRound;
     private int ticksUntilCurrentRoundCanEnd;
-    private boolean lateGameDelayPassed;
+    public boolean lateGameDelayPassed;
     public boolean victoryScreenAppeared;
 
     public int getCurrentRound() {
@@ -32,7 +32,7 @@ public class RoundManager {
         this.plugin = plugin;
         this.currentRound = 0;
         this.ticksUntilCurrentRoundCanEnd = 0;
-        this.lateGameDelayPassed = false;
+        this.lateGameDelayPassed = false; // also used to check if game has been won
         this.victoryScreenAppeared = false;
     }
 
@@ -59,7 +59,7 @@ public class RoundManager {
             if (currentRound == RoundData.ROUNDS.length - 1) {
                 if (!lateGameDelayPassed) {
                     lateGameDelayPassed = true;
-                    ticksUntilCurrentRoundCanEnd = 160;
+                    ticksUntilCurrentRoundCanEnd = 240;
                     return;
                 }
             }

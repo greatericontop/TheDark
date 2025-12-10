@@ -4,7 +4,6 @@ import io.github.greatericontop.thedark.enemy.BaseEnemy;
 import io.github.greatericontop.thedark.miscmechanic.GameDifficulty;
 import io.github.greatericontop.thedark.player.PlayerProfile;
 import io.github.greatericontop.thedark.rounds.RoundSpawner;
-import io.github.greatericontop.thedark.rounds.data.RoundData;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.title.Title;
 import org.bukkit.Bukkit;
@@ -97,7 +96,7 @@ public class GameManager {
             gameOverLose();
             return;
         }
-        if (plugin.getRoundManager().getCurrentRound() == RoundData.ROUNDS.length && !plugin.getRoundManager().victoryScreenAppeared) {
+        if (plugin.getRoundManager().lateGameDelayPassed && !plugin.getRoundManager().victoryScreenAppeared) {
             gameOverWin();
             return;
         }
