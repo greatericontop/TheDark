@@ -17,6 +17,7 @@ import io.github.greatericontop.thedark.miscmechanic.CashGeneration;
 import io.github.greatericontop.thedark.miscmechanic.GameDifficulty;
 import io.github.greatericontop.thedark.player.PlayerProfile;
 import io.github.greatericontop.thedark.rounds.RoundSpawner;
+import io.github.greatericontop.thedark.rounds.data.LateGame;
 import io.github.greatericontop.thedark.rounds.data.RoundData;
 import io.github.greatericontop.thedark.rounds.operation.BaseOperation;
 import io.github.greatericontop.thedark.rounds.operation.SpawnOneAtATime;
@@ -140,7 +141,12 @@ public class TheDarkCommand implements CommandExecutor {
             double totalHp = 0.0;
             double totalCoins = 0.0;
             for (int r = start; r <= end; r++) {
-                BaseOperation[] round = RoundData.ROUNDS[r];
+                BaseOperation[] round;
+                if (r <= 50) {
+                    round = RoundData.ROUNDS[r];
+                } else {
+                    round = LateGame.generateRound(r);
+                }
                 for (BaseOperation baseOp : round) {
                     if (baseOp instanceof SpawnOneAtATime op) {
                         int enemyCount = op.getCount();

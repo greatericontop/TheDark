@@ -27,7 +27,7 @@ public class CashGeneration {
         if (round <= 50) {
             return 0.2;
         }
-        return 0.0;
+        return 0.05;
     }
 
     public static void rewardCoinsOnDamage(PlayerProfile profile, double finalDamage, TheDark plugin) {
