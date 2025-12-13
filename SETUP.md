@@ -34,6 +34,17 @@ valid-spawn-locations:
 - ["world", 11501.5, 292.0, 11501.5]
 ```
 
+## Uncapping health
+
+By default, all mobs can't have more than 2048 health.
+
+To uncap health, find the `attribute:` section, under `settings:` in `spigot.yml`. Add this in that section
+
+```
+    maxHealth:
+      max: 100000.0
+```
+
 ## Building your own map
 
 This part is optional, but keep reading if you want to build your own map!
