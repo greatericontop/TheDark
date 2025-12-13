@@ -13,6 +13,7 @@ import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitTask;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -143,7 +144,13 @@ public class GameManager {
             p.setGameMode(GameMode.SPECTATOR);
         }
         playerProfiles.clear();
+        for (BukkitTask bt : plugin.getRoundManager().roundSpawnTaskIDs) {
+            bt.cancel();
+        }
         plugin.getRoundManager().reset();
+        for (BaseEnemy e : activeEnemies) {
+            e.getEntity().remove();
+        }
         activeEnemies.clear();
     }
 

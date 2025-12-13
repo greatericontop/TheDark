@@ -16,12 +16,17 @@ import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitTask;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class RoundManager {
     private int currentRound;
     private int ticksUntilCurrentRoundCanEnd;
     public boolean lateGameDelayPassed;
     public boolean victoryScreenAppeared;
+    public List<BukkitTask> roundSpawnTaskIDs = new ArrayList<>();
 
     public int getCurrentRound() {
         return currentRound;
@@ -34,6 +39,7 @@ public class RoundManager {
         this.ticksUntilCurrentRoundCanEnd = 0;
         this.lateGameDelayPassed = false; // also used to check if game has been won
         this.victoryScreenAppeared = false;
+        this.roundSpawnTaskIDs = new ArrayList<>();
     }
 
     public void startGame() {
@@ -50,6 +56,7 @@ public class RoundManager {
         ticksUntilCurrentRoundCanEnd = 0;
         lateGameDelayPassed = false;
         victoryScreenAppeared = false;
+        roundSpawnTaskIDs.clear();
     }
 
     public void tick() {
