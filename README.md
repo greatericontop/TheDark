@@ -25,3 +25,8 @@ By default, every player online on the server is added to the game.
 
 [Click here to learn more about the game mechanics.](https://github.com/greatericontop/TheDark/blob/master/MECHANICS.md)
 
+## Bug Reports and Improvements
+
+If you find any bugs or have feature requests, please create an issue on the [GitHub issues page](https://github.com/greatericontop/TheDark/issues).
+
+If you have suggestions for balancing, please go there too!
