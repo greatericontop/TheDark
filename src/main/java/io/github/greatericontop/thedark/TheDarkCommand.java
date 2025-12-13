@@ -20,7 +20,6 @@ import io.github.greatericontop.thedark.rounds.data.RoundData;
 import io.github.greatericontop.thedark.rounds.operation.BaseOperation;
 import io.github.greatericontop.thedark.rounds.operation.SpawnOneAtATime;
 import io.github.greatericontop.thedark.util.GreatCommands;
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
@@ -29,7 +28,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.persistence.PersistentDataType;
-import org.bukkit.util.Vector;
 
 public class TheDarkCommand implements CommandExecutor {
 
@@ -193,15 +191,5 @@ public class TheDarkCommand implements CommandExecutor {
         return false;
     }
 
-    private void debug_spawnEnemies(int count1, int count2, Location loc) {
-        for (int i = 0; i < count1; i++) {
-            Location adjustedLoc = loc.clone().add(new Vector(4 * (Math.random() - 0.5), 0, 4 * (Math.random() - 0.5)));
-            plugin.getGameManager().spawnEnemy(BasicZombie.class, adjustedLoc);
-        }
-        for (int i = 0; i < count2; i++) {
-            Location adjustedLoc = loc.clone().add(new Vector(4 * (Math.random() - 0.5), 0, 4 * (Math.random() - 0.5)));
-            plugin.getGameManager().spawnEnemy(HelmetZombie.class, adjustedLoc);
-        }
-    }
 
 }
