@@ -30,12 +30,14 @@ public class GameManager {
 
     private int tickNum;
     private GameDifficulty difficulty;
+    private Location[] cachedLocations;
 
     private final TheDark plugin;
     public GameManager(TheDark plugin) {
         this.plugin = plugin;
         this.tickNum = 0;
         this.difficulty = GameDifficulty.GOLD;
+        this.cachedLocations = null;
     }
 
     public PlayerProfile getPlayerProfile(Player player) {
@@ -52,18 +54,20 @@ public class GameManager {
     }
 
     public void startNewGame() {
-        Location[] locations = RoundSpawner.getSpawnableLocations(plugin);
-        if (locations == null) {
+        cachedLocations = RoundSpawner.getSpawnableLocations(plugin);
+        if (cachedLocations == null) {
             plugin.getLogger().warning("No valid spawn locations!");
             return;
         }
-        locations[0].getWorld().setGameRule(GameRule.NATURAL_REGENERATION, false);
+        cachedLocations[0].getWorld().setGameRule(GameRule.NATURAL_REGENERATION, false);
+        cachedLocations[0].getWorld().setGameRule(GameRule.DO_MOB_SPAWNING, false);
+        cachedLocations[0].getWorld().setGameRule(GameRule.DO_DAYLIGHT_CYCLE, false);
         for (Player p : Bukkit.getOnlinePlayers()) {
             PlayerProfile profile = new PlayerProfile(p);
             profile.coins = 500;
             playerProfiles.put(p.getUniqueId(), profile);
             p.setGameMode(GameMode.ADVENTURE);
-            p.teleport(locations[(int) (Math.random() * locations.length)]);
+            p.teleport(cachedLocations[(int) (Math.random() * cachedLocations.length)]);
         }
         plugin.getRoundManager().startGame();
     }
@@ -72,6 +76,10 @@ public class GameManager {
         tickNum++;
         // rounds
         plugin.getRoundManager().tick();
+        // daylight cycle time
+        // constants chosen so R1 is midnight, R51+ is 23400, which is almost morning but mobs don't burn
+        int daylightTime = 18000 + 108 * Math.min(plugin.getRoundManager().getCurrentRound()-1, 50);
+        cachedLocations[0].getWorld().setTime(daylightTime);
         // tick players
         boolean atLeastOnePlayerAlive = false;
         for (PlayerProfile profile : playerProfiles.values()) {
