@@ -1,7 +1,6 @@
 package io.github.greatericontop.thedark.rounds.operation;
 
 import org.bukkit.Bukkit;
-import org.bukkit.scheduler.BukkitTask;
 
 public abstract class BaseOperation {
 
@@ -12,8 +11,7 @@ public abstract class BaseOperation {
     protected abstract int getOffset();
 
     public void execute(OperationContext ctx) {
-        BukkitTask ret = Bukkit.getScheduler().runTaskLater(ctx.plugin(), () -> actuallyExecute(ctx), getOffset());
-        ctx.plugin().getRoundManager().roundSpawnTaskIDs.add(ret);
+        Bukkit.getScheduler().runTaskLater(ctx.plugin(), () -> actuallyExecute(ctx), getOffset());
     }
 
     // Note: you should be able to execute this method multiple times.

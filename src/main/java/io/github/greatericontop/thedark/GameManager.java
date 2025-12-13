@@ -13,7 +13,6 @@ import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitTask;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -75,12 +74,17 @@ public class GameManager {
 
     public void tick() {
         tickNum++;
+        if (!plugin.getRoundManager().gameIsActive()) {
+            return;
+        }
         // rounds
         plugin.getRoundManager().tick();
         // daylight cycle time
         // constants chosen so R1 is midnight, R51+ is 23400, which is almost morning but mobs don't burn
         int daylightTime = 18000 + 108 * Math.min(plugin.getRoundManager().getCurrentRound()-1, 50);
-        cachedLocations[0].getWorld().setTime(daylightTime);
+        if (cachedLocations != null) {
+            cachedLocations[0].getWorld().setTime(daylightTime);
+        }
         // tick players
         boolean atLeastOnePlayerAlive = false;
         for (PlayerProfile profile : playerProfiles.values()) {
@@ -144,9 +148,6 @@ public class GameManager {
             p.setGameMode(GameMode.SPECTATOR);
         }
         playerProfiles.clear();
-        for (BukkitTask bt : plugin.getRoundManager().roundSpawnTaskIDs) {
-            bt.cancel();
-        }
         plugin.getRoundManager().reset();
         for (BaseEnemy e : activeEnemies) {
             e.getEntity().remove();

@@ -50,6 +50,10 @@ public class SpawnOneAtATime extends BaseOperation {
         if (numberRemaining <= 0) {
             return;
         }
+        if (!ctx.plugin().getRoundManager().gameIsActive()) {
+            // Don't spawn more if the game has ended (e.g. everyone died)
+            return;
+        }
         Location[] locations = ctx.locations();
         ctx.plugin().getGameManager().spawnEnemy(enemyClass, locations[random.nextInt(locations.length)]);
         final int numberRemainingNext = numberRemaining - 1;
