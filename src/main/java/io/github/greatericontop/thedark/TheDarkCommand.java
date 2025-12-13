@@ -1,6 +1,5 @@
 package io.github.greatericontop.thedark;
 
-import io.github.greatericontop.thedark.enemy.BaseEnemy;
 import io.github.greatericontop.thedark.enemy.zombies.BasicZombie;
 import io.github.greatericontop.thedark.enemy.zombies.ChainmailZombie;
 import io.github.greatericontop.thedark.enemy.zombies.HelmetZombie;
@@ -16,11 +15,11 @@ import io.github.greatericontop.thedark.menus.SignListener;
 import io.github.greatericontop.thedark.miscmechanic.CashGeneration;
 import io.github.greatericontop.thedark.miscmechanic.GameDifficulty;
 import io.github.greatericontop.thedark.player.PlayerProfile;
-import io.github.greatericontop.thedark.rounds.RoundSpawner;
 import io.github.greatericontop.thedark.rounds.data.LateGame;
 import io.github.greatericontop.thedark.rounds.data.RoundData;
 import io.github.greatericontop.thedark.rounds.operation.BaseOperation;
 import io.github.greatericontop.thedark.rounds.operation.SpawnOneAtATime;
+import io.github.greatericontop.thedark.util.GreatCommands;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -42,6 +41,7 @@ public class TheDarkCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (args.length == 0) {
+            sender.sendMessage("§cTheDark v" + plugin.getDescription().getVersion());
             return false;
         }
         if (!(sender instanceof Player player)) {
@@ -49,47 +49,49 @@ public class TheDarkCommand implements CommandExecutor {
             return true;
         }
 
-        if (args[0].equals("info")) {
-            player.sendMessage("§cTheDark v" + plugin.getDescription().getVersion());
-            player.sendMessage(String.format("§7Enemy count: §f%d", plugin.getGameManager().activeEnemies.size()));
+
+        if (args[0].equals("give")) {
+            Player p2 = GreatCommands.argumentPlayer(1, args);
+            if (p2 == null) {
+                player.sendMessage("§cSpecify a player!");
+                return true;
+            }
+            PlayerProfile profile = plugin.getGameManager().getPlayerProfile(player);
+            PlayerProfile profile2 = plugin.getGameManager().getPlayerProfile(p2);
+            if (profile == null) {
+                player.sendMessage("§cYou are not in the game!");
+                return true;
+            }
+            if (profile2 == null) {
+                player.sendMessage("§cThat player is not in the game!");
+                return true;
+            }
+            Integer amount = GreatCommands.argumentInteger(2, args);
+            if (amount == null) {
+                player.sendMessage("§cSpecify an amount!");
+                return true;
+            }
+            if (amount <= 0) {
+                player.sendMessage("§cAmount must be positive!");
+                return true;
+            }
+            if (profile.coins < amount) {
+                player.sendMessage("§cYou don't have enough coins!");
+                return true;
+            }
+            profile.coins -= amount;
+            profile2.coins += amount;
+            player.sendMessage(String.format("§3You gave §b%d §3coins to §b%s§3!", amount, p2.getName()));
+            p2.sendMessage(String.format("§3You received §b%d §3coins from §b%s§3!", amount, player.getName()));
             return true;
         }
 
-        if (args[0].equals("spawnMob")) {
-            if (args.length < 3) {
-                player.sendMessage("§c/thedark spawnMob <className> <count>");
-                return true;
-            }
-            String className = args[1];
-            Class<? extends BaseEnemy> clazz;
-            // ZOMBIES
-            if (className.equalsIgnoreCase("BasicZombie")) {
-                clazz = BasicZombie.class;
-            } else if (className.equalsIgnoreCase("HelmetZombie")) {
-                clazz = HelmetZombie.class;
-            } else if (className.equalsIgnoreCase("ChainmailZombie")) {
-                clazz = ChainmailZombie.class;
-            } else {
-                player.sendMessage("§cUnknown className " + className);
-                return true;
-            }
-            int count = Integer.parseInt(args[2]);
-            for (int i = 0; i < count; i++) {
-                plugin.getGameManager().spawnEnemy(clazz, player.getLocation());
-            }
-            return true;
-        }
-        if (args[0].equals("addMe")) {
-            PlayerProfile profile = new PlayerProfile(player);
-            profile.coins = 500; // Starting cash
-            plugin.getGameManager().playerProfiles.put(player.getUniqueId(), profile);
-            return true;
-        }
-        if (args[0].equals("addCoins")) {
-            plugin.getGameManager().playerProfiles.get(player.getUniqueId()).coins += Integer.parseInt(args[1]);
-            return true;
-        }
         if (args[0].equals("setSign")) {
+            String arg = GreatCommands.argumentString(1, args);
+            if (arg == null) {
+                player.sendMessage("§cSpecify what type of sign to set!");
+                return true;
+            }
             Block lookingAt = player.getTargetBlock(10);
             if (lookingAt == null || (lookingAt.getType() != Material.OAK_WALL_SIGN && lookingAt.getType() != Material.OAK_SIGN)) {
                 player.sendMessage("§cYou must be looking at a sign!");
@@ -100,7 +102,22 @@ public class TheDarkCommand implements CommandExecutor {
             player.sendMessage("§3Set your sign to be: §7" + args[1]);
             return true;
         }
-        if (args[0].equals("giveGun")) {
+
+
+        // Debug commands
+
+
+        if (args[0].equals("_addMe")) {
+            PlayerProfile profile = new PlayerProfile(player);
+            profile.coins = 500; // Starting cash
+            plugin.getGameManager().playerProfiles.put(player.getUniqueId(), profile);
+            return true;
+        }
+        if (args[0].equals("_addCoins")) {
+            plugin.getGameManager().playerProfiles.get(player.getUniqueId()).coins += Integer.parseInt(args[1]);
+            return true;
+        }
+        if (args[0].equals("_giveGun")) {
             GunType toGive = GunType.valueOf(args[1]);
             if (args.length < 3) {
                 GunBuying.debugGiveGun(toGive, player, null);
@@ -109,33 +126,18 @@ public class TheDarkCommand implements CommandExecutor {
             }
             return true;
         }
-        if (args[0].equals("buyGun")) {
-            GunType toGive = GunType.valueOf(args[1]);
-            GunBuying.attemptGive(toGive, player, player.getInventory().getHeldItemSlot());
-            return true;
-        }
-        if (args[0].equals("emerald")) {
-            plugin.getGameManager().playerProfiles.get(player.getUniqueId()).emeralds += 1;
-            return true;
-        }
-        if (args[0].equals("startRound")) {
-            int round = Integer.parseInt(args[1]);
-            player.sendMessage("§7Starting round!");
-            RoundSpawner.executeRound(plugin, round);
-            return true;
-        }
-        if (args[0].equals("startGame")) {
+        if (args[0].equals("_startGame")) {
             player.sendMessage("§7Starting game!");
             plugin.getRoundManager().startGame();
             return true;
         }
-        if (args[0].equals("startGameAt")) {
+        if (args[0].equals("_startGameAt")) {
             player.sendMessage("§7Starting game!");
             int r = Integer.parseInt(args[1]);
             plugin.getRoundManager().startGameAt(r);
             return true;
         }
-        if (args[0].equals("calculate")) {
+        if (args[0].equals("_calculate")) {
             int start = Integer.parseInt(args[1]);
             int end = Integer.parseInt(args[2]);
             double totalHp = 0.0;
@@ -182,7 +184,7 @@ public class TheDarkCommand implements CommandExecutor {
             player.sendMessage(String.format("§eEstimated coins: §a%.2f §7(including scaling)", totalCoins));
             return true;
         }
-        if (args[0].equals("difficulty")) {
+        if (args[0].equals("_difficulty")) {
             GameDifficulty difficulty = GameDifficulty.valueOf(args[1]);
             plugin.getGameManager().setDifficulty(difficulty);
             player.sendMessage("§3Set game difficulty to §6" + difficulty.name());
