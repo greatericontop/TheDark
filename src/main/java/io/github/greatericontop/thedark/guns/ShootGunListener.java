@@ -115,7 +115,6 @@ public class ShootGunListener implements Listener {
             gunCooldowns.put(player.getUniqueId(), true);
             Bukkit.getScheduler().runTaskLater(plugin, () -> gunCooldowns.put(player.getUniqueId(), false), intCooldownTicks);
         }
-        player.sendMessage(String.format("§7[Debug] fired with pierce %d, damage %.1f, cooldown %dt", pierce, damage, intCooldownTicks));
     }
 
 }
