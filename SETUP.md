@@ -45,6 +45,14 @@ To uncap health, find the `attribute:` section, under `settings:` in `spigot.yml
       max: 100000.0
 ```
 
+## Scoreboard
+
+This is optional, but you can display the round number and number of zombies alive on the scoreboard.
+
+Use the following PlaceholderAPI placeholders:
+- `%thedark_round%` - current round number
+- `%thedark_enemiesleft%` - number of zombies currently alive
+
 ## Building your own map
 
 This part is optional, but keep reading if you want to build your own map!
