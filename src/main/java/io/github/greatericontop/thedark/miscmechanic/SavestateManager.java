@@ -19,6 +19,7 @@ package io.github.greatericontop.thedark.miscmechanic;
 
 import io.github.greatericontop.thedark.TheDark;
 import io.github.greatericontop.thedark.player.PlayerProfile;
+import org.bukkit.attribute.Attribute;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -53,13 +54,18 @@ public class SavestateManager {
         savestates.put(round, savestateList);
     }
 
+    public boolean hasSavestate(int round) {
+        return savestates.containsKey(round);
+    }
+
     public void restoreSavestate(int round, TheDark plugin) {
         plugin.getGameManager().playerProfiles.clear();
         for (Savestate savestate : savestates.get(round)) {
             PlayerProfile profile = new PlayerProfile(savestate.player(), true);
             profile.coins = savestate.coins();
             profile.armorLevel = savestate.armorLevel();
-            savestate.player().setHealth(savestate.health());
+            savestate.player().setHealth(Math.min(savestate.health(),
+                    savestate.player().getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue()));
             savestate.player().getInventory().setItem(1, savestate.gun1());
             savestate.player().getInventory().setItem(2, savestate.gun2());
             savestate.player().getInventory().setItem(3, savestate.gun3());

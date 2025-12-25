@@ -100,6 +100,8 @@ public class RoundManager {
                 p.setHealth(4.0); // Fairly arbitrary small number
             }
         }
+        // Create savestate after players are revived
+        plugin.getSavestateManager().createSavestates(currentRound, plugin);
         for (PlayerProfile profile : plugin.getGameManager().playerProfiles.values()) {
             for (int slot = 1; slot <= 3; slot++) {
                 ItemStack stack = profile.getPlayer().getInventory().getItem(slot);

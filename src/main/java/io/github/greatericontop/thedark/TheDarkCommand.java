@@ -101,6 +101,24 @@ public class TheDarkCommand implements CommandExecutor {
             return true;
         }
 
+        if (args[0].equals("retry")) {
+            Integer round = GreatCommands.argumentInteger(1, args);
+            if (round == null) {
+                player.sendMessage("§cSpecify a round number to retry from!");
+                return true;
+            }
+            if (plugin.getRoundManager().gameIsActive()) {
+                player.sendMessage("§cYou can't use this command during an active game!");
+                return true;
+            }
+            if (!plugin.getSavestateManager().hasSavestate(round)) {
+                player.sendMessage("§cNo savestate for that round!");
+                return true;
+            }
+            plugin.getSavestateManager().restoreSavestate(round, plugin);
+            return true;
+        }
+
         if (args[0].equals("setSign")) {
             String arg = GreatCommands.argumentString(1, args);
             if (arg == null) {

@@ -7,7 +7,7 @@ api-version: 1.19
 commands:
   thedark:
     description: TheDark Command
-    usage: §c/thedark §6[§fgive, setSign§6]
+    usage: §c/thedark §6[§fgive, retry, setSign§6]
     permission: thedark.command
     permission-message: §cNo permission!
 

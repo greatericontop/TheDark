@@ -23,6 +23,7 @@ import io.github.greatericontop.thedark.menus.ArmorBuyListener;
 import io.github.greatericontop.thedark.menus.GunUpgradeListener;
 import io.github.greatericontop.thedark.menus.SignListener;
 import io.github.greatericontop.thedark.menus.StartGameMenu;
+import io.github.greatericontop.thedark.miscmechanic.SavestateManager;
 import io.github.greatericontop.thedark.player.PlayerDeathListener;
 import io.github.greatericontop.thedark.player.PlayerShennaniganPreventionListener;
 import io.github.greatericontop.thedark.rounds.RoundManager;
@@ -40,6 +41,10 @@ public class TheDark extends JavaPlugin {
     public RoundManager getRoundManager() {
         return roundManager;
     }
+    private SavestateManager savestateManager;
+    public SavestateManager getSavestateManager() {
+        return savestateManager;
+    }
 
     public UpgradeListing upgradeUtils = null;
 
@@ -55,6 +60,7 @@ public class TheDark extends JavaPlugin {
     public void onEnable() {
         gameManager = new GameManager(this);
         roundManager = new RoundManager(this);
+        savestateManager = new SavestateManager();
         this.getCommand("thedark").setExecutor(new TheDarkCommand(this));
 
         upgradeUtils = new UpgradeListing(this);

@@ -86,6 +86,7 @@ public class GameManager {
             p.setGameMode(GameMode.ADVENTURE);
             p.teleport(cachedLocations[(int) (Math.random() * cachedLocations.length)]);
         }
+        plugin.getSavestateManager().clear();
         plugin.getRoundManager().startGame();
     }
 
