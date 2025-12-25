@@ -54,7 +54,7 @@ public class SignListener implements Listener {
 
         if (signType.equals("startGame")) {
             // No profile needed, we just make one temporarily because of API
-            plugin.startGameMenu.openMenu(new PlayerProfile(player));
+            plugin.startGameMenu.openMenu(new PlayerProfile(player, true));
             return;
         }
 

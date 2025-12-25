@@ -42,6 +42,9 @@ public class PlayerProfile {
     public boolean swordSharpnessOne;
 
     public PlayerProfile(Player player) {
+        this(player, false);
+    }
+    public PlayerProfile(Player player, boolean skipInitialization) {
         this.player = player;
         coins = 0;
         emeralds = 0;
@@ -49,7 +52,9 @@ public class PlayerProfile {
         armorProtectionLevel = 0;
         swordTier = 1;
         swordSharpnessOne = false;
-        initializePlayer();
+        if (!skipInitialization) {
+            initializePlayer();
+        }
     }
 
     public Player getPlayer() {
