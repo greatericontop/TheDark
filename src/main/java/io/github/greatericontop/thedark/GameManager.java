@@ -89,6 +89,22 @@ public class GameManager {
         plugin.getRoundManager().startGame();
     }
 
+    public void restoreSavestateGame(int round) {
+        cachedLocations = RoundSpawner.getSpawnableLocations(plugin);
+        if (cachedLocations == null) {
+            plugin.getLogger().warning("No valid spawn locations!");
+            return;
+        }
+        for (PlayerProfile profile : playerProfiles.values()) {
+            profile.getPlayer().setGameMode(GameMode.ADVENTURE);
+            profile.getPlayer().teleport(cachedLocations[(int) (Math.random() * cachedLocations.length)]);
+        }
+        if (round >= 51) {
+            plugin.getRoundManager().victoryScreenAppeared = true;
+        }
+        plugin.getRoundManager().startGameAt(round);
+    }
+
     public void tick() {
         tickNum++;
         if (!plugin.getRoundManager().gameIsActive()) {
