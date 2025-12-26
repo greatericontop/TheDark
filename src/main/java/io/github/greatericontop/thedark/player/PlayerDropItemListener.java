@@ -51,25 +51,27 @@ public class PlayerDropItemListener implements Listener {
         // the first 3 slots of the inventory.
         // In both cases, drop is an early reload (set durability damage)
 
-        ItemStack toModify;
+        ItemStack toModify = null;
         if (droppedItem.isSimilar(profile.getPlayer().getInventory().getItem(1))
                 || droppedItem.isSimilar(profile.getPlayer().getInventory().getItem(2))
                 || droppedItem.isSimilar(profile.getPlayer().getInventory().getItem(3))) {
             event.getItemDrop().remove();
             toModify = profile.getPlayer().getInventory().getItemInMainHand();
-
+            if (!toModify.isSimilar(droppedItem)) {
+                // Don't modify if the dropped item isn't the one in hand (e.g., dropping a different item from
+                // the inventory window)
+                return;
+            }
         } else {
             event.setCancelled(true);
             // Slightly hacky: the server places back the dropped item, but we can modify what it places back
             toModify = event.getItemDrop().getItemStack();
         }
 
-        if (toModify.isSimilar(droppedItem)) {
-            Damageable im = (Damageable) toModify.getItemMeta();
-            im.setDamage(toModify.getType().getMaxDurability() - 1);
-            toModify.setItemMeta(im);
-            toModify.setAmount(1);
-        }
+        Damageable im = (Damageable) toModify.getItemMeta();
+        im.setDamage(toModify.getType().getMaxDurability() - 1);
+        toModify.setItemMeta(im);
+        toModify.setAmount(1);
     }
 
 }
