@@ -31,15 +31,15 @@ public class Data1To20 {
     // Intended to be manageable difficulty
 
     public static final BaseOperation[] R1 = new RoundOperationHelper(4 * 20)
-            .addSpawnOneAtATime(BasicZombie.class, 10, 50, false)
+            .addSpawnOneAtATime(BasicZombie.class, 10, 45, false)
     .getOutput();
 
     public static final BaseOperation[] R2 = new RoundOperationHelper(4 * 20)
-            .addSpawnOneAtATime(BasicZombie.class, 20, 50, false)
+            .addSpawnOneAtATime(BasicZombie.class, 20, 45, false)
     .getOutput();
 
     public static final BaseOperation[] R3 = new RoundOperationHelper(4 * 20)
-            .addSpawnOneAtATime(BasicZombie.class, 15, 45, false)
+            .addSpawnOneAtATime(BasicZombie.class, 15, 40, false)
             .delaySeconds(4)
             .addSpawnOneAtATime(HelmetZombie.class, 10, 80, false)
     .getOutput();
@@ -50,16 +50,16 @@ public class Data1To20 {
     .getOutput();
 
     public static final BaseOperation[] R5 = new RoundOperationHelper(4 * 20)
-            .addSpawnOneAtATime(BasicZombie.class, 40, 14, false)
+            .addSpawnOneAtATime(BasicZombie.class, 40, 13, false)
     .getOutput();
 
     public static final BaseOperation[] R6 = new RoundOperationHelper(4 * 20)
             .addSpawnOneAtATime(BasicZombie.class, 25, 40, true)
-            .addSpawnOneAtATime(HelmetZombie.class, 15, 75, false)
+            .addSpawnOneAtATime(HelmetZombie.class, 15, 70, false)
     .getOutput();
 
     public static final BaseOperation[] R7 = new RoundOperationHelper(4 * 20)
-            .addSpawnOneAtATime(BasicZombie.class, 15, 40, false)
+            .addSpawnOneAtATime(BasicZombie.class, 15, 30, false)
             .delaySeconds(4)
             .addSpawnOneAtATime(HelmetZombie.class, 15, 20, false)
     .getOutput();
@@ -70,18 +70,18 @@ public class Data1To20 {
     .getOutput();
 
     public static final BaseOperation[] R9 = new RoundOperationHelper(4 * 20)
-            .addSpawnOneAtATime(ChainmailZombie.class, 5, 80, false)
-            .delaySeconds(10)
-            .addSpawnOneAtATime(ChainmailZombie.class, 5, 80, false)
+            .addSpawnOneAtATime(ChainmailZombie.class, 5, 60, false)
+            .delaySeconds(12)
+            .addSpawnOneAtATime(ChainmailZombie.class, 5, 60, false)
     .getOutput();
 
     public static final BaseOperation[] R10 = new RoundOperationHelper(4 * 20)
-            .addSpawnOneAtATime(BasicZombie.class, 10, 30, false)
-            .addSpawnOneAtATime(HelmetZombie.class, 10, 30, false)
+            .addSpawnOneAtATime(BasicZombie.class, 10, 25, false)
+            .addSpawnOneAtATime(HelmetZombie.class, 10, 25, false)
             .addSpawnOneAtATime(ChainmailZombie.class, 3, 30, false)
     .getOutput();
 
-    // Start with $3300 on round 11
+
 
     public static final BaseOperation[] R11 = new RoundOperationHelper(4 * 20)
             .addSpawnOneAtATime(HelmetZombie.class, 30, 25, false)
@@ -96,13 +96,13 @@ public class Data1To20 {
     public static final BaseOperation[] R13 = new RoundOperationHelper(4 * 20)
             .addSpawnOneAtATime(ChainmailZombie.class, 6, 1, false)
             .delaySeconds(6).addSpawnOneAtATime(BasicZombie.class, 15, 25, false)
-            .addSpawnOneAtATime(HelmetZombie.class, 15, 25, false)
+            .addSpawnOneAtATime(HelmetZombie.class, 15, 20, false)
     .getOutput();
 
     public static final BaseOperation[] R14 = new RoundOperationHelper(4 * 20)
-            .addSpawnOneAtATime(ChainmailZombie.class, 8, 1, false)
-            .delaySeconds(16).addSpawnOneAtATime(ChainmailZombie.class, 8, 1, false)
-            .delaySeconds(16).addSpawnOneAtATime(ChainmailZombie.class, 8, 1, false)
+            .addSpawnOneAtATime(ChainmailZombie.class, 9, 1, false)
+            .delaySeconds(14).addSpawnOneAtATime(ChainmailZombie.class, 9, 1, false)
+            .delaySeconds(14).addSpawnOneAtATime(ChainmailZombie.class, 9, 1, false)
     .getOutput();
 
     public static final BaseOperation[] R15 = new RoundOperationHelper(4 * 20)
@@ -113,20 +113,20 @@ public class Data1To20 {
     public static final BaseOperation[] R16 = new RoundOperationHelper(4 * 20)
             .addSpawnOneAtATime(HelmetZombie.class, 6, 10, false)
             .delaySeconds(5).addSpawnOneAtATime(ChainmailZombie.class, 6, 10, false)
-            .delaySeconds(10).addSpawnOneAtATime(IronZombie.class, 3, 10, false)
+            .delaySeconds(5).addSpawnOneAtATime(IronZombie.class, 3, 10, false)
     .getOutput();
 
     public static final BaseOperation[] R17 = new RoundOperationHelper(4 * 20)
             .addSpawnOneAtATime(IronZombie.class, 1, 1, true)
             .addSpawnOneAtATime(ChainmailZombie.class, 8, 10, false)
-            .delaySeconds(15)
+            .delaySeconds(10)
             .addSpawnOneAtATime(IronZombie.class, 1, 1, true)
             .addSpawnOneAtATime(ChainmailZombie.class, 8, 10, false)
     .getOutput();
 
     public static final BaseOperation[] R18 = new RoundOperationHelper(4 * 20)
             .addSpawnOneAtATime(IronZombie.class, 5, 1, false)
-            .delaySeconds(10).addSpawnOneAtATime(ChainmailZombie.class, 10, 80, false)
+            .delaySeconds(8).addSpawnOneAtATime(ChainmailZombie.class, 10, 70, false)
     .getOutput();
 
     public static final BaseOperation[] R19 = new RoundOperationHelper(4 * 20)
