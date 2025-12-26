@@ -19,7 +19,9 @@ package io.github.greatericontop.thedark.miscmechanic;
 
 import io.github.greatericontop.thedark.TheDark;
 import io.github.greatericontop.thedark.player.PlayerProfile;
+import org.bukkit.Bukkit;
 import org.bukkit.attribute.Attribute;
+import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -42,6 +44,7 @@ public class SavestateManager {
         List<Savestate> savestateList = new ArrayList<>();
         for (PlayerProfile profile : plugin.getGameManager().playerProfiles.values()) {
             savestateList.add(new Savestate(
+                profile.getPlayer().getUniqueId(),
                 profile.getPlayer(),
                 profile.getPlayer().getHealth(),
                 profile.coins,
@@ -61,15 +64,21 @@ public class SavestateManager {
     public void restoreSavestate(int round, TheDark plugin) {
         plugin.getGameManager().playerProfiles.clear();
         for (Savestate savestate : savestates.get(round)) {
-            PlayerProfile profile = new PlayerProfile(savestate.player(), true);
+            Player player = Bukkit.getPlayer(savestate.playerUUID());
+            if (player == null) {
+                // Can reuse the old object temporarily if they are offline
+                // When they reconnect, the join listener will refresh the player object
+                player = savestate.cachedPlayer();
+            }
+            PlayerProfile profile = new PlayerProfile(player, true);
             profile.coins = savestate.coins();
             profile.armorLevel = savestate.armorLevel();
-            savestate.player().setHealth(Math.min(savestate.health(),
-                    savestate.player().getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue()));
-            savestate.player().getInventory().setItem(1, savestate.gun1());
-            savestate.player().getInventory().setItem(2, savestate.gun2());
-            savestate.player().getInventory().setItem(3, savestate.gun3());
-            plugin.getGameManager().playerProfiles.put(savestate.player().getUniqueId(), profile);
+            player.setHealth(Math.min(
+                    savestate.health(), player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue()));
+            player.getInventory().setItem(1, savestate.gun1());
+            player.getInventory().setItem(2, savestate.gun2());
+            player.getInventory().setItem(3, savestate.gun3());
+            plugin.getGameManager().playerProfiles.put(player.getUniqueId(), profile);
         }
         plugin.getGameManager().restoreSavestateGame(round);
     }

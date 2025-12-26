@@ -20,8 +20,11 @@ package io.github.greatericontop.thedark.miscmechanic;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.UUID;
+
 public record Savestate(
-    Player player,
+    UUID playerUUID,
+    Player cachedPlayer,
     double health,
     int coins,
     int armorLevel,
