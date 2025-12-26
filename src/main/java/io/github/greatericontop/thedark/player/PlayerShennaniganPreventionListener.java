@@ -26,13 +26,10 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerSwapHandItemsEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
-
-import java.util.UUID;
 
 public class PlayerShennaniganPreventionListener implements Listener {
     private final TheDark plugin;
@@ -91,16 +88,6 @@ public class PlayerShennaniganPreventionListener implements Listener {
             } else {
                 event.setCancelled(true);
             }
-        }
-    }
-
-    // refresh profiles when player rejoins
-    @EventHandler()
-    public void onPlayerJoin(PlayerJoinEvent event) {
-        UUID uuid = event.getPlayer().getUniqueId();
-        if (plugin.getGameManager().playerProfiles.containsKey(uuid)) {
-            plugin.getGameManager().playerProfiles.get(uuid).setPlayer(event.getPlayer());
-            event.getPlayer().sendMessage("§3Your profile was refreshed!");
         }
     }
 

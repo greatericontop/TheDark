@@ -25,6 +25,7 @@ import io.github.greatericontop.thedark.menus.SignListener;
 import io.github.greatericontop.thedark.menus.StartGameMenu;
 import io.github.greatericontop.thedark.miscmechanic.SavestateManager;
 import io.github.greatericontop.thedark.player.PlayerDeathListener;
+import io.github.greatericontop.thedark.player.PlayerRejoinListener;
 import io.github.greatericontop.thedark.player.PlayerShennaniganPreventionListener;
 import io.github.greatericontop.thedark.rounds.RoundManager;
 import io.github.greatericontop.thedark.upgrades.UpgradeListing;
@@ -76,6 +77,7 @@ public class TheDark extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new EnemyListener(this), this);
 
         this.getServer().getPluginManager().registerEvents(new PlayerDeathListener(this), this);
+        this.getServer().getPluginManager().registerEvents(new PlayerRejoinListener(this), this);
         this.getServer().getPluginManager().registerEvents(new PlayerShennaniganPreventionListener(this), this);
 
         shootGunListener = new ShootGunListener(this);
