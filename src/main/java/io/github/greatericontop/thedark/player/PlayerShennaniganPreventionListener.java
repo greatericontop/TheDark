@@ -52,14 +52,21 @@ public class PlayerShennaniganPreventionListener implements Listener {
     public void onDropItem(PlayerDropItemEvent event) {
         PlayerProfile profile = plugin.getGameManager().getPlayerProfile(event.getPlayer().getUniqueId());
         if (profile == null)  return;
-        // if the item being dropped is a gun (has the pdc), just delete it rather than trying to cancel the event
-        // this prevents the bug that separates out the stack, and you'll only lose 1 ammo slot
-        // however, if you only have 1 left... you're screwed
         ItemStack droppedItem = event.getItemDrop().getItemStack();
         ItemMeta droppedIM = droppedItem.getItemMeta();
-        if (droppedIM != null && droppedIM.getPersistentDataContainer().has(GunUtil.GUN_KEY, PersistentDataType.STRING)) {
+        if (droppedIM == null || !droppedIM.getPersistentDataContainer().has(GunUtil.GUN_KEY, PersistentDataType.STRING)) {
+            event.setCancelled(true);
+            return;
+        }
+        // The event is called AFTER the item is dropped.
+        // If the item being dropped is a gun (has the pdc), just delete it rather than trying to cancel the event
+        // this prevents the bug that separates out the stack, and you'll only lose 1 ammo slot.
+        // If there's only 1 left, we cancel the event normally. To check, we see if the dropped gun is no longer in
+        // the first 3 slots of the inventory.
+        if (droppedItem.isSimilar(profile.getPlayer().getInventory().getItem(1))
+                || droppedItem.isSimilar(profile.getPlayer().getInventory().getItem(2))
+                || droppedItem.isSimilar(profile.getPlayer().getInventory().getItem(3))) {
             event.getItemDrop().remove();
-            event.getPlayer().sendMessage("§7DEBUG: deleting item drop rather than cancelling event");
         } else {
             event.setCancelled(true);
         }
