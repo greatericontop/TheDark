@@ -187,8 +187,8 @@ public class GameManager {
             p.sendMessage(Component.text(String.format("§6> §bRetry Round %d", lastRound))
                     .clickEvent(ClickEvent.suggestCommand(String.format("/thedark retry %d", lastRound))));
             if (lastRound > 11 && lastRound % 10 != 1) {
-                int lastCheckpoint = (lastRound / 10) * 10 + 1;
-                p.sendMessage(Component.text(String.format("§6> §bRetry Round %d", lastCheckpoint))
+                int lastCheckpoint = ((lastRound-1) / 10) * 10 + 1;
+                p.sendMessage(Component.text(String.format("§6> §bRetry From Round %d", lastCheckpoint))
                         .clickEvent(ClickEvent.suggestCommand(String.format("/thedark retry %d", lastCheckpoint))));
             }
         }
