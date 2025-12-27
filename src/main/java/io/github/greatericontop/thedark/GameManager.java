@@ -22,6 +22,7 @@ import io.github.greatericontop.thedark.miscmechanic.GameDifficulty;
 import io.github.greatericontop.thedark.player.PlayerProfile;
 import io.github.greatericontop.thedark.rounds.RoundSpawner;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.event.ClickEvent;
 import net.kyori.adventure.title.Title;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -175,11 +176,21 @@ public class GameManager {
     }
 
     public void gameOverLose() {
+        int lastRound = plugin.getRoundManager().getCurrentRound();
         for (PlayerProfile profile : playerProfiles.values()) {
             Player p = profile.getPlayer();
-            p.showTitle(Title.title(Component.text("§cGame Over!"), Component.text("§7You survived until round " + plugin.getRoundManager().getCurrentRound())));
+            p.showTitle(Title.title(Component.text("§cGame Over!"), Component.text("§7You survived until round " + lastRound)));
             p.playSound(p.getLocation(), Sound.ENTITY_ENDER_DRAGON_DEATH, 1.0F, 1.0F);
             p.setGameMode(GameMode.SPECTATOR);
+            p.sendMessage("§9----------------------------------------");
+            p.sendMessage("§6Want to try again?");
+            p.sendMessage(Component.text(String.format("§6> §bRetry Round %d", lastRound))
+                    .clickEvent(ClickEvent.suggestCommand(String.format("/thedark retry %d", lastRound))));
+            if (lastRound > 11 && lastRound % 10 != 1) {
+                int lastCheckpoint = (lastRound / 10) * 10 + 1;
+                p.sendMessage(Component.text(String.format("§6> §bRetry Round %d", lastCheckpoint))
+                        .clickEvent(ClickEvent.suggestCommand(String.format("/thedark retry %d", lastCheckpoint))));
+            }
         }
         playerProfiles.clear();
         plugin.getRoundManager().reset();
